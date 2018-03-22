@@ -22,7 +22,7 @@ Imports System.Linq.Expressions
 Imports System.Reflection
 
 
-<Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="goodworld_database")>  _
+<Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="goodworld")>  _
 Partial Public Class DataClasses_GoodWorldDataContext
 	Inherits System.Data.Linq.DataContext
 	
@@ -76,7 +76,7 @@ Partial Public Class DataClasses_GoodWorldDataContext
   #End Region
 	
 	Public Sub New()
-        MyBase.New(Global.System.Configuration.ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, mappingSource)
+		MyBase.New(Global.System.Configuration.ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, mappingSource)
 		OnCreated
 	End Sub
 	
@@ -1498,6 +1498,48 @@ Partial Public Class tblPolicyRegister
 	
 	Private _CarRegYear As String
 	
+	Private _CustomerType As String
+	
+	Private _Fax As String
+	
+	Private _Email As String
+	
+	Private _SocialMediaNo As String
+	
+	Private _BenefitName As String
+	
+	Private _NewRenew As String
+	
+	Private _RenewPolicyYear As System.Nullable(Of Integer)
+	
+	Private _CarType As System.Nullable(Of Integer)
+	
+	Private _CarBrandModel As System.Nullable(Of Integer)
+	
+	Private _Engine As String
+	
+	Private _Chassis As String
+	
+	Private _CarSize As String
+	
+	Private _ChassisType As String
+	
+	Private _CarUse As String
+	
+	Private _DriverName1 As String
+	
+	Private _DriverDOB1 As System.Nullable(Of Date)
+	
+	Private _DriverName2 As String
+	
+	Private _DriverDOB2 As System.Nullable(Of Date)
+	
+	Private _SendPolicy2CustomerDate As System.Nullable(Of Date)
+	
+	Private _CustomerGetPolicyDate As System.Nullable(Of Date)
+	
+	Private _Remark As String
+	
     #Region "Extensibility Method Definitions"
     Partial Private Sub OnLoaded()
     End Sub
@@ -1656,6 +1698,90 @@ Partial Public Class tblPolicyRegister
     Partial Private Sub OnCarRegYearChanging(value As String)
     End Sub
     Partial Private Sub OnCarRegYearChanged()
+    End Sub
+    Partial Private Sub OnCustomerTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnCustomerTypeChanged()
+    End Sub
+    Partial Private Sub OnFaxChanging(value As String)
+    End Sub
+    Partial Private Sub OnFaxChanged()
+    End Sub
+    Partial Private Sub OnEmailChanging(value As String)
+    End Sub
+    Partial Private Sub OnEmailChanged()
+    End Sub
+    Partial Private Sub OnSocialMediaNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnSocialMediaNoChanged()
+    End Sub
+    Partial Private Sub OnBenefitNameChanging(value As String)
+    End Sub
+    Partial Private Sub OnBenefitNameChanged()
+    End Sub
+    Partial Private Sub OnNewRenewChanging(value As String)
+    End Sub
+    Partial Private Sub OnNewRenewChanged()
+    End Sub
+    Partial Private Sub OnRenewPolicyYearChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnRenewPolicyYearChanged()
+    End Sub
+    Partial Private Sub OnCarTypeChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCarTypeChanged()
+    End Sub
+    Partial Private Sub OnCarBrandModelChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCarBrandModelChanged()
+    End Sub
+    Partial Private Sub OnEngineChanging(value As String)
+    End Sub
+    Partial Private Sub OnEngineChanged()
+    End Sub
+    Partial Private Sub OnChassisChanging(value As String)
+    End Sub
+    Partial Private Sub OnChassisChanged()
+    End Sub
+    Partial Private Sub OnCarSizeChanging(value As String)
+    End Sub
+    Partial Private Sub OnCarSizeChanged()
+    End Sub
+    Partial Private Sub OnChassisTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnChassisTypeChanged()
+    End Sub
+    Partial Private Sub OnCarUseChanging(value As String)
+    End Sub
+    Partial Private Sub OnCarUseChanged()
+    End Sub
+    Partial Private Sub OnDriverName1Changing(value As String)
+    End Sub
+    Partial Private Sub OnDriverName1Changed()
+    End Sub
+    Partial Private Sub OnDriverDOB1Changing(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDriverDOB1Changed()
+    End Sub
+    Partial Private Sub OnDriverName2Changing(value As String)
+    End Sub
+    Partial Private Sub OnDriverName2Changed()
+    End Sub
+    Partial Private Sub OnDriverDOB2Changing(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDriverDOB2Changed()
+    End Sub
+    Partial Private Sub OnSendPolicy2CustomerDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnSendPolicy2CustomerDateChanged()
+    End Sub
+    Partial Private Sub OnCustomerGetPolicyDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnCustomerGetPolicyDateChanged()
+    End Sub
+    Partial Private Sub OnRemarkChanging(value As String)
+    End Sub
+    Partial Private Sub OnRemarkChanged()
     End Sub
     #End Region
 	
@@ -2269,6 +2395,342 @@ Partial Public Class tblPolicyRegister
 				Me._CarRegYear = value
 				Me.SendPropertyChanged("CarRegYear")
 				Me.OnCarRegYearChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CustomerType", DbType:="NVarChar(50)")>  _
+	Public Property CustomerType() As String
+		Get
+			Return Me._CustomerType
+		End Get
+		Set
+			If (String.Equals(Me._CustomerType, value) = false) Then
+				Me.OnCustomerTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._CustomerType = value
+				Me.SendPropertyChanged("CustomerType")
+				Me.OnCustomerTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="NVarChar(50)")>  _
+	Public Property Fax() As String
+		Get
+			Return Me._Fax
+		End Get
+		Set
+			If (String.Equals(Me._Fax, value) = false) Then
+				Me.OnFaxChanging(value)
+				Me.SendPropertyChanging
+				Me._Fax = value
+				Me.SendPropertyChanged("Fax")
+				Me.OnFaxChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="NVarChar(150)")>  _
+	Public Property Email() As String
+		Get
+			Return Me._Email
+		End Get
+		Set
+			If (String.Equals(Me._Email, value) = false) Then
+				Me.OnEmailChanging(value)
+				Me.SendPropertyChanging
+				Me._Email = value
+				Me.SendPropertyChanged("Email")
+				Me.OnEmailChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SocialMediaNo", DbType:="NVarChar(150)")>  _
+	Public Property SocialMediaNo() As String
+		Get
+			Return Me._SocialMediaNo
+		End Get
+		Set
+			If (String.Equals(Me._SocialMediaNo, value) = false) Then
+				Me.OnSocialMediaNoChanging(value)
+				Me.SendPropertyChanging
+				Me._SocialMediaNo = value
+				Me.SendPropertyChanged("SocialMediaNo")
+				Me.OnSocialMediaNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BenefitName", DbType:="NVarChar(255)")>  _
+	Public Property BenefitName() As String
+		Get
+			Return Me._BenefitName
+		End Get
+		Set
+			If (String.Equals(Me._BenefitName, value) = false) Then
+				Me.OnBenefitNameChanging(value)
+				Me.SendPropertyChanging
+				Me._BenefitName = value
+				Me.SendPropertyChanged("BenefitName")
+				Me.OnBenefitNameChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NewRenew", DbType:="NVarChar(2)")>  _
+	Public Property NewRenew() As String
+		Get
+			Return Me._NewRenew
+		End Get
+		Set
+			If (String.Equals(Me._NewRenew, value) = false) Then
+				Me.OnNewRenewChanging(value)
+				Me.SendPropertyChanging
+				Me._NewRenew = value
+				Me.SendPropertyChanged("NewRenew")
+				Me.OnNewRenewChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RenewPolicyYear", DbType:="Int")>  _
+	Public Property RenewPolicyYear() As System.Nullable(Of Integer)
+		Get
+			Return Me._RenewPolicyYear
+		End Get
+		Set
+			If (Me._RenewPolicyYear.Equals(value) = false) Then
+				Me.OnRenewPolicyYearChanging(value)
+				Me.SendPropertyChanging
+				Me._RenewPolicyYear = value
+				Me.SendPropertyChanged("RenewPolicyYear")
+				Me.OnRenewPolicyYearChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarType", DbType:="Int")>  _
+	Public Property CarType() As System.Nullable(Of Integer)
+		Get
+			Return Me._CarType
+		End Get
+		Set
+			If (Me._CarType.Equals(value) = false) Then
+				Me.OnCarTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._CarType = value
+				Me.SendPropertyChanged("CarType")
+				Me.OnCarTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarBrandModel", DbType:="Int")>  _
+	Public Property CarBrandModel() As System.Nullable(Of Integer)
+		Get
+			Return Me._CarBrandModel
+		End Get
+		Set
+			If (Me._CarBrandModel.Equals(value) = false) Then
+				Me.OnCarBrandModelChanging(value)
+				Me.SendPropertyChanging
+				Me._CarBrandModel = value
+				Me.SendPropertyChanged("CarBrandModel")
+				Me.OnCarBrandModelChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Engine", DbType:="NVarChar(150)")>  _
+	Public Property Engine() As String
+		Get
+			Return Me._Engine
+		End Get
+		Set
+			If (String.Equals(Me._Engine, value) = false) Then
+				Me.OnEngineChanging(value)
+				Me.SendPropertyChanging
+				Me._Engine = value
+				Me.SendPropertyChanged("Engine")
+				Me.OnEngineChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Chassis", DbType:="NVarChar(150)")>  _
+	Public Property Chassis() As String
+		Get
+			Return Me._Chassis
+		End Get
+		Set
+			If (String.Equals(Me._Chassis, value) = false) Then
+				Me.OnChassisChanging(value)
+				Me.SendPropertyChanging
+				Me._Chassis = value
+				Me.SendPropertyChanged("Chassis")
+				Me.OnChassisChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarSize", DbType:="NVarChar(50)")>  _
+	Public Property CarSize() As String
+		Get
+			Return Me._CarSize
+		End Get
+		Set
+			If (String.Equals(Me._CarSize, value) = false) Then
+				Me.OnCarSizeChanging(value)
+				Me.SendPropertyChanging
+				Me._CarSize = value
+				Me.SendPropertyChanged("CarSize")
+				Me.OnCarSizeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChassisType", DbType:="NVarChar(50)")>  _
+	Public Property ChassisType() As String
+		Get
+			Return Me._ChassisType
+		End Get
+		Set
+			If (String.Equals(Me._ChassisType, value) = false) Then
+				Me.OnChassisTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._ChassisType = value
+				Me.SendPropertyChanged("ChassisType")
+				Me.OnChassisTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarUse", DbType:="NVarChar(2)")>  _
+	Public Property CarUse() As String
+		Get
+			Return Me._CarUse
+		End Get
+		Set
+			If (String.Equals(Me._CarUse, value) = false) Then
+				Me.OnCarUseChanging(value)
+				Me.SendPropertyChanging
+				Me._CarUse = value
+				Me.SendPropertyChanged("CarUse")
+				Me.OnCarUseChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DriverName1", DbType:="NVarChar(255)")>  _
+	Public Property DriverName1() As String
+		Get
+			Return Me._DriverName1
+		End Get
+		Set
+			If (String.Equals(Me._DriverName1, value) = false) Then
+				Me.OnDriverName1Changing(value)
+				Me.SendPropertyChanging
+				Me._DriverName1 = value
+				Me.SendPropertyChanged("DriverName1")
+				Me.OnDriverName1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DriverDOB1", DbType:="Date")>  _
+	Public Property DriverDOB1() As System.Nullable(Of Date)
+		Get
+			Return Me._DriverDOB1
+		End Get
+		Set
+			If (Me._DriverDOB1.Equals(value) = false) Then
+				Me.OnDriverDOB1Changing(value)
+				Me.SendPropertyChanging
+				Me._DriverDOB1 = value
+				Me.SendPropertyChanged("DriverDOB1")
+				Me.OnDriverDOB1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DriverName2", DbType:="NVarChar(255)")>  _
+	Public Property DriverName2() As String
+		Get
+			Return Me._DriverName2
+		End Get
+		Set
+			If (String.Equals(Me._DriverName2, value) = false) Then
+				Me.OnDriverName2Changing(value)
+				Me.SendPropertyChanging
+				Me._DriverName2 = value
+				Me.SendPropertyChanged("DriverName2")
+				Me.OnDriverName2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DriverDOB2", DbType:="Date")>  _
+	Public Property DriverDOB2() As System.Nullable(Of Date)
+		Get
+			Return Me._DriverDOB2
+		End Get
+		Set
+			If (Me._DriverDOB2.Equals(value) = false) Then
+				Me.OnDriverDOB2Changing(value)
+				Me.SendPropertyChanging
+				Me._DriverDOB2 = value
+				Me.SendPropertyChanged("DriverDOB2")
+				Me.OnDriverDOB2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SendPolicy2CustomerDate", DbType:="Date")>  _
+	Public Property SendPolicy2CustomerDate() As System.Nullable(Of Date)
+		Get
+			Return Me._SendPolicy2CustomerDate
+		End Get
+		Set
+			If (Me._SendPolicy2CustomerDate.Equals(value) = false) Then
+				Me.OnSendPolicy2CustomerDateChanging(value)
+				Me.SendPropertyChanging
+				Me._SendPolicy2CustomerDate = value
+				Me.SendPropertyChanged("SendPolicy2CustomerDate")
+				Me.OnSendPolicy2CustomerDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CustomerGetPolicyDate", DbType:="Date")>  _
+	Public Property CustomerGetPolicyDate() As System.Nullable(Of Date)
+		Get
+			Return Me._CustomerGetPolicyDate
+		End Get
+		Set
+			If (Me._CustomerGetPolicyDate.Equals(value) = false) Then
+				Me.OnCustomerGetPolicyDateChanging(value)
+				Me.SendPropertyChanging
+				Me._CustomerGetPolicyDate = value
+				Me.SendPropertyChanged("CustomerGetPolicyDate")
+				Me.OnCustomerGetPolicyDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Remark", DbType:="NVarChar(255)")>  _
+	Public Property Remark() As String
+		Get
+			Return Me._Remark
+		End Get
+		Set
+			If (String.Equals(Me._Remark, value) = false) Then
+				Me.OnRemarkChanging(value)
+				Me.SendPropertyChanging
+				Me._Remark = value
+				Me.SendPropertyChanged("Remark")
+				Me.OnRemarkChanged
 			End If
 		End Set
 	End Property

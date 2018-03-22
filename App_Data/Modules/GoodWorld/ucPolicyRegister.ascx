@@ -1,10 +1,24 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucPolicyRegister.ascx.vb" Inherits="Modules_ucPolicyRegister" %>
-
 <style>
-    .saveBt {
-        margin-right: 10px;
+    legend {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 23px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #212121;
+        border: 0;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .text-primary {
+        color: #2196f3;
+        font-size: 14px;
     }
 </style>
+
+
 
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
@@ -16,7 +30,7 @@
     SettingsBehavior-AllowDragDrop="true"
     SettingsPopup-EditForm-AllowResize="true"
     DataSourceID="SqlDataSource_PolicyRegister"
-    Width="100%"
+    Width="100%" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
     PopupAnimationType="Fade" CloseOnEscape="true" CloseAction="None">
     <CssClasses Control="tasks-grid" PreviewRow="text-muted" />
     <ClientSideEvents ToolbarItemClick="function(s,e){
@@ -65,11 +79,13 @@
                     <SettingsBootstrap RenderOption="Link" />
                 </dx:BootstrapButton>
             </DataItemTemplate>
+
         </dx:BootstrapGridViewDataColumn>
-        <dx:BootstrapGridViewTextColumn FieldName="ID" Visible="false"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="ID" Visible="false">
+        </dx:BootstrapGridViewTextColumn>
 
 
-        <dx:BootstrapGridViewDateColumn FieldName="CreateDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" AdaptivePriority="2" SettingsEditForm-Visible="False" />
+        <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
         <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="LastName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
@@ -90,8 +106,8 @@
             </PropertiesComboBox>
         </dx:BootstrapGridViewComboBoxColumn>
 
-        <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
-        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
+        <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
+        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
 
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
@@ -127,15 +143,26 @@
 <asp:SqlDataSource ID="SqlDataSource_InsureType" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select ID, Name from tblInsureType Order by OrderNo "></asp:SqlDataSource>
 
+<asp:SqlDataSource ID="SqlDataSource_PolicyType" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
+    SelectCommand="select ID, Name from tblPolicyType Order by OrderNo "></asp:SqlDataSource>
+
 
 <asp:SqlDataSource ID="SqlDataSource_SubBroker" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select AgentCode,  AgentName + ' (' + AgentCode + ')' as AgentName  from tblSubBroker "></asp:SqlDataSource>
+
+
+<asp:SqlDataSource ID="SqlDataSource_CarType" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
+    SelectCommand="select ID, Name from tblCarType Order by Name "></asp:SqlDataSource>
+
+<asp:SqlDataSource ID="SqlDataSource_CarBrandModel" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
+    SelectCommand="select ID, [CarBrand] + ' - ' + [CarModel] as Name from tblCarBrandModel Order by [CarBrand],[CarModel] "></asp:SqlDataSource>
 
 <dx:BootstrapPopupControl ID="TaskNewPopup" ClientInstanceName="TaskNewPopup" runat="server"
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ลงทะเบียนกรมธรรม์"
     PopupAnimationType="Fade">
     <SettingsAdaptivity Mode="Always" FixedHeader="true" VerticalAlign="WindowTop" />
     <SettingsBootstrap Sizing="Large" />
+    <CssClasses Header="text-primary" />
 
     <ClientSideEvents
         BeginCallback="function(s,e){LoadingPanel.Show();}"
@@ -164,9 +191,9 @@
 
     <ContentCollection>
         <dx:ContentControl ID="ContentControl1" runat="server">
-            <%--            <fieldset>
-                <legend class="text-primary">บริษัท</legend>
-            </fieldset>--%>
+            <fieldset>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">บริษัทประกัน/ตัวแทน</i></legend>
+            </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormLayout1" runat="server" LayoutType="Horizontal">
                 <Items>
                     <dx:BootstrapLayoutItem Caption="บริษัทประกันภัย" ColSpanMd="6">
@@ -175,9 +202,7 @@
                                 <dx:BootstrapComboBox runat="server" ID="newInsurerCode"
                                     NullText="เลือกบริษัทประกันภัย..." DataSourceID="SqlDataSource_Insurer" TextField="InsurerName" ValueField="InsurerCode">
                                     <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskNewPopup.PerformCallback('calbrokerage');
-                                        }" />
+
                                 </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -187,9 +212,7 @@
                             <dx:ContentControl ID="ContentControl13" runat="server">
                                 <dx:BootstrapComboBox runat="server" ID="newAgentCode" NullText="เลือกตัวแทน..." DataSourceID="SqlDataSource_SubBroker" TextField="AgentName" ValueField="AgentCode">
                                     <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskNewPopup.PerformCallback('calbrokerage');
-                                        }" />
+
                                 </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -198,11 +221,26 @@
                 </Items>
             </dx:BootstrapFormLayout>
             <fieldset>
-                <legend class="text-primary">ผู้เอาประกัน</legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">ผู้เอาประกัน</i></legend>
             </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormLayout2" runat="server" LayoutType="Horizontal">
                 <Items>
-                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6">
+                    <dx:BootstrapLayoutItem Caption="บุคลธรรมดา/นิติบุคล" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapComboBox runat="server" ID="newCustomerType" NullText="เลือก...">
+                                    <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
+                                    <Items>
+                                        <dx:BootstrapListEditItem Text="บุคลธรรมดา" Value="P"></dx:BootstrapListEditItem>
+                                        <dx:BootstrapListEditItem Text="นิติบุคล" Value="C"></dx:BootstrapListEditItem>
+                                    </Items>
+                                </dx:BootstrapComboBox>
+
+
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" BeginRow="true">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newFirstName" NullText="พิมพ์ชื่อ..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
@@ -218,7 +256,8 @@
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6">
+
+                    <%--  <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="newDOB" runat="server" NullText="เลือกวันเดือนปีเกิด..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
@@ -235,100 +274,314 @@
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
 
-                    <dx:BootstrapLayoutItem Caption="ที่อยู่" ColSpanMd="6">
+                    <dx:BootstrapLayoutItem Caption="ที่อยู่ 1" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newAddress1" NullText="พิมพ์ที่อยู่ 1..." ToolTip="ที่อยู่ 1" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+                    <dx:BootstrapLayoutItem Caption="ที่อยู่ 2" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newAddress2" NullText="พิมพ์ที่อยู่ 2..." ToolTip="ที่อยู่ 2" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+
 
 
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="โทรศัพท์/มือถือ" ColSpanMd="6">
+
+
+                    <dx:BootstrapLayoutItem Caption="โทรศัทพ์บ้าน/สำนักงาน" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" NullText="พิมพ์โทรศัพท์..." ToolTip="โทรศัพท์" ID="newTelNo" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                    <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />
+                                    <%-- <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />--%>
                                 </dx:BootstrapTextBox>
-
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="โทรศัพท์มือถือ" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" NullText="พิมพ์มือถือ..." ToolTip="มือถือ" ID="newMobile" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                    <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />
+                                    <%-- <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />--%>
                                 </dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="Fax" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="newFax" NullText="Fax..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                    <dx:BootstrapLayoutItem Caption="Email" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="newEmail" NullText="Email..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="Line ID/FaceBook" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="newSocialMediaNo" NullText="Line..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                    <dx:BootstrapLayoutItem Caption="ผู้รับผลประโยชน์" ColSpanMd="6">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="newBenefitName" NullText="พิมพ์ชื่อ..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                 </Items>
             </dx:BootstrapFormLayout>
+
+
+            <div id="content">
+                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active">
+                        <a href="#newtab1" class="fa fa-lg fa-arrow-right" style="font-size: large" data-toggle="tab">รายละเอียดกรมธรรม์</a>
+
+                    </li>
+                    <li><a href="#newtab2" class="fa fa-lg fa-arrow-right" style="font-size: large" data-toggle="tab">รายละเอียดรถคันที่เอาประกันภัย</a></li>
+
+                </ul>
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="newtab1">
+                        <%--        <fieldset>
+                            <legend class="text-primary">รายละเอียดรถ</legend>
+                        </fieldset>--%>
+                        <dx:BootstrapFormLayout ID="BootstrapFormLayout3" runat="server" LayoutType="Horizontal">
+                            <Items>
+
+                                <dx:BootstrapLayoutItem Caption="ประเภทการประกันภัย" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl ID="ContentControl2" runat="server">
+                                            <dx:BootstrapComboBox runat="server" ID="newInsureType" NullText="เลือกประเภทการประกันภัย..." DataSourceID="SqlDataSource_InsureType" TextField="Name" ValueField="ID">
+                                                <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
+
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ใหม่/ต่ออายุ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox ID="newNewRenew" runat="server" NullText="เลือก..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
+                                                <Items>
+                                                    <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
+                                                    <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
+                                                </Items>
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ปีที่ต่ออายุ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapSpinEdit ID="newRenewPolicyYear" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="ปีที่ต่ออายุ..."
+                                                SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
+                                            </dx:BootstrapSpinEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="เบอร์กรมธรรม์" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newPolicyNo" NullText="พิมพ์เบอร์กรมธรรม์..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเริ่มคุ้มครอง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="newEffectiveDate" runat="server" NullText="เลือกวันเริ่มคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันสิ้นสุดคุ้มครอง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="newExpiredDate" runat="server" NullText="เลือกวันสิ้นสุดคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                                <dx:BootstrapLayoutItem Caption="ประเภทกรมธรรม์" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl ID="ContentControl3" runat="server">
+                                            <dx:BootstrapComboBox runat="server" ID="newPolicyType" NullText="เลือกประเภทกรมธรรม์..." DataSourceID="SqlDataSource_PolicyType" TextField="Name" ValueField="ID">
+                                                <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
+
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+
+
+
+
+
+
+                            </Items>
+                        </dx:BootstrapFormLayout>
+
+                    </div>
+                    <div class="tab-pane" id="newtab2">
+                        <dx:BootstrapFormLayout ID="BootstrapFormLayout9" runat="server" LayoutType="Horizontal">
+                            <Items>
+
+                                <dx:BootstrapLayoutItem Caption="รหัสรถ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox runat="server" ID="newCarType" DataSourceID="SqlDataSource_CarType" TextField="Name" ValueField="ID">
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ยี่ห้อรถ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox runat="server" ID="newCarBrandModel" DataSourceID="SqlDataSource_CarBrandModel" TextField="Name" ValueField="ID">
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+
+                                <dx:BootstrapLayoutItem Caption="ปีรถ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newCarRegYear"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newCarLicensePlate"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+
+                                <dx:BootstrapLayoutItem Caption="เลขเครื่อง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newEngine"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="เลขถัง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newChassis"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+                                <dx:BootstrapLayoutItem Caption="ขนาด/น้ำหนัก/ที่นั่ง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newCarSize"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="แบบตัวถัง" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newChassisType"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                                <dx:BootstrapLayoutItem Caption="การใช้" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox ID="newCarUse" runat="server">
+                                                <Items>
+                                                    <dx:BootstrapListEditItem Text="บุคคล" Value="P" />
+                                                    <dx:BootstrapListEditItem Text="พาณิชย์" Value="C" />
+                                                </Items>
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 1" ColSpanMd="6" BeginRow="true">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newDriverName1"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+
+                                            <dx:BootstrapDateEdit ID="newDriverDOB1" runat="server" EditFormatString="dd/MM/yyyy">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 2" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="newDriverName2"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="newDriverDOB2" runat="server" EditFormatString="dd/MM/yyyy">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                            </Items>
+                        </dx:BootstrapFormLayout>
+                    </div>
+
+
+                </div>
+            </div>
+
             <fieldset>
-                <legend class="text-primary">รายละเอียดรถ</legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">รายละเอียดความคุ้มครอง</i></legend>
             </fieldset>
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout3" runat="server" LayoutType="Horizontal">
+            <dx:BootstrapFormLayout ID="BootstrapFormLayout4" runat="server" LayoutType="Horizontal">
+                <CssClasses Control="overview-fl" />
                 <Items>
 
-                    <dx:BootstrapLayoutItem Caption="ประเภทการประกันภัย" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl ID="ContentControl2" runat="server">
-                                <dx:BootstrapComboBox runat="server" ID="newInsureType" NullText="เลือกประเภทการประกันภัย..." DataSourceID="SqlDataSource_InsureType" TextField="Name" ValueField="ID">
-                                    <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="newPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskNewPopup.PerformCallback('calbrokerage');
-                                        }" />
-                                </dx:BootstrapComboBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="เบอร์กรมธรรม์" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newPolicyNo" NullText="พิมพ์เบอร์กรมธรรม์..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ใหม่/ต่ออายุ" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <%-- <dx:BootstrapRadioButtonList ID="BootstrapRadioButtonList1"
-                                    ValidationSettings-RequiredField-IsRequired="true" RepeatDirection="Horizontal" RepeatColumns="2" runat="server">
-                                    <Items>
-                                        <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
-                                        <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
-                                    </Items>
-                                </dx:BootstrapRadioButtonList>--%>
-
-                                <dx:BootstrapComboBox ID="newPolicyType" runat="server" NullText="เลือก..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                    <Items>
-                                        <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
-                                        <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
-                                    </Items>
-                                </dx:BootstrapComboBox>
-
-
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
-
-                    <dx:BootstrapLayoutItem Caption="วันเริ่มคุ้มครอง" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="newEffectiveDate" runat="server" NullText="เลือกวันเริ่มคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                </dx:BootstrapDateEdit>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันสิ้นสุดคุ้มครอง" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="newExpiredDate" runat="server" NullText="เลือกวันสิ้นสุดคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                </dx:BootstrapDateEdit>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ทุนประกัน" ColSpanMd="4">
+                    <dx:BootstrapLayoutItem Caption="จำนวนเงินเอาประกันภัย" ColSpanMd="4" BeginRow="true">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newSuminsured" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="พิมพ์ทุนประกัน..."
@@ -338,30 +591,11 @@
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newCarLicensePlate" NullText="พิมพ์ทะเบียนรถ..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ปีจดทะเบียน" ColSpanMd="4">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newCarRegYear" NullText="พิมพ์ปีจดทะเบียน..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
                     <dx:BootstrapLayoutItem Caption="เบี้ยประกันภัย" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
-                                    <ClientSideEvents ValueChanged="function(s,e){
-                                        TaskNewPopup.PerformCallback('calbrokerage');
-                                        }" />
-
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -369,8 +603,8 @@
                     <dx:BootstrapLayoutItem Caption="อากร" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newStamp" ClientEnabled="false" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                <dx:BootstrapSpinEdit ID="newStamp" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -378,8 +612,8 @@
                     <dx:BootstrapLayoutItem Caption="ภาษี" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newVat" ClientEnabled="false" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                <dx:BootstrapSpinEdit ID="newVat" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -388,37 +622,18 @@
                     <dx:BootstrapLayoutItem Caption="เบี้ยประกันภัยรวม" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newGrossPremium" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                <dx:BootstrapSpinEdit ID="newGrossPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                </Items>
-            </dx:BootstrapFormLayout>
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-</div>
-            <fieldset>
-                <legend class="text-primary">ส่วนเจ้าหน้าที่</legend>
-            </fieldset>
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout4" runat="server" LayoutType="Horizontal">
-                <CssClasses Control="overview-fl" />
-                <Items>
+
                     <dx:BootstrapLayoutItem Caption="ค่าคอม(ประกัน)" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newBRCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="newBRCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -427,7 +642,7 @@
                     <dx:BootstrapLayoutItem Caption="ค่าส่งเสริม" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newPRCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="newPRCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -436,7 +651,7 @@
                     <dx:BootstrapLayoutItem Caption="ค่านายหน้าจ่าย Sub" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="newSubCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="newSubCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -444,30 +659,50 @@
                     </dx:BootstrapLayoutItem>
 
 
-                    <dx:BootstrapLayoutItem Caption="วันที่ส่งกรมธรรม์" ColSpanMd="4">
+                    <dx:BootstrapLayoutItem Caption="วันที่ออก กธ." ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="newSentPolicyDate" runat="server" NullText="เลือกวันที่ส่งกรมธรรม์..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="newSentPolicyDate" runat="server" EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันที่ได้รับกรมธรรม์" ColSpanMd="4">
+                    <dx:BootstrapLayoutItem Caption="วันที่ได้รับ กธ." ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="newGetPolicyDate" runat="server" NullText="เลือกวันที่ได้รับกรมธรรม์..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="newGetPolicyDate" runat="server" EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4">
+
+                    <dx:BootstrapLayoutItem Caption="วันที่ส่ง กธ.ให้ลูกค้า" ColSpanMd="4">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapDateEdit ID="newSendPolicy2CustomerDate" runat="server" EditFormatString="dd/MM/yyyy">
+                                </dx:BootstrapDateEdit>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+                    <dx:BootstrapLayoutItem Caption="วันที่ลูกค้ารับ กธ." ColSpanMd="4">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapDateEdit ID="newCustomerGetPolicyDate" runat="server" EditFormatString="dd/MM/yyyy">
+                                </dx:BootstrapDateEdit>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                    <%--          <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="newSubGetPolicyDate" runat="server" NullText="เลือก Sub รับกรมธรรม์..." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
 
 
@@ -510,8 +745,8 @@
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ลงทะเบียนกรมธรรม์"
     PopupAnimationType="Fade">
     <SettingsAdaptivity Mode="Always" FixedHeader="true" VerticalAlign="WindowTop" />
-    <SettingsBootstrap Sizing="Large" />
-
+    <SettingsBootstrap Sizing="Large"  />
+    <CssClasses Header="text-primary" />
     <ClientSideEvents
         BeginCallback="function(s,e){
             LoadingPanel.Show();
@@ -547,8 +782,10 @@
         <dx:ContentControl ID="ContentControl7" runat="server">
             <dx:ASPxHiddenField runat="server" ID="hdID"></dx:ASPxHiddenField>
 
-
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout5" runat="server" LayoutType="Horizontal">
+            <fieldset>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> บริษัทประกัน/ตัวแทน</i></legend>
+            </fieldset>
+            <dx:BootstrapFormLayout ID="BootstrapFormEdit1" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
                 <Items>
                     <dx:BootstrapLayoutItem Caption="บริษัทประกันภัย" ColSpanMd="6" FieldName="InsurerCode">
@@ -556,9 +793,7 @@
                             <dx:ContentControl ID="ContentControl8" runat="server">
                                 <dx:BootstrapComboBox runat="server" ID="editInsurerCode" NullText="เลือกบริษัทประกันภัย..." DataSourceID="SqlDataSource_Insurer" TextField="InsurerName" ValueField="InsurerCode">
                                     <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskEditPopup.PerformCallback('calbrokerage');
-                                        }" />
+
                                 </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -568,9 +803,7 @@
                             <dx:ContentControl ID="ContentControl9" runat="server">
                                 <dx:BootstrapComboBox runat="server" ID="editAgentCode" NullText="เลือกตัวแทน..." DataSourceID="SqlDataSource_SubBroker" TextField="AgentName" ValueField="AgentCode">
                                     <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskEditPopup.PerformCallback('calbrokerage');
-                                        }" />
+
                                 </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -578,11 +811,28 @@
                 </Items>
             </dx:BootstrapFormLayout>
             <fieldset>
-                <legend class="text-primary">ผู้เอาประกัน</legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> ผู้เอาประกัน</i></legend>
             </fieldset>
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout6" runat="server" LayoutType="Horizontal">
+            <dx:BootstrapFormLayout ID="BootstrapFormEdit2" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
                 <Items>
+
+                    <dx:BootstrapLayoutItem Caption="บุคลธรรมดา/นิติบุคล" ColSpanMd="6" FieldName="CustomerType">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapComboBox runat="server" ID="editCustomerType" NullText="เลือก...">
+                                    <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
+                                    <Items>
+                                        <dx:BootstrapListEditItem Text="บุคลธรรมดา" Value="P"></dx:BootstrapListEditItem>
+                                        <dx:BootstrapListEditItem Text="นิติบุคล" Value="C"></dx:BootstrapListEditItem>
+                                    </Items>
+                                </dx:BootstrapComboBox>
+
+
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
                     <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" FieldName="FirstName">
                         <ContentCollection>
                             <dx:ContentControl>
@@ -599,16 +849,16 @@
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6" FieldName="DOB">
+                    <%-- <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6" FieldName="DOB">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="editDOB" runat="server" NullText="เลือกวันเดือนปีเกิด..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
-                    <dx:BootstrapLayoutItem Caption="บัตรประชาชน" ColSpanMd="6" FieldName="IdentityNo">
+                    <%--                    <dx:BootstrapLayoutItem Caption="บัตรประชาชน" ColSpanMd="6" FieldName="IdentityNo">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editIdentityNo" NullText="พิมพ์บัตรประชาชน..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
@@ -616,99 +866,311 @@
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
 
-                    <dx:BootstrapLayoutItem Caption="ที่อยู่" ColSpanMd="6">
+                    <dx:BootstrapLayoutItem Caption="ที่อยู่ 1" ColSpanMd="6" FieldName="Address1">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editAddress1" NullText="พิมพ์ที่อยู่ 1..." ToolTip="ที่อยู่ 1" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
-                                <dx:BootstrapTextBox runat="server" ID="editAddress2" NullText="พิมพ์ที่อยู่ 2..." ToolTip="ที่อยู่ 2" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="โทรศัพท์/มือถือ" ColSpanMd="6">
+                    <dx:BootstrapLayoutItem Caption="ที่อยู่ 2" ColSpanMd="6" FieldName="Address2">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editAddress2" NullText="พิมพ์ที่อยู่ 2..." ToolTip="ที่อยู่ 2" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+
+                    <dx:BootstrapLayoutItem Caption="โทรศัทพ์บ้าน/สำนักงาน" ColSpanMd="6" FieldName="TelNo">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" NullText="พิมพ์โทรศัพท์..." ToolTip="โทรศัพท์" ID="editTelNo" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                    <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />
                                 </dx:BootstrapTextBox>
 
+
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="โทรศัพท์มือถือ" ColSpanMd="6" FieldName="Mobile">
+                        <ContentCollection>
+                            <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" NullText="พิมพ์มือถือ..." ToolTip="มือถือ" ID="editMobile" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                    <MaskSettings Mask="(000) 000-0000" IncludeLiterals="None" />
                                 </dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                    <dx:BootstrapLayoutItem Caption="Fax" ColSpanMd="6" FieldName="Fax">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editFax" NullText="Fax..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+
+
+                    <dx:BootstrapLayoutItem Caption="Email" ColSpanMd="6" FieldName="Email">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editEmail" NullText="Email..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="Line ID/FaceBook" ColSpanMd="6" FieldName="SocialMediaNo">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editSocialMediaNo" NullText="Line..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                    <dx:BootstrapLayoutItem Caption="ผู้รับผลประโยชน์" ColSpanMd="6" FieldName="BenefitName">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editBenefitName" NullText="พิมพ์ชื่อ..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                 </Items>
             </dx:BootstrapFormLayout>
-            <fieldset>
-                <legend class="text-primary">รายละเอียดรถ</legend>
+
+            <div id="content">
+                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active">
+                        <a href="#edittab1" class="fa fa-lg fa-arrow-right" style="font-size: large" data-toggle="tab">รายละเอียดกรมธรรม์</a>
+
+                    </li>
+                    <li><a href="#edittab2" class="fa fa-lg fa-arrow-right" style="font-size: large" data-toggle="tab">รายละเอียดรถคันที่เอาประกันภัย</a></li>
+
+                </ul>
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="edittab1">
+                        <dx:BootstrapFormLayout ID="BootstrapFormEdit3" runat="server" LayoutType="Horizontal">
+                            <Items>
+
+                                <dx:BootstrapLayoutItem Caption="ประเภทการประกันภัย" ColSpanMd="6" FieldName="InsureType">
+                                    <ContentCollection>
+                                        <dx:ContentControl ID="ContentControl4" runat="server">
+                                            <dx:BootstrapComboBox runat="server" ID="editInsureType" NullText="เลือกประเภทการประกันภัย..." DataSourceID="SqlDataSource_InsureType" TextField="Name" ValueField="ID">
+                                                <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
+
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ใหม่/ต่ออายุ" ColSpanMd="6" FieldName="NewRenew">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox ID="editNewRenew" runat="server" NullText="เลือก..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
+                                                <Items>
+                                                    <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
+                                                    <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
+                                                </Items>
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ปีที่ต่ออายุ" ColSpanMd="6" FieldName="RenewPolicyYear">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapSpinEdit ID="editRenewPolicyYear" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="ปีที่ต่ออายุ..."
+                                                SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
+                                            </dx:BootstrapSpinEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="เบอร์กรมธรรม์" ColSpanMd="6" FieldName="PolicyNo">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editPolicyNo" NullText="พิมพ์เบอร์กรมธรรม์..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเริ่มคุ้มครอง" ColSpanMd="6" FieldName="EffectiveDate">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="editEffectiveDate" runat="server" NullText="เลือกวันเริ่มคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันสิ้นสุดคุ้มครอง" ColSpanMd="6" FieldName="ExpiredDate">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="editExpiredDate" runat="server" NullText="เลือกวันสิ้นสุดคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                                <dx:BootstrapLayoutItem Caption="ประเภทกรมธรรม์" ColSpanMd="6" FieldName="PolicyType">
+                                    <ContentCollection>
+                                        <dx:ContentControl ID="ContentControl5" runat="server">
+                                            <dx:BootstrapComboBox runat="server" ID="editPolicyType" NullText="เลือกประเภทกรมธรรม์..." DataSourceID="SqlDataSource_PolicyType" TextField="Name" ValueField="ID">
+                                                <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
+
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+
+
+
+
+
+
+                            </Items>
+                        </dx:BootstrapFormLayout>
+
+                    </div>
+                    <div class="tab-pane" id="edittab2">
+                        <dx:BootstrapFormLayout ID="BootstrapFormEdit4" runat="server" LayoutType="Horizontal">
+                            <Items>
+
+                                <dx:BootstrapLayoutItem Caption="รหัสรถ" ColSpanMd="6" FieldName="CarType">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox runat="server" ID="editCarType" DataSourceID="SqlDataSource_CarType" TextField="Name" ValueField="ID">
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ยี่ห้อรถ" ColSpanMd="6" FieldName="CarBrandModel">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox runat="server" ID="editCarBrandModel" DataSourceID="SqlDataSource_CarBrandModel" TextField="Name" ValueField="ID">
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+ 
+                                   <dx:BootstrapLayoutItem Caption="ปีรถ" ColSpanMd="6" FieldName="CarRegYear">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editCarRegYear"  ></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+                             <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="6" FieldName="CarLicensePlate">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editCarLicensePlate" ></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+
+                                <dx:BootstrapLayoutItem Caption="เลขเครื่อง" ColSpanMd="6" FieldName="Engine">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editEngine"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="เลขถัง" ColSpanMd="6"  FieldName="Chassis">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editChassis"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+                                <dx:BootstrapLayoutItem Caption="ขนาด/น้ำหนัก/ที่นั่ง" ColSpanMd="6" FieldName="CarSize">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editCarSize"></dx:BootstrapTextBox>
+
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="แบบตัวถัง" ColSpanMd="6" FieldName="ChassisType">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editChassisType"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                                <dx:BootstrapLayoutItem Caption="การใช้" ColSpanMd="6" FieldName="CarUse">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox ID="editCarUse" runat="server">
+                                                <Items>
+                                                    <dx:BootstrapListEditItem Text="บุคคล" Value="P" />
+                                                    <dx:BootstrapListEditItem Text="พาณิชย์" Value="C" />
+                                                </Items>
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 1" ColSpanMd="6" BeginRow="true" FieldName="DriverName1">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editDriverName1"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6" FieldName="DriverDOB1">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+
+                                            <dx:BootstrapDateEdit ID="editDriverDOB1" runat="server" EditFormatString="dd/MM/yyyy">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 2" ColSpanMd="6" FieldName="DriverName2" >
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editDriverName2"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6" FieldName="DriverDOB2">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapDateEdit ID="editDriverDOB2" runat="server" EditFormatString="dd/MM/yyyy">
+                                            </dx:BootstrapDateEdit>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                            </Items>
+                        </dx:BootstrapFormLayout>
+                    </div>
+
+
+                </div>
+            </div>
+
+              <fieldset>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">รายละเอียดความคุ้มครอง</i></legend>
             </fieldset>
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout7" runat="server" LayoutType="Horizontal">
+            <dx:BootstrapFormLayout ID="BootstrapFormEdit5" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
                 <Items>
 
-                    <dx:BootstrapLayoutItem Caption="ประเภทการประกันภัย" ColSpanMd="4" FieldName="InsureType">
-                        <ContentCollection>
-                            <dx:ContentControl ID="ContentControl16" runat="server">
-                                <dx:BootstrapComboBox runat="server" ID="editInsureType" NullText="เลือกประเภทการประกันภัย..." DataSourceID="SqlDataSource_InsureType" TextField="Name" ValueField="ID">
-                                    <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="editPolicyForm"></ValidationSettings>
-                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        TaskEditPopup.PerformCallback('calbrokerage');
-                                        }" />
-                                </dx:BootstrapComboBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="เบอร์กรมธรรม์" ColSpanMd="4" FieldName="PolicyNo">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editPolicyNo" NullText="พิมพ์เบอร์กรมธรรม์..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ใหม่/ต่ออายุ" ColSpanMd="4" FieldName="PolicyType">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <%-- <dx:BootstrapRadioButtonList ID="BootstrapRadioButtonList1"
-                                    ValidationSettings-RequiredField-IsRequired="true" RepeatDirection="Horizontal" RepeatColumns="2" runat="server">
-                                    <Items>
-                                        <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
-                                        <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
-                                    </Items>
-                                </dx:BootstrapRadioButtonList>--%>
-
-                                <dx:BootstrapComboBox ID="editPolicyType" runat="server" NullText="เลือก..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                    <Items>
-                                        <dx:BootstrapListEditItem Text="ใหม่" Value="N" />
-                                        <dx:BootstrapListEditItem Text="ต่ออายุ" Value="R" />
-                                    </Items>
-                                </dx:BootstrapComboBox>
-
-
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
-
-                    <dx:BootstrapLayoutItem Caption="วันเริ่มคุ้มครอง" ColSpanMd="4" FieldName="EffectiveDate">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="editEffectiveDate" runat="server" NullText="เลือกวันเริ่มคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                </dx:BootstrapDateEdit>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันสิ้นสุดคุ้มครอง" ColSpanMd="4" FieldName="ExpiredDate">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="editExpiredDate" runat="server" NullText="เลือกวันสิ้นสุดคุ้มครอง..." EditFormatString="dd/MM/yyyy" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                </dx:BootstrapDateEdit>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ทุนประกัน" ColSpanMd="4" FieldName="Suminsured">
+                    <dx:BootstrapLayoutItem Caption="จำนวนเงินเอาประกันภัย" ColSpanMd="4" FieldName="Suminsured">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editSuminsured" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="พิมพ์ทุนประกัน..."
@@ -718,30 +1180,12 @@
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="4" FieldName="CarLicensePlate">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editCarLicensePlate" NullText="พิมพ์ทะเบียนรถ..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ปีจดทะเบียน" ColSpanMd="4" FieldName="CarRegYear">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editCarRegYear" NullText="พิมพ์ปีจดทะเบียน..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
                     <dx:BootstrapLayoutItem Caption="เบี้ยประกันภัย" ColSpanMd="4" FieldName="Premium">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                    <ClientSideEvents ValueChanged="function(s,e){
-                                        TaskEditPopup.PerformCallback('calbrokerage');
-                                        }" />
-
+                                
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -749,8 +1193,8 @@
                     <dx:BootstrapLayoutItem Caption="อากร" ColSpanMd="4" FieldName="Stamp">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editStamp" ClientEnabled="false" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                <dx:BootstrapSpinEdit ID="editStamp"   runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -758,8 +1202,8 @@
                     <dx:BootstrapLayoutItem Caption="ภาษี" ColSpanMd="4" FieldName="Vat">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editVat" ClientEnabled="false" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                <dx:BootstrapSpinEdit ID="editVat"  runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -768,36 +1212,30 @@
                     <dx:BootstrapLayoutItem Caption="เบี้ยประกันภัยรวม" ColSpanMd="4" FieldName="GrossPremium">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editGrossPremium" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
-                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
-                                </dx:BootstrapSpinEdit>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
-
-                </Items>
-            </dx:BootstrapFormLayout>
-            <fieldset>
-                <legend class="text-primary">ส่วนเจ้าหน้าที่</legend>
-            </fieldset>
-            <dx:BootstrapFormLayout ID="BootstrapFormLayout8" runat="server" LayoutType="Horizontal">
-                <CssClasses Control="overview-fl" />
-                <Items>
-
-
-                    <dx:BootstrapLayoutItem Caption="ค่าคอม(ประกัน)" ColSpanMd="4" FieldName="BRCommAmt">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editBRCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editGrossPremium"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
+
+
+                    
+
+                    <dx:BootstrapLayoutItem Caption="ค่าคอม(ประกัน)" ColSpanMd="4" FieldName="BRCommAmt">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapSpinEdit ID="editBRCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                    SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
+                                </dx:BootstrapSpinEdit>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
                     <dx:BootstrapLayoutItem Caption="ค่าส่งเสริม" ColSpanMd="4" FieldName="PRCommAmt">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editPRCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editPRCommAmt"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -806,7 +1244,7 @@
                     <dx:BootstrapLayoutItem Caption="ค่านายหน้าจ่าย Sub" ColSpanMd="4" FieldName="SubCommAmt">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editSubCommAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editSubCommAmt"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -814,30 +1252,78 @@
                     </dx:BootstrapLayoutItem>
 
 
-                    <dx:BootstrapLayoutItem Caption="วันที่ส่งกรมธรรม์" ColSpanMd="4" FieldName="SentPolicyDate">
+                    <dx:BootstrapLayoutItem Caption="วันที่ออก กธ." ColSpanMd="4" FieldName="SentPolicyDate">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="editSentPolicyDate" runat="server" NullText="เลือกวันที่ส่งกรมธรรม์..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="editSentPolicyDate" runat="server" NullText="เลือกวันที่ออก กธ...." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันที่ได้รับกรมธรรม์" ColSpanMd="4" FieldName="GetPolicyDate">
+                    <dx:BootstrapLayoutItem Caption="วันที่ได้รับ กธ." ColSpanMd="4" FieldName="GetPolicyDate">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="editGetPolicyDate" runat="server" NullText="เลือกวันที่ได้รับกรมธรรม์..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="editGetPolicyDate" runat="server" NullText="เลือกวันที่ได้รับ กธ...." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4" FieldName="SubGetPolicyDate">
+                   <%-- <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4" FieldName="SubGetPolicyDate">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="editSubGetPolicyDate" runat="server" NullText="เลือก Sub รับกรมธรรม์..." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
+                    </dx:BootstrapLayoutItem>--%>
+                     <dx:BootstrapLayoutItem Caption="วันที่ส่ง กธ.ให้ลูกค้า" ColSpanMd="4" FieldName="SendPolicy2CustomerDate">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapDateEdit ID="editSendPolicy2CustomerDate" runat="server" EditFormatString="dd/MM/yyyy">
+                                </dx:BootstrapDateEdit>
+                            </dx:ContentControl>
+                        </ContentCollection>
                     </dx:BootstrapLayoutItem>
+
+                    <dx:BootstrapLayoutItem Caption="วันที่ลูกค้ารับ กธ." ColSpanMd="4" FieldName="CustomerGetPolicyDate">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapDateEdit ID="editCustomerGetPolicyDate" runat="server" EditFormatString="dd/MM/yyyy">
+                                </dx:BootstrapDateEdit>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
+
+
+                      <dx:BootstrapLayoutItem Caption="สถานะ" ColSpanMd="4" FieldName="Status">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapComboBox ID="editStatus" runat="server">
+                                                <Items>
+                                                    <dx:BootstrapListEditItem Text="Active" Value="1" />
+                                                    <dx:BootstrapListEditItem Text="Cancel" Value="0" />
+                                                </Items>
+                                            </dx:BootstrapComboBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+
+                    <dx:BootstrapLayoutItem Caption="หมายเหตุ" ColSpanMd="8" FieldName="Remark" >
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editRemark"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+                </Items>
+            </dx:BootstrapFormLayout>
+            <fieldset>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> ส่วนเจ้าหน้าที่ </i></legend>
+            </fieldset>
+            <dx:BootstrapFormLayout ID="BootstrapFormEdit6" runat="server" LayoutType="Horizontal">
+                <CssClasses Control="overview-fl" />
+                <Items>
 
 
 

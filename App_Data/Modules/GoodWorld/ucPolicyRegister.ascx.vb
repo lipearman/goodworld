@@ -119,20 +119,50 @@ Partial Class Modules_ucPolicyRegister
 
                 Dim newData As New tblPolicyRegister
                 With newData
+                    'บริษัทประกัน/ตัวแทน
                     .InsurerCode = newInsurerCode.Value
                     .AgentCode = newAgentCode.Value
+                    'ผู้เอาประกัน
+                    .CustomerType = newCustomerType.Value
                     .FirstName = newFirstName.Value
                     .LastName = newLastName.Value
-                    .IdentityNo = newIdentityNo.Value
-                    .TelNo = newTelNo.Value
-                    .Mobile = newMobile.Value
                     .Address1 = newAddress1.Value
                     .Address2 = newAddress2.Value
-                    .InsureType = CInt(newInsureType.Value)
-                    .PolicyNo = newPolicyNo.Value
+                    '.IdentityNo = newIdentityNo.Value
+                    .TelNo = newTelNo.Value
+                    .Mobile = newMobile.Value
+                    .Fax = newFax.Text
+                    .Email = newEmail.Text
+                    .SocialMediaNo = newSocialMediaNo.Text
+                    .BenefitName = newBenefitName.Text
+
+                    'รายละเอียดกรมธรรม์
                     .PolicyType = newPolicyType.Value
+                    .NewRenew = newNewRenew.Value
+                    .RenewPolicyYear = CInt(newRenewPolicyYear.Value)
+                    .PolicyNo = newPolicyNo.Value
                     .EffectiveDate = newEffectiveDate.Value
                     .ExpiredDate = newExpiredDate.Value
+                    .InsureType = CInt(newInsureType.Value)
+
+
+                    'รายละเอียดรถคันที่เอาประกันภัย
+                    .CarType = CInt(newCarType.Value)
+                    .CarBrandModel = CInt(newCarBrandModel.Value)
+                    .CarRegYear = newCarRegYear.Value
+                    .CarLicensePlate = newCarLicensePlate.Value
+                    .Engine = newEngine.Text
+                    .Chassis = newChassis.Text
+                    .CarSize = newCarSize.Text
+                    .ChassisType = newChassisType.Text
+                    .CarUse = newCarUse.Value
+                    .DriverName1 = newDriverName1.Text
+                    .DriverDOB1 = newDriverDOB1.Value
+                    .DriverName2 = newDriverName2.Text
+                    .DriverDOB2 = newDriverDOB2.Value
+
+
+                    'รายละเอียดความคุ้มครอง
                     .Suminsured = CInt(newSuminsured.Value)
                     .Premium = newPremium.Value
                     .Vat = newVat.Value
@@ -145,25 +175,30 @@ Partial Class Modules_ucPolicyRegister
 
                     .SentPolicyDate = newSentPolicyDate.Value
                     .GetPolicyDate = newGetPolicyDate.Value
-                    .SubGetPolicyDate = newSubGetPolicyDate.Value
+                    '.SubGetPolicyDate = newSubGetPolicyDate.Value
+                    .SendPolicy2CustomerDate = newSendPolicy2CustomerDate.Value
+                    .CustomerGetPolicyDate = newCustomerGetPolicyDate.Value
+
+
                     .CreateDate = DateTime.Now
                     .CreateBy = HttpContext.Current.User.Identity.Name
                     '.Status = newStatus.value
-                    .DOB = newDOB.Value
-                    .CarLicensePlate = newCarLicensePlate.Value
-                    .CarRegYear = newCarRegYear.Value
+                    '.DOB = newDOB.Value
 
-                    Dim brokerage = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(.InsurerCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
-                    If brokerage IsNot Nothing Then
-                        .BRCommP = brokerage.BRCommP
-                        .PRCommP = brokerage.PRCommP
-                    End If
+                    .Status = "1"
 
-                    Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(.AgentCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
-                    If subcomm IsNot Nothing Then
-                        .SubCommP = subcomm.SubCommP
-                        .SubCommID = subcomm.SubCommID
-                    End If
+
+                    'Dim brokerage = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(.InsurerCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
+                    'If brokerage IsNot Nothing Then
+                    '    .BRCommP = brokerage.BRCommP
+                    '    .PRCommP = brokerage.PRCommP
+                    'End If
+
+                    'Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(.AgentCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
+                    'If subcomm IsNot Nothing Then
+                    '    .SubCommP = subcomm.SubCommP
+                    '    .SubCommID = subcomm.SubCommID
+                    'End If
 
                 End With
 
@@ -215,20 +250,22 @@ Partial Class Modules_ucPolicyRegister
         Using dc As New DataClasses_GoodWorldExt()
             Dim data = (From c In dc.tblPolicyRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
 
-            BootstrapFormLayout5.DataSource = data
-            BootstrapFormLayout5.DataBind()
-            BootstrapFormLayout6.DataSource = data
-            BootstrapFormLayout6.DataBind()
-            BootstrapFormLayout7.DataSource = data
-            BootstrapFormLayout7.DataBind()
-            BootstrapFormLayout8.DataSource = data
-            BootstrapFormLayout8.DataBind()
+            BootstrapFormEdit1.DataSource = data
+            BootstrapFormEdit1.DataBind()
+            BootstrapFormEdit2.DataSource = data
+            BootstrapFormEdit2.DataBind()
+            BootstrapFormEdit3.DataSource = data
+            BootstrapFormEdit3.DataBind()
+            BootstrapFormEdit4.DataSource = data
+            BootstrapFormEdit4.DataBind()
+            BootstrapFormEdit5.DataSource = data
+            BootstrapFormEdit5.DataBind()
 
-            editAddress1.Value = data.Address1
-            editAddress2.Value = data.Address2
+            'editAddress1.Value = data.Address1
+            'editAddress2.Value = data.Address2
 
-            editTelNo.Value = data.TelNo
-            editMobile.Value = data.Mobile
+            'editTelNo.Value = data.TelNo
+            'editMobile.Value = data.Mobile
 
             editCreateBy.Value = String.Format("{0} {1}", data.CreateBy, data.CreateDate)
             editModifyBy.Value = String.Format("{0} {1}", data.ModifyBy, data.ModifyDate)
@@ -297,20 +334,97 @@ Partial Class Modules_ucPolicyRegister
                 Dim data = (From c In dc.tblPolicyRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
 
                 With data
+                    '.InsurerCode = editInsurerCode.Value
+                    '.AgentCode = editAgentCode.Value
+                    '.FirstName = editFirstName.Value
+                    '.LastName = editLastName.Value
+                    ''.IdentityNo = editIdentityNo.Value
+                    '.TelNo = editTelNo.Value
+                    '.Mobile = editMobile.Value
+                    '.Address1 = editAddress1.Value
+                    '.Address2 = editAddress2.Value
+                    '.InsureType = CInt(editInsureType.Value)
+                    '.PolicyNo = editPolicyNo.Value
+                    '.PolicyType = editPolicyType.Value
+                    '.EffectiveDate = editEffectiveDate.Value
+                    '.ExpiredDate = editExpiredDate.Value
+                    '.Suminsured = CInt(editSuminsured.Value)
+                    '.Premium = editPremium.Value
+                    '.Vat = editVat.Value
+                    '.Stamp = editStamp.Value
+                    '.GrossPremium = editGrossPremium.Value
+
+                    '.BRCommAmt = editBRCommAmt.Value
+                    '.PRCommAmt = editPRCommAmt.Value
+                    '.SubCommAmt = editSubCommAmt.Value
+
+                    '.SentPolicyDate = editSentPolicyDate.Value
+                    '.GetPolicyDate = editGetPolicyDate.Value
+                    ''.SubGetPolicyDate = editSubGetPolicyDate.Value
+                    '.ModifyDate = DateTime.Now
+                    '.ModifyBy = HttpContext.Current.User.Identity.Name
+                    ''.Status = newStatus.value
+                    ''.DOB = editDOB.Value
+                    '.CarLicensePlate = editCarLicensePlate.Value
+                    '.CarRegYear = editCarRegYear.Value
+
+                    ''Dim brokerage = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(.InsurerCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
+                    ''If brokerage IsNot Nothing Then
+                    ''    .BRCommP = brokerage.BRCommP
+                    ''    .PRCommP = brokerage.PRCommP
+                    ''End If
+
+                    ''Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(.AgentCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
+                    ''If subcomm IsNot Nothing Then
+                    ''    .SubCommP = subcomm.SubCommP
+                    ''    .SubCommID = subcomm.SubCommID
+                    ''End If
+
+
+                    'บริษัทประกัน/ตัวแทน
                     .InsurerCode = editInsurerCode.Value
                     .AgentCode = editAgentCode.Value
+                    'ผู้เอาประกัน
+                    .CustomerType = editCustomerType.Value
                     .FirstName = editFirstName.Value
                     .LastName = editLastName.Value
-                    .IdentityNo = editIdentityNo.Value
-                    .TelNo = editTelNo.Value
-                    .Mobile = editMobile.Value
                     .Address1 = editAddress1.Value
                     .Address2 = editAddress2.Value
-                    .InsureType = CInt(editInsureType.Value)
-                    .PolicyNo = editPolicyNo.Value
+                    '.IdentityNo = newIdentityNo.Value
+                    .TelNo = editTelNo.Value
+                    .Mobile = editMobile.Value
+                    .Fax = editFax.Text
+                    .Email = editEmail.Text
+                    .SocialMediaNo = editSocialMediaNo.Text
+                    .BenefitName = editBenefitName.Text
+
+                    'รายละเอียดกรมธรรม์
                     .PolicyType = editPolicyType.Value
+                    .NewRenew = editNewRenew.Value
+                    .RenewPolicyYear = CInt(editRenewPolicyYear.Value)
+                    .PolicyNo = editPolicyNo.Value
                     .EffectiveDate = editEffectiveDate.Value
                     .ExpiredDate = editExpiredDate.Value
+                    .InsureType = CInt(editInsureType.Value)
+
+
+                    'รายละเอียดรถคันที่เอาประกันภัย
+                    .CarType = CInt(editCarType.Value)
+                    .CarBrandModel = CInt(editCarBrandModel.Value)
+                    .CarRegYear = editCarRegYear.Value
+                    .CarLicensePlate = editCarLicensePlate.Value
+                    .Engine = editEngine.Text
+                    .Chassis = editChassis.Text
+                    .CarSize = editCarSize.Text
+                    .ChassisType = editChassisType.Text
+                    .CarUse = editCarUse.Value
+                    .DriverName1 = editDriverName1.Text
+                    .DriverDOB1 = editDriverDOB1.Value
+                    .DriverName2 = editDriverName2.Text
+                    .DriverDOB2 = editDriverDOB2.Value
+
+
+                    'รายละเอียดความคุ้มครอง
                     .Suminsured = CInt(editSuminsured.Value)
                     .Premium = editPremium.Value
                     .Vat = editVat.Value
@@ -323,26 +437,13 @@ Partial Class Modules_ucPolicyRegister
 
                     .SentPolicyDate = editSentPolicyDate.Value
                     .GetPolicyDate = editGetPolicyDate.Value
-                    .SubGetPolicyDate = editSubGetPolicyDate.Value
+                    '.SubGetPolicyDate = newSubGetPolicyDate.Value
+                    .SendPolicy2CustomerDate = editSendPolicy2CustomerDate.Value
+                    .CustomerGetPolicyDate = editCustomerGetPolicyDate.Value
+                    .Status = editStatus.Value
+                    .Remark = editRemark.Value
                     .ModifyDate = DateTime.Now
                     .ModifyBy = HttpContext.Current.User.Identity.Name
-                    '.Status = newStatus.value
-                    .DOB = editDOB.Value
-                    .CarLicensePlate = editCarLicensePlate.Value
-                    .CarRegYear = editCarRegYear.Value
-
-                    Dim brokerage = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(.InsurerCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
-                    If brokerage IsNot Nothing Then
-                        .BRCommP = brokerage.BRCommP
-                        .PRCommP = brokerage.PRCommP
-                    End If
-
-                    Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(.AgentCode) And c.InsureType.Equals(.InsureType)).FirstOrDefault()
-                    If subcomm IsNot Nothing Then
-                        .SubCommP = subcomm.SubCommP
-                        .SubCommID = subcomm.SubCommID
-                    End If
-
                 End With
 
 

@@ -11,7 +11,7 @@
 </fieldset>
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid" EnableRowsCache="false"
-    AutoGenerateColumns="False"
+    AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
     KeyFieldName="ID" SettingsBehavior-ConfirmDelete="true"
     SettingsBehavior-AllowDragDrop="true"
     SettingsPopup-EditForm-AllowResize="true"

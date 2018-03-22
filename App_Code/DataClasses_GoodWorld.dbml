@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="goodworld_database" Class="DataClasses_GoodWorldDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LOCKTHBNK-DUSIP\SQLEXPRESS2016;Initial Catalog=goodworld_database;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="goodworld_databaseConnectionString1" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="goodworld" Class="DataClasses_GoodWorldDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS01;Initial Catalog=goodworld;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PortalConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblBrokerage" Member="tblBrokerages">
     <Type Name="tblBrokerage">
       <Column Name="BRID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -111,6 +111,27 @@
       <Column Name="DOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="CarLicensePlate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CarRegYear" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SocialMediaNo" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="BenefitName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NewRenew" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="RenewPolicyYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarBrandModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Engine" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Chassis" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CarSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChassisType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CarUse" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DriverName1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DriverDOB1" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DriverName2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DriverDOB2" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SendPolicy2CustomerDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomerGetPolicyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

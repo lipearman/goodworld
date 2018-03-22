@@ -20,7 +20,15 @@
         background-color: transparent;
         -webkit-text-decoration-skip: objects;
     }
+    .saveBt {
+        margin-right: 10px;
+    }
+
+    .removeWrapping {
+        white-space: nowrap;
+    }
 </style>
+
    <%-- 
     <style>
         .main-content {

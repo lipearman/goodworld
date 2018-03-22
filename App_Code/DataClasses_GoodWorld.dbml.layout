@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.5" name="DataClasses_GoodWorld">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 15.625" name="DataClasses_GoodWorld">
   <DataContextMoniker Name="/DataClasses_GoodWorldDataContext" />
   <nestedChildShapes>
     <classShape Id="f40c8036-5db5-4c78-a8fb-eca0869af1be" absoluteBounds="0.75, 0.75, 2, 2.7324039713541666">
@@ -38,10 +38,10 @@
         <elementListCompartment Id="637b5bc7-c945-4944-b230-72ffbff26781" absoluteBounds="0.765, 9.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fb592377-9a86-4a2a-b85d-259531a0ee96" absoluteBounds="6.125, 3.125, 2, 8.1168440755208326">
+    <classShape Id="cdbb312b-24b0-4cfb-8c7e-e249590b2ac3" absoluteBounds="7.75, 3.25, 2, 12.155174153645833">
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblPolicyRegister" />
       <nestedChildShapes>
-        <elementListCompartment Id="22ec49c9-b31d-4842-ac82-c367e6d6dc37" absoluteBounds="6.14, 3.585, 1.9700000000000002, 7.556844075520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d18361bd-fb08-4070-ba91-1e809b8f9386" absoluteBounds="7.7650000000000006, 3.71, 1.9700000000000002, 11.595174153645832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

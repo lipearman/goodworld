@@ -16,7 +16,7 @@
     SettingsBehavior-AllowDragDrop="true"
     SettingsPopup-EditForm-AllowResize="true"
     DataSourceID="SqlDataSource_Brokerage"
-    Width="100%"
+    Width="100%" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
     PopupAnimationType="Fade" CloseOnEscape="true" CloseAction="None">
     <CssClasses Control="tasks-grid" PreviewRow="text-muted" />
     <Toolbars>
