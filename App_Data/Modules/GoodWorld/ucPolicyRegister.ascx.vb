@@ -14,7 +14,8 @@ Imports DevExpress.Web
 Imports DevExpress.Web.ASPxTreeList
 Imports DevExpress.Web.Data
 Imports DevExpress.Web.Bootstrap
-
+Imports DevExpress.XtraPrinting
+Imports DevExpress.Export
 
 Partial Class Modules_ucPolicyRegister
     Inherits PortalModuleControl
@@ -476,4 +477,17 @@ Partial Class Modules_ucPolicyRegister
 
 
     End Sub
+
+
+    Protected Sub TaskGrid_ToolbarItemClick(ByVal sender As Object, ByVal e As BootstrapGridViewToolbarItemClickEventArgs) Handles TaskGrid.ToolbarItemClick
+
+        Select Case e.Item.Name
+            Case "ExportToXLS"
+                TaskGrid.ExportXlsToResponse(New XlsExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
+            Case "ExportToXLSX"
+                TaskGrid.ExportXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
+        End Select
+    End Sub
+
+
 End Class

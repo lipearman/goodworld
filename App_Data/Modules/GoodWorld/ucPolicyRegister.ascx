@@ -35,15 +35,25 @@
     <CssClasses Control="tasks-grid" PreviewRow="text-muted" />
     <ClientSideEvents ToolbarItemClick="function(s,e){
                 switch (e.item.name) {
+
+                case 'ExportToXLSX':
+                case 'ExportToXLS':
+                    e.processOnServer = true;
+                    e.usePostBack = true;
+                    break;
+
+
                 case 'NewPolicy':
                     TaskNewPopup.Show();
                     //TaskNewPopup.PerformCallback();
                     ASPxClientEdit.ClearEditorsInContainerById('newPolicyForm');
+                    e.processOnServer = false;
                     break;
             }
             //e.usePostBack = false;
-            e.processOnServer = false;
+            //e.processOnServer = false;
         }" />
+     
     <Toolbars>
         <dx:BootstrapGridViewToolbar>
             <Items>
@@ -60,6 +70,12 @@
                 <dx:BootstrapGridViewToolbarItem Command="ClearSorting" />
                 <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" />
 
+                <dx:BootstrapGridViewToolbarItem Command="Custom" Text="Export To">
+                    <Items>
+                        <dx:BootstrapGridViewToolbarMenuItem Name="ExportToXLSX" Text="XLSX" />
+                        <dx:BootstrapGridViewToolbarMenuItem Name="ExportToXLS" Text="XLS" />
+                    </Items>
+                </dx:BootstrapGridViewToolbarItem>
 
                 <dx:BootstrapGridViewToolbarItem Command="ShowCustomizationDialog" BeginGroup="true">
                 </dx:BootstrapGridViewToolbarItem>
@@ -111,6 +127,43 @@
 
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+
+
+
+
+        <dx:BootstrapGridViewTextColumn FieldName="Suminsured" Visible="false" Caption="จำนวนเงินเอาประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Premium" Visible="false" Caption="เบี้ยประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Vat" Visible="false" Caption="ภาษี"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Stamp" Visible="false" Caption="อากร"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="SentPolicyDate" Visible="false" Caption="วันที่ออกกรมธรรม์"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="GetPolicyDate" Visible="false" Caption="วันที่ได้รับกรมธรรม์"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CreateDate" Visible="false" Caption="วันที่ทำรายการ "></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CreateBy" Visible="false" Caption="เจ้าหน้าที่บันทึก"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="ModifyDate" Visible="false" Caption="วันที่แก้ไข"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="ModifyBy" Visible="false" Caption="เจ้าหน้าที่แก้ไข"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Status" Visible="false" Caption="Status"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Visible="false" Caption="ทะเบียนรถ"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarRegYear" Visible="false" Caption="ปีรุ่น"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CustomerType" Visible="false" Caption="CustomerType"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Fax" Visible="false" Caption="Fax"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Email" Visible="false" Caption="Email"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="SocialMediaNo" Visible="false" Caption="Line ID /FaceBook"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="BenefitName" Visible="false" Caption="ผู้รับผลประโยชน์"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="NewRenew" Visible="false" Caption="NewRenew"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="RenewPolicyYear" Visible="false" Caption="กรมธรรม์ต่ออายุปีที่"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarType" Visible="false" Caption="รหัสรถ"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarBrandModel" Visible="false" Caption="ยี่ห้อรถ"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Engine" Visible="false" Caption="เลขเครื่อง"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="Chassis" Visible="false" Caption="เลขตัวถัง"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarSize" Visible="false" Caption="ขนาด/น้ำหนัก/ที่นั่ง"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="ChassisType" Visible="false" Caption="แบบตัวถัง"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CarUse" Visible="false" Caption="การใช้"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="DriverName1" Visible="false" Caption="ผู้ขับขี่ที่ 1 "></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="DriverDOB1" Visible="false" Caption="วันเดือนปีเกิด"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="DriverName2" Visible="false" Caption="ผู้ขับขี่ที่ 2"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="DriverDOB2" Visible="false" Caption="วันเดือนปีเกิด"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="SendPolicy2CustomerDate" Visible="false" Caption="วันที่ส่งกรมธรรม์ให้ลูกค้า"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="CustomerGetPolicyDate" Visible="false" Caption="วันที่ลูกค้ารับกรมธรรม์"></dx:BootstrapGridViewTextColumn>
 
 
 
@@ -745,7 +798,7 @@
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ลงทะเบียนกรมธรรม์"
     PopupAnimationType="Fade">
     <SettingsAdaptivity Mode="Always" FixedHeader="true" VerticalAlign="WindowTop" />
-    <SettingsBootstrap Sizing="Large"  />
+    <SettingsBootstrap Sizing="Large" />
     <CssClasses Header="text-primary" />
     <ClientSideEvents
         BeginCallback="function(s,e){
@@ -783,7 +836,7 @@
             <dx:ASPxHiddenField runat="server" ID="hdID"></dx:ASPxHiddenField>
 
             <fieldset>
-                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> บริษัทประกัน/ตัวแทน</i></legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">บริษัทประกัน/ตัวแทน</i></legend>
             </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormEdit1" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
@@ -811,7 +864,7 @@
                 </Items>
             </dx:BootstrapFormLayout>
             <fieldset>
-                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> ผู้เอาประกัน</i></legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">ผู้เอาประกัน</i></legend>
             </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormEdit2" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
@@ -1056,22 +1109,22 @@
                                     </ContentCollection>
                                 </dx:BootstrapLayoutItem>
 
- 
-                                   <dx:BootstrapLayoutItem Caption="ปีรถ" ColSpanMd="6" FieldName="CarRegYear">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editCarRegYear"  ></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
 
-                             <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="6" FieldName="CarLicensePlate">
-                        <ContentCollection>
-                            <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editCarLicensePlate" ></dx:BootstrapTextBox>
-                            </dx:ContentControl>
-                        </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                                <dx:BootstrapLayoutItem Caption="ปีรถ" ColSpanMd="6" FieldName="CarRegYear">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editCarRegYear"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
+
+                                <dx:BootstrapLayoutItem Caption="ทะเบียนรถ" ColSpanMd="6" FieldName="CarLicensePlate">
+                                    <ContentCollection>
+                                        <dx:ContentControl>
+                                            <dx:BootstrapTextBox runat="server" ID="editCarLicensePlate"></dx:BootstrapTextBox>
+                                        </dx:ContentControl>
+                                    </ContentCollection>
+                                </dx:BootstrapLayoutItem>
 
 
 
@@ -1083,7 +1136,7 @@
                                         </dx:ContentControl>
                                     </ContentCollection>
                                 </dx:BootstrapLayoutItem>
-                                <dx:BootstrapLayoutItem Caption="เลขถัง" ColSpanMd="6"  FieldName="Chassis">
+                                <dx:BootstrapLayoutItem Caption="เลขถัง" ColSpanMd="6" FieldName="Chassis">
                                     <ContentCollection>
                                         <dx:ContentControl>
                                             <dx:BootstrapTextBox runat="server" ID="editChassis"></dx:BootstrapTextBox>
@@ -1139,7 +1192,7 @@
                                         </dx:ContentControl>
                                     </ContentCollection>
                                 </dx:BootstrapLayoutItem>
-                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 2" ColSpanMd="6" FieldName="DriverName2" >
+                                <dx:BootstrapLayoutItem Caption="ผู้ขับขี่ที่ 2" ColSpanMd="6" FieldName="DriverName2">
                                     <ContentCollection>
                                         <dx:ContentControl>
                                             <dx:BootstrapTextBox runat="server" ID="editDriverName2"></dx:BootstrapTextBox>
@@ -1163,7 +1216,7 @@
                 </div>
             </div>
 
-              <fieldset>
+            <fieldset>
                 <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">รายละเอียดความคุ้มครอง</i></legend>
             </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormEdit5" runat="server" LayoutType="Horizontal">
@@ -1185,7 +1238,6 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
-                                
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -1193,7 +1245,7 @@
                     <dx:BootstrapLayoutItem Caption="อากร" ColSpanMd="4" FieldName="Stamp">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editStamp"   runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
+                                <dx:BootstrapSpinEdit ID="editStamp" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1202,7 +1254,7 @@
                     <dx:BootstrapLayoutItem Caption="ภาษี" ColSpanMd="4" FieldName="Vat">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editVat"  runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editVat" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1212,7 +1264,7 @@
                     <dx:BootstrapLayoutItem Caption="เบี้ยประกันภัยรวม" ColSpanMd="4" FieldName="GrossPremium">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editGrossPremium"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editGrossPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1220,7 +1272,7 @@
                     </dx:BootstrapLayoutItem>
 
 
-                    
+
 
                     <dx:BootstrapLayoutItem Caption="ค่าคอม(ประกัน)" ColSpanMd="4" FieldName="BRCommAmt">
                         <ContentCollection>
@@ -1235,7 +1287,7 @@
                     <dx:BootstrapLayoutItem Caption="ค่าส่งเสริม" ColSpanMd="4" FieldName="PRCommAmt">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editPRCommAmt"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editPRCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1244,7 +1296,7 @@
                     <dx:BootstrapLayoutItem Caption="ค่านายหน้าจ่าย Sub" ColSpanMd="4" FieldName="SubCommAmt">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editSubCommAmt"  runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editSubCommAmt" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1268,7 +1320,7 @@
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                   <%-- <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4" FieldName="SubGetPolicyDate">
+                    <%-- <dx:BootstrapLayoutItem Caption="วันที่ Sub รับกรมธรรม์" ColSpanMd="4" FieldName="SubGetPolicyDate">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="editSubGetPolicyDate" runat="server" NullText="เลือก Sub รับกรมธรรม์..." EditFormatString="dd/MM/yyyy">
@@ -1276,7 +1328,7 @@
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>--%>
-                     <dx:BootstrapLayoutItem Caption="วันที่ส่ง กธ.ให้ลูกค้า" ColSpanMd="4" FieldName="SendPolicy2CustomerDate">
+                    <dx:BootstrapLayoutItem Caption="วันที่ส่ง กธ.ให้ลูกค้า" ColSpanMd="4" FieldName="SendPolicy2CustomerDate">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapDateEdit ID="editSendPolicy2CustomerDate" runat="server" EditFormatString="dd/MM/yyyy">
@@ -1295,31 +1347,31 @@
                     </dx:BootstrapLayoutItem>
 
 
-                      <dx:BootstrapLayoutItem Caption="สถานะ" ColSpanMd="4" FieldName="Status">
-                                    <ContentCollection>
-                                        <dx:ContentControl>
-                                            <dx:BootstrapComboBox ID="editStatus" runat="server">
-                                                <Items>
-                                                    <dx:BootstrapListEditItem Text="Active" Value="1" />
-                                                    <dx:BootstrapListEditItem Text="Cancel" Value="0" />
-                                                </Items>
-                                            </dx:BootstrapComboBox>
-                                        </dx:ContentControl>
-                                    </ContentCollection>
-                                </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="สถานะ" ColSpanMd="4" FieldName="Status">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapComboBox ID="editStatus" runat="server">
+                                    <Items>
+                                        <dx:BootstrapListEditItem Text="Active" Value="1" />
+                                        <dx:BootstrapListEditItem Text="Cancel" Value="0" />
+                                    </Items>
+                                </dx:BootstrapComboBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
 
 
-                    <dx:BootstrapLayoutItem Caption="หมายเหตุ" ColSpanMd="8" FieldName="Remark" >
-                                    <ContentCollection>
-                                        <dx:ContentControl>
-                                            <dx:BootstrapTextBox runat="server" ID="editRemark"></dx:BootstrapTextBox>
-                                        </dx:ContentControl>
-                                    </ContentCollection>
-                                </dx:BootstrapLayoutItem>
+                    <dx:BootstrapLayoutItem Caption="หมายเหตุ" ColSpanMd="8" FieldName="Remark">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:BootstrapTextBox runat="server" ID="editRemark"></dx:BootstrapTextBox>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:BootstrapLayoutItem>
                 </Items>
             </dx:BootstrapFormLayout>
             <fieldset>
-                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right"> ส่วนเจ้าหน้าที่ </i></legend>
+                <legend class="text-primary"><i class="fa fa-lg fa-arrow-right">ส่วนเจ้าหน้าที่ </i></legend>
             </fieldset>
             <dx:BootstrapFormLayout ID="BootstrapFormEdit6" runat="server" LayoutType="Horizontal">
                 <CssClasses Control="overview-fl" />
