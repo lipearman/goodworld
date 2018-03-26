@@ -33,4 +33,28 @@ Partial Class Modules_ucSubAgentSetup
     End Sub
 
 
+    Protected Sub TaskGrid_RowInserting(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles TaskGrid.RowInserting
+        Dim SubAgentCode = e.NewValues("SubAgentCode").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblSubAgents.SingleOrDefault(Function(c) c.SubAgentCode.Equals(SubAgentCode))
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", SubAgentCode))
+
+            End If
+        End Using
+    End Sub
+
+    Protected Sub TaskGrid_RowUpdating(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs) Handles TaskGrid.RowUpdating
+        Dim ID = e.NewValues("ID").ToString()
+        Dim SubAgentCode = e.NewValues("SubAgentCode").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblSubAgents.SingleOrDefault(Function(c) c.SubAgentCode.Equals(SubAgentCode) And c.ID <> ID)
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", SubAgentCode))
+
+            End If
+        End Using
+    End Sub
 End Class

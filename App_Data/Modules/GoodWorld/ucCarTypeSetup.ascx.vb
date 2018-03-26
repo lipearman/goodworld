@@ -34,4 +34,28 @@ Partial Class Modules_ucCarTypeSetup
     End Sub
 
 
+    Protected Sub TaskGrid_RowInserting(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles TaskGrid.RowInserting
+        Dim Code = e.NewValues("Code").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblCarTypes.SingleOrDefault(Function(c) c.Code.Equals(Code))
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", Code))
+
+            End If
+        End Using
+    End Sub
+
+    Protected Sub TaskGrid_RowUpdating(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs) Handles TaskGrid.RowUpdating
+        Dim ID = e.NewValues("ID").ToString()
+        Dim Code = e.NewValues("Code").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblCarTypes.SingleOrDefault(Function(c) c.Code.Equals(Code) And c.ID <> ID)
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", Code))
+
+            End If
+        End Using
+    End Sub
 End Class

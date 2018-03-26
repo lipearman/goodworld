@@ -4,7 +4,7 @@
     <Type Name="tblBrokerage">
       <Column Name="BRID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="InsurerCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="InsureType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PolicyType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="BRCommP" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="PRCommP" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -27,6 +27,31 @@
       <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tblCarBrandModel" Member="tblCarBrandModels">
+    <Type Name="tblCarBrandModel">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarBrand" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CarModel" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCarType" Member="tblCarTypes">
+    <Type Name="tblCarType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InsureType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tblInsurer" Member="tblInsurers">
     <Type Name="tblInsurer">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -41,14 +66,21 @@
       <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BranchCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CertificateNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblInsureType" Member="tblInsureTypes">
     <Type Name="tblInsureType">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblLogin_Log" Member="tblLogin_Logs">
@@ -57,18 +89,6 @@
       <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CREATEDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tblSubBroker" Member="tblSubBrokers">
-    <Type Name="tblSubBroker">
-      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CertificateNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblPolicyRegister" Member="tblPolicyRegisters">
@@ -132,6 +152,83 @@
       <Column Name="SendPolicy2CustomerDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="CustomerGetPolicyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPolicyType" Member="tblPolicyTypes">
+    <Type Name="tblPolicyType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InsureType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSubAgent" Member="tblSubAgents">
+    <Type Name="tblSubAgent">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubAgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SubAgentName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CertificateNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSubAgentComm" Member="tblSubAgentComms">
+    <Type Name="tblSubAgentComm">
+      <Column Name="SubAgentCommID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubAgentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InsureType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubAgentCommP" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSubBroker" Member="tblSubBrokers">
+    <Type Name="tblSubBroker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CertificateNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblClaimRegister" Member="tblClaimRegisters">
+    <Type Name="tblClaimRegister">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PolicyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CarLicensePlate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExpiredDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GrossPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ClaimNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AccidentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AccisentPlace" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AccidentType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsRight" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ClaimAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

@@ -12,7 +12,7 @@
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid"  EnableRowsCache="false"
     AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
-    KeyFieldName="AgentCode" SettingsBehavior-ConfirmDelete="true"
+    KeyFieldName="ID" SettingsBehavior-ConfirmDelete="true"
     SettingsBehavior-AllowDragDrop="true"
     SettingsPopup-EditForm-AllowResize="true"
     DataSourceID="SqlDataSource_SubBroker"
@@ -85,11 +85,12 @@
     SelectCommand="select * from tblSubBroker Order By AgentName"
     UpdateCommand="update tblSubBroker 
       set AgentName=@AgentName
+    ,AgentCode=@AgentCode
       ,CertificateNo=@CertificateNo
       ,IsActive=@IsActive
       ,ModifyDate=getdate()
       ,ModifyBy=@UserName
-    Where AgentCode=@AgentCode
+    Where ID=@ID
     "
     InsertCommand="Insert into tblSubBroker(
       AgentCode
@@ -114,6 +115,7 @@
         <asp:Parameter Name="CertificateNo" />
         <asp:Parameter Name="IsActive" />
         <asp:Parameter Name="UserName" />
+        <asp:Parameter Name="ID" />
     </UpdateParameters>
 
     <InsertParameters>

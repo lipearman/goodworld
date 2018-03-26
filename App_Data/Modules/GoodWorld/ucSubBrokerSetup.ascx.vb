@@ -33,4 +33,28 @@ Partial Class Modules_ucSubBrokerSetup
     End Sub
 
 
+    Protected Sub TaskGrid_RowInserting(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles TaskGrid.RowInserting
+        Dim AgentCode = e.NewValues("AgentCode").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblSubBrokers.SingleOrDefault(Function(c) c.AgentCode.Equals(AgentCode))
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", AgentCode))
+
+            End If
+        End Using
+    End Sub
+
+    Protected Sub TaskGrid_RowUpdating(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs) Handles TaskGrid.RowUpdating
+        Dim ID = e.NewValues("ID").ToString()
+        Dim AgentCode = e.NewValues("AgentCode").ToString()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = dc.tblSubBrokers.SingleOrDefault(Function(c) c.AgentCode.Equals(AgentCode) And c.ID <> ID)
+            If data IsNot Nothing Then
+
+                Throw New Exception(String.Format("รหัส {0} มีในระบบแล้ว", AgentCode))
+
+            End If
+        End Using
+    End Sub
 End Class
