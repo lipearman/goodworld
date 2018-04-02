@@ -325,7 +325,7 @@
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newIdentityNo" NullText="พิมพ์บัตรประชาชน...">
-                                    <MaskSettings Mask="0-0000-00000-00-0" IncludeLiterals="None" />
+                            
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -916,7 +916,7 @@
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editIdentityNo" NullText="พิมพ์บัตรประชาชน...">
-                                    <MaskSettings Mask="0-0000-00000-00-0" IncludeLiterals="None" />
+                                   
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
