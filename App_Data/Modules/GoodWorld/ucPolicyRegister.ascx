@@ -233,7 +233,7 @@
                 //taskGrid.PerformCallback();
                 taskGrid.Refresh();
             }
-            else if(s.cpnewtask=='calbrokerage' )
+            else if(s.cpnewtask=='calpremium' )
             {
 
             }
@@ -651,6 +651,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
+                                     <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskNewPopup.PerformCallback('calpremium');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -822,8 +825,11 @@
             }
             else if(s.cpedittask=='edit' )
             {
-               
                 ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup.GetMainElement());
+            }
+            else if(s.cpnewtask=='calpremium' )
+            {
+
             }
             else
             {
@@ -1239,6 +1245,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                     <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskEditPopup.PerformCallback('calpremium');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -1246,7 +1255,7 @@
                     <dx:BootstrapLayoutItem Caption="อากร" ColSpanMd="4" FieldName="Stamp">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editStamp" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0"
+                                <dx:BootstrapSpinEdit ID="editStamp" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
@@ -1255,7 +1264,7 @@
                     <dx:BootstrapLayoutItem Caption="ภาษี" ColSpanMd="4" FieldName="Vat">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapSpinEdit ID="editVat" runat="server" DisplayFormatString="N0" AllowMouseWheel="false" NullText="0.00"
+                                <dx:BootstrapSpinEdit ID="editVat" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>

@@ -43,8 +43,8 @@ Partial Class Modules_ucPolicyRegister
 
 
         Select Case args.ToLower()
-            Case "calbrokerage"
-                calbrokerage()
+            Case "calpremium"
+                calpremium()
             Case "savenew"
                 savenew()
         End Select
@@ -58,60 +58,32 @@ Partial Class Modules_ucPolicyRegister
 
 
 
-    Private Sub calbrokerage()
-        'Using dc As New DataClasses_GoodWorldExt()
-        '    Dim _insurercode = newInsurerCode.Value
-        '    Dim _InsureType = IIf(newInsureType.Value IsNot Nothing, newInsureType.Value, 0)
+    Private Sub calpremium()
+        Using dc As New DataClasses_GoodWorldExt()
+            'Dim _insurercode = newInsurerCode.Value
+            Dim _InsureType = IIf(newInsureType.Value IsNot Nothing, newInsureType.Value, 0)
 
-        '    Dim _Premium = IIf(newPremium.Value IsNot Nothing, newPremium.Value, 0)
-        '    Dim _Stamp = Math.Ceiling((Convert.ToDouble(_Premium) * 0.004))
-        '    Dim _Vat = (_Stamp + Convert.ToDouble(_Premium)) * 0.07
-        '    Dim _GrossPremium = _Premium + _Stamp + _Vat
+            Dim _Premium = IIf(newPremium.Value IsNot Nothing, newPremium.Value, 0)
+            Dim _Stamp = Math.Ceiling((Convert.ToDouble(_Premium) * 0.004))
+            Dim _Vat = (_Stamp + Convert.ToDouble(_Premium)) * 0.07
+            Dim _GrossPremium = _Premium + _Stamp + _Vat
 
+            Dim _newBRCommP = 0.0
+            Dim _newBRCommAmt = 0.0
 
-        '    ''--Set @PolicyPremium = Floor(Convert(float,@PolicyTotalPremium) / 1.07428)
-        '    ''--Set @PolicyStamp = Round((@PolicyPremium * 0.004),0)
-        '    ''--Set @PolicyVat = (@PolicyPremium + @PolicyStamp) * 0.07
-        '    'Dim _GrossPremium = IIf(newGrossPremium.Value IsNot Nothing, newGrossPremium.Value, 0)
-        '    'Dim _Premium = Math.Floor((_GrossPremium) / 1.07428)
-        '    'Dim _Stamp = Math.Ceiling(_Premium * 0.004)
-        '    'Dim _Vat = (_Premium + _Stamp) * 0.07
+            Dim data = (From c In dc.tblInsureTypes Where c.ID.Equals(_InsureType)).FirstOrDefault()
 
-        '    Dim _newBRCommP = 0.0
-        '    Dim _newPRCommP = 0.0
+            If data IsNot Nothing Then
+                _newBRCommP = data.Commission
+                _newBRCommAmt = _Premium * _newBRCommP / 100
+            End If
 
-        '    Dim _newBRCommAmt = 0.0
-        '    Dim _newPRCommAmt = 0.0
+            newStamp.Value = _Stamp
+            newVat.Value = _Vat
+            newGrossPremium.Value = _GrossPremium
+            newBRCommAmt.Value = _newBRCommAmt
 
-        '    Dim data = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(_insurercode) And c.InsureType.Equals(_InsureType)).FirstOrDefault()
-
-        '    If data IsNot Nothing Then
-        '        _newBRCommP = data.BRCommP
-        '        _newPRCommP = data.PRCommP
-
-        '        _newBRCommAmt = _Premium * _newBRCommP / 100
-        '        _newPRCommAmt = _Premium * _newPRCommP / 100
-        '    End If
-
-        '    'newPremium.Value = _Premium
-        '    newStamp.Value = _Stamp
-        '    newVat.Value = _Vat
-        '    newGrossPremium.Value = _GrossPremium
-
-        '    newBRCommAmt.Value = _newBRCommAmt
-        '    newPRCommAmt.Value = _newPRCommAmt
-
-        '    Dim SubCommAmt = 0.0
-        '    Dim _AgentCode = IIf(newAgentCode.Value IsNot Nothing, newAgentCode.Value, "")
-        '    Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(_AgentCode) And c.InsureType.Equals(_InsureType)).FirstOrDefault()
-        '    If subcomm IsNot Nothing Then
-
-        '        SubCommAmt = _Premium * subcomm.SubCommP / 100
-        '    End If
-
-        '    newSubCommAmt.Value = SubCommAmt
-
-        'End Using
+        End Using
     End Sub
 
     Private Sub savenew()
@@ -233,8 +205,8 @@ Partial Class Modules_ucPolicyRegister
         Else
 
             Select Case args.ToLower()
-                Case "calbrokerage"
-                    calbrokerage2()
+                Case "calpremium"
+                    calpremium2()
                 Case "saveedit"
                     update(hdID("ID"))
             End Select
@@ -274,60 +246,33 @@ Partial Class Modules_ucPolicyRegister
 
         End Using
     End Sub
-    Private Sub calbrokerage2()
-        'Using dc As New DataClasses_GoodWorldExt()
-        '    Dim _insurercode = editInsurerCode.Value
-        '    Dim _InsureType = IIf(editInsureType.Value IsNot Nothing, editInsureType.Value, 0)
+    Private Sub calpremium2()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim _insurercode = editInsurerCode.Value
+            Dim _InsureType = IIf(editInsureType.Value IsNot Nothing, editInsureType.Value, 0)
 
-        '    Dim _Premium = IIf(editPremium.Value IsNot Nothing, editPremium.Value, 0)
-        '    Dim _Stamp = Math.Ceiling((Convert.ToDouble(_Premium) * 0.004))
-        '    Dim _Vat = (_Stamp + Convert.ToDouble(_Premium)) * 0.07
-        '    Dim _GrossPremium = _Premium + _Stamp + _Vat
+            Dim _Premium = IIf(editPremium.Value IsNot Nothing, editPremium.Value, 0)
+            Dim _Stamp = Math.Ceiling((Convert.ToDouble(_Premium) * 0.004))
+            Dim _Vat = (_Stamp + Convert.ToDouble(_Premium)) * 0.07
+            Dim _GrossPremium = _Premium + _Stamp + _Vat
 
+            Dim _BRCommP = 0.0
 
-        '    ''--Set @PolicyPremium = Floor(Convert(float,@PolicyTotalPremium) / 1.07428)
-        '    ''--Set @PolicyStamp = Round((@PolicyPremium * 0.004),0)
-        '    ''--Set @PolicyVat = (@PolicyPremium + @PolicyStamp) * 0.07
-        '    'Dim _GrossPremium = IIf(newGrossPremium.Value IsNot Nothing, newGrossPremium.Value, 0)
-        '    'Dim _Premium = Math.Floor((_GrossPremium) / 1.07428)
-        '    'Dim _Stamp = Math.Ceiling(_Premium * 0.004)
-        '    'Dim _Vat = (_Premium + _Stamp) * 0.07
+            Dim _BRCommAmt = 0.0
 
-        '    Dim _BRCommP = 0.0
-        '    Dim _PRCommP = 0.0
+            Dim data = (From c In dc.tblInsureTypes Where c.ID.Equals(_InsureType)).FirstOrDefault()
 
-        '    Dim _BRCommAmt = 0.0
-        '    Dim _PRCommAmt = 0.0
+            If data IsNot Nothing Then
+                _BRCommP = data.Commission
+                _BRCommAmt = _Premium * _BRCommP / 100
+            End If
 
-        '    Dim data = (From c In dc.tblBrokerages Where c.InsurerCode.Equals(_insurercode) And c.InsureType.Equals(_InsureType)).FirstOrDefault()
+            editStamp.Value = _Stamp
+            editVat.Value = _Vat
+            editGrossPremium.Value = _GrossPremium
+            editBRCommAmt.Value = _BRCommAmt
 
-        '    If data IsNot Nothing Then
-        '        _BRCommP = data.BRCommP
-        '        _PRCommP = data.PRCommP
-
-        '        _BRCommAmt = _Premium * _BRCommP / 100
-        '        _PRCommAmt = _Premium * _PRCommP / 100
-        '    End If
-
-        '    'newPremium.Value = _Premium
-        '    editStamp.Value = _Stamp
-        '    editVat.Value = _Vat
-        '    editGrossPremium.Value = _GrossPremium
-
-        '    editBRCommAmt.Value = _BRCommAmt
-        '    editPRCommAmt.Value = _PRCommAmt
-
-        '    Dim SubCommAmt = 0.0
-        '    Dim _AgentCode = IIf(editAgentCode.Value IsNot Nothing, editAgentCode.Value, "")
-        '    Dim subcomm = (From c In dc.tblSubComms Where c.AgentCode.Equals(_AgentCode) And c.InsureType.Equals(_InsureType)).FirstOrDefault()
-        '    If subcomm IsNot Nothing Then
-
-        '        SubCommAmt = _Premium * subcomm.SubCommP / 100
-        '    End If
-
-        '    editSubCommAmt.Value = SubCommAmt
-
-        'End Using
+        End Using
     End Sub
     Private Sub update(ByVal _ID As String)
         Try

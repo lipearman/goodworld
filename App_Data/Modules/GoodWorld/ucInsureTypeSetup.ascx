@@ -49,6 +49,16 @@
             </PropertiesTextEdit>
         </dx:BootstrapGridViewTextColumn>
 
+           <dx:BootstrapGridViewSpinEditColumn FieldName="Commission"  Caption="ค่าคอมตามกฎหมาย(%)"
+            PropertiesSpinEdit-NumberType="Float"  
+            PropertiesSpinEdit-NullText="0.00" PropertiesSpinEdit-AllowNull="false" PropertiesSpinEdit-MinValue="0.00" PropertiesSpinEdit-MaxValue="99.00"
+            PropertiesSpinEdit-DisplayFormatString="{0:N2}" >
+            <PropertiesSpinEdit>
+                <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
+            </PropertiesSpinEdit>
+        </dx:BootstrapGridViewSpinEditColumn>
+
+
         <dx:BootstrapGridViewCheckColumn FieldName="IsActive" ></dx:BootstrapGridViewCheckColumn>
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="OrderNo" 
@@ -94,14 +104,15 @@
     UpdateCommand="update tblInsureType 
       set Name=@Name
       ,Code=@Code
+     ,Commission=@Commission
       ,OrderNo=@OrderNo
       ,IsActive=@IsActive
       ,ModifyDate=getdate()
      ,ModifyBy=@UserName
     Where ID=@ID
     "
-    InsertCommand="Insert into tblInsureType(Name,Code,OrderNo,IsActive,CreateDate, CreateBy )
-    values(@Name,@Code,@OrderNo,@IsActive,getdate(),@UserName)">
+    InsertCommand="Insert into tblInsureType(Name,Code,Commission,OrderNo,IsActive,CreateDate, CreateBy )
+    values(@Name,@Code,@Commission,@OrderNo,@IsActive,getdate(),@UserName)">
 
     <UpdateParameters>
         <asp:Parameter Name="Name" />
@@ -110,6 +121,7 @@
         <asp:Parameter Name="IsActive" />
         <asp:Parameter Name="UserName" />
         <asp:Parameter Name="ID" />
+         <asp:Parameter Name="Commission" />
     </UpdateParameters>
 
     <InsertParameters>
@@ -118,6 +130,7 @@
         <asp:Parameter Name="OrderNo" />
         <asp:Parameter Name="IsActive" />
         <asp:Parameter Name="UserName" />
+         <asp:Parameter Name="Commission" />
     </InsertParameters>
 
 </asp:SqlDataSource>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15.5, 13.125" name="DataClasses_GoodWorld">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15, 17.5" name="DataClasses_GoodWorld">
   <DataContextMoniker Name="/DataClasses_GoodWorldDataContext" />
   <nestedChildShapes>
     <classShape Id="552a45fe-f31b-4dec-9fc2-0ddb89264a21" absoluteBounds="0.75, 0.75, 2, 2.7324039713541666">
@@ -32,12 +32,6 @@
         <elementListCompartment Id="dd764440-9f86-4073-a575-e2ad12373012" absoluteBounds="6.765, 1.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3723e4f4-7659-4038-a16b-5dffa728d489" absoluteBounds="6.75, 5.75, 2, 2.5401025390625005">
-      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblInsureType" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ee2fab25-16d9-4a2f-9ed4-c7db1a59e879" absoluteBounds="6.765, 6.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="0d69da9f-0590-4f01-9eb4-501c100318de" absoluteBounds="0.75, 8.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblLogin_Log" />
       <nestedChildShapes>
@@ -68,16 +62,22 @@
         <elementListCompartment Id="84c0c612-acec-48c9-94be-97fbe0a78a7a" absoluteBounds="12.765, 5.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="550dd79c-3ae9-49bd-9b7e-b1539feb5e95" absoluteBounds="13.25, 8.375, 2, 2.5401025390625">
+    <classShape Id="550dd79c-3ae9-49bd-9b7e-b1539feb5e95" absoluteBounds="12.75, 8.75, 2, 2.5401025390624987">
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblSubBroker" />
       <nestedChildShapes>
-        <elementListCompartment Id="ac74da1b-823f-4a74-8891-7f326e33ad90" absoluteBounds="13.265, 8.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ac74da1b-823f-4a74-8891-7f326e33ad90" absoluteBounds="12.765, 9.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3a304104-3838-43d5-a994-305a77d0b3d7" absoluteBounds="3.5, 3.5, 2, 4.4631168619791666">
+    <classShape Id="3a304104-3838-43d5-a994-305a77d0b3d7" absoluteBounds="12.75, 12.75, 2, 4.4631168619791666">
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblClaimRegister" />
       <nestedChildShapes>
-        <elementListCompartment Id="1ecae933-3e16-4cfc-8261-6c2e0947f75a" absoluteBounds="3.515, 3.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1ecae933-3e16-4cfc-8261-6c2e0947f75a" absoluteBounds="12.765, 13.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd59e3be-d1ee-43e3-8c9a-883950c85cd6" absoluteBounds="6.875, 5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblInsureType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26c06abc-8e7c-4cb7-8186-d6f347b6904b" absoluteBounds="6.89, 5.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
