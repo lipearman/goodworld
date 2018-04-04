@@ -312,7 +312,7 @@
                                 <%--<dx:BootstrapTextBox runat="server" ID="newFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>--%>
                             
                             <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="newClientName" DropDownStyle="DropDown"  
-                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
+                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" ForceDataBinding="true" EnableCallbackMode="true">
                             </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
