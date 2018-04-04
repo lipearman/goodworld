@@ -45,6 +45,8 @@ Partial Class Modules_ucPolicyRegister
         Select Case args.ToLower()
             Case "calpremium"
                 calpremium()
+            Case "calvatstamp"
+                calvatstamp()
             Case "savenew"
                 savenew()
         End Select
@@ -54,7 +56,13 @@ Partial Class Modules_ucPolicyRegister
     End Sub
 
 
-
+    Private Sub calvatstamp()
+        Dim _Premium = IIf(newPremium.Value IsNot Nothing, newPremium.Value, 0)
+        Dim _Stamp = IIf(newStamp.Value IsNot Nothing, newStamp.Value, 0)
+        Dim _Vat = IIf(newVat.Value IsNot Nothing, newVat.Value, 0)
+        Dim _GrossPremium = _Premium + _Stamp + _Vat
+        newGrossPremium.Value = _GrossPremium
+    End Sub
 
 
 
@@ -97,8 +105,9 @@ Partial Class Modules_ucPolicyRegister
                     .AgentCode = newAgentCode.Value
                     'ผู้เอาประกัน
                     .CustomerType = newCustomerType.Value
-                    .FirstName = newFirstName.Value
-                    .LastName = newLastName.Value
+                    '.FirstName = newFirstName.Value
+                    '.LastName = newLastName.Value
+                    .ClientName = newClientName.Text
                     .Address1 = newAddress1.Value
                     .Address2 = newAddress2.Value
                     .DOB = newDOB.Value
@@ -207,6 +216,8 @@ Partial Class Modules_ucPolicyRegister
             Select Case args.ToLower()
                 Case "calpremium"
                     calpremium2()
+                Case "calvatstamp"
+                    calvatstamp2()
                 Case "saveedit"
                     update(hdID("ID"))
             End Select
@@ -274,6 +285,13 @@ Partial Class Modules_ucPolicyRegister
 
         End Using
     End Sub
+    Private Sub calvatstamp2()
+        Dim _Premium = IIf(editPremium.Value IsNot Nothing, editPremium.Value, 0)
+        Dim _Stamp = IIf(editStamp.Value IsNot Nothing, editStamp.Value, 0)
+        Dim _Vat = IIf(editVat.Value IsNot Nothing, editVat.Value, 0)
+        Dim _GrossPremium = _Premium + _Stamp + _Vat
+        editGrossPremium.Value = _GrossPremium
+    End Sub
     Private Sub update(ByVal _ID As String)
         Try
             Using dc As New DataClasses_GoodWorldExt()
@@ -333,8 +351,9 @@ Partial Class Modules_ucPolicyRegister
                     .AgentCode = editAgentCode.Value
                     'ผู้เอาประกัน
                     .CustomerType = editCustomerType.Value
-                    .FirstName = editFirstName.Value
-                    .LastName = editLastName.Value
+                    '.FirstName = editFirstName.Value
+                    '.LastName = editLastName.Value
+                    .ClientName = editClientName.Text
                     .Address1 = editAddress1.Value
                     .Address2 = editAddress2.Value
                     .DOB = editDOB.Value

@@ -102,8 +102,11 @@
 
 
         <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
-        <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+  <%--      <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="LastName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+        --%>
+        <dx:BootstrapGridViewTextColumn FieldName="ClientName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+        
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
 
         <dx:BootstrapGridViewComboBoxColumn FieldName="InsureType" Caption="ประเภทการประกันภัย">
@@ -212,6 +215,14 @@
 <asp:SqlDataSource ID="SqlDataSource_CarBrandModel" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select ID, [CarBrand] + ' - ' + [CarModel] as Name from tblCarBrandModel Order by [CarBrand],[CarModel] "></asp:SqlDataSource>
 
+
+<asp:SqlDataSource ID="SqlDataSource_ClientName" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
+    SelectCommand="select ClientName
+    from tblPolicyRegister 
+    Group By ClientName
+    Order By ClientName"></asp:SqlDataSource>
+
+
 <dx:BootstrapPopupControl ID="TaskNewPopup" ClientInstanceName="TaskNewPopup" runat="server"
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ลงทะเบียนกรมธรรม์"
     PopupAnimationType="Fade">
@@ -233,7 +244,7 @@
                 //taskGrid.PerformCallback();
                 taskGrid.Refresh();
             }
-            else if(s.cpnewtask=='calpremium' )
+            else if(s.cpnewtask=='calpremium' || s.cpnewtask=='calvatstamp')
             {
 
             }
@@ -295,21 +306,25 @@
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" BeginRow="true">
+                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6"  >
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>
+                                <%--<dx:BootstrapTextBox runat="server" ID="newFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>--%>
+                            
+                            <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="newClientName" DropDownStyle="DropDown"  
+                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
+                            </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6">
+<%--                    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newLastName" NullText="พิมพ์นามสกุล..."></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
 
                     <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6">
@@ -663,6 +678,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newStamp" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
+                                     <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskNewPopup.PerformCallback('calvatstamp');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -672,6 +690,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newVat" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
+                                      <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskNewPopup.PerformCallback('calvatstamp');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -827,7 +848,7 @@
             {
                 ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup.GetMainElement());
             }
-            else if(s.cpnewtask=='calpremium' )
+            else if(s.cpnewtask=='calpremium' || s.cpnewtask=='calvatstamp' )
             {
 
             }
@@ -894,21 +915,25 @@
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" FieldName="FirstName">
+                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" FieldName="ClientName">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>
+                               <%-- <dx:BootstrapTextBox runat="server" ID="editFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>
+                            --%>
+                              <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="editClientName" DropDownStyle="DropDown"  
+                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
+                            </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6" FieldName="LastName">
+                <%--    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6" FieldName="LastName">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editLastName" NullText="พิมพ์นามสกุล..."></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
-                    </dx:BootstrapLayoutItem>
+                    </dx:BootstrapLayoutItem>--%>
 
                     <dx:BootstrapLayoutItem Caption="วันเดือนปีเกิด" ColSpanMd="6" FieldName="DOB">
                         <ContentCollection>
@@ -1257,6 +1282,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editStamp" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                    <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskEditPopup.PerformCallback('calvatstamp');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -1266,6 +1294,9 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editVat" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                    <ClientSideEvents ValueChanged="function(s,e){
+                                        TaskEditPopup.PerformCallback('calvatstamp');
+                                        }" />
                                 </dx:BootstrapSpinEdit>
                             </dx:ContentControl>
                         </ContentCollection>

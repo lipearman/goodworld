@@ -38,12 +38,6 @@
         <elementListCompartment Id="ae07f401-1249-418d-a653-d04854ac475f" absoluteBounds="0.765, 9.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="82036f95-68be-49dc-af41-a59952aca5b9" absoluteBounds="9.75, 0.75, 2, 12.155174153645833">
-      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblPolicyRegister" />
-      <nestedChildShapes>
-        <elementListCompartment Id="513c9350-ade9-4032-8a7e-fe820b0bce57" absoluteBounds="9.765, 1.21, 1.9700000000000002, 11.595174153645832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="e2e63949-cc61-42fc-ad3c-a2f22df3c036" absoluteBounds="3.75, 9.75, 2, 2.7324039713541666">
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblPolicyType" />
       <nestedChildShapes>
@@ -78,6 +72,12 @@
       <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblInsureType" />
       <nestedChildShapes>
         <elementListCompartment Id="26c06abc-8e7c-4cb7-8186-d6f347b6904b" absoluteBounds="6.89, 5.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="19861c11-b8c0-44a9-b399-5c4b73f59807" absoluteBounds="9.75, 0.875, 2, 12.3474755859375">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblPolicyRegister" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce920b45-8abc-410c-8303-35b022a0d31c" absoluteBounds="9.765, 1.335, 1.9700000000000002, 11.7874755859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
