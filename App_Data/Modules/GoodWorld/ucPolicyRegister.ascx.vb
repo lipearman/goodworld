@@ -61,17 +61,19 @@ Partial Class Modules_ucPolicyRegister
         Using dc As New DataClasses_GoodWorldExt()
             Dim _data = (From c In dc.tblPolicyRegisters Where c.ClientName.Equals(newClientName.Value) Order By c.EffectiveDate Descending).FirstOrDefault()
 
+            If _data IsNot Nothing Then
+                newAddress1.Value = _data.Address1
+                newAddress2.Value = _data.Address2
+                newDOB.Value = _data.DOB
+                newIdentityNo.Value = _data.IdentityNo
+                newTelNo.Value = _data.TelNo
+                newMobile.Value = _data.Mobile
+                newFax.Text = _data.Fax
+                newEmail.Text = _data.Email
+                newSocialMediaNo.Text = _data.SocialMediaNo
+                newBenefitName.Text = _data.BenefitName
+            End If
 
-            newAddress1.Value = _data.Address1
-            newAddress2.Value = _data.Address2
-            newDOB.Value = _data.DOB
-            newIdentityNo.Value = _data.IdentityNo
-            newTelNo.Value = _data.TelNo
-            newMobile.Value = _data.Mobile
-            newFax.Text = _data.Fax
-            newEmail.Text = _data.Email
-            newSocialMediaNo.Text = _data.SocialMediaNo
-            newBenefitName.Text = _data.BenefitName
 
         End Using
     End Sub
@@ -246,6 +248,8 @@ Partial Class Modules_ucPolicyRegister
                     calpremium2()
                 Case "calvatstamp"
                     calvatstamp2()
+                Case "clientselect"
+                    clientselect2()
                 Case "saveedit"
                     update(hdID("ID"))
             End Select
@@ -462,7 +466,26 @@ Partial Class Modules_ucPolicyRegister
     End Sub
 
 
+    Private Sub clientselect2()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim _data = (From c In dc.tblPolicyRegisters Where c.ClientName.Equals(editClientName.Value) Order By c.EffectiveDate Descending).FirstOrDefault()
 
+            If _data IsNot Nothing Then
+                editAddress1.Value = _data.Address1
+                editAddress2.Value = _data.Address2
+                editDOB.Value = _data.DOB
+                editIdentityNo.Value = _data.IdentityNo
+                editTelNo.Value = _data.TelNo
+                editMobile.Value = _data.Mobile
+                editFax.Text = _data.Fax
+                editEmail.Text = _data.Email
+                editSocialMediaNo.Text = _data.SocialMediaNo
+                editBenefitName.Text = _data.BenefitName
+            End If
+
+
+        End Using
+    End Sub
 
 
 

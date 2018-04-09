@@ -289,7 +289,7 @@
                 ,PortalId
             FROM PortalCfg_Tabs
             where ParentId  is not null and PortalId=@PortalId
-            and TabId not in(3) and ParentId not in(3)
+       
             
         ) a 
         order by PortalId, OrderBy

@@ -847,11 +847,7 @@
             {
                 ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup.GetMainElement());
             }
-            else if(s.cpnewtask=='calpremium' || s.cpnewtask=='calvatstamp' )
-            {
-
-            }
-            else
+            else if(s.cpedittask.indexOf('error') != -1)
             {
                 alert(s.cpedittask);
             }
@@ -921,6 +917,9 @@
                             --%>
                               <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="editClientName" DropDownStyle="DropDown"  
                                 TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
+                                  <ClientSideEvents SelectedIndexChanged="function(s,e){
+                                    TaskEditPopup.PerformCallback('clientselect');
+                                   }" />
                             </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
