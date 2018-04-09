@@ -80,5 +80,11 @@
         <elementListCompartment Id="ce920b45-8abc-410c-8303-35b022a0d31c" absoluteBounds="9.765, 1.335, 1.9700000000000002, 11.7874755859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="7c15ce8a-8134-4317-b7f5-a691137db51c" absoluteBounds="2.25, 3.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblXtraReport" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9ef4747f-5d18-4f67-92ef-d18a39a9b10e" absoluteBounds="2.2649999999999997, 4.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

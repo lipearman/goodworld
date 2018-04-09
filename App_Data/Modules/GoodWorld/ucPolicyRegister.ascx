@@ -99,10 +99,11 @@
         </dx:BootstrapGridViewDataColumn>
         <dx:BootstrapGridViewTextColumn FieldName="ID" Visible="false">
         </dx:BootstrapGridViewTextColumn>
+         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"   />
+       
 
-
-        <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
-  <%--      <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+    <%--     <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
+       <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="LastName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         --%>
         <dx:BootstrapGridViewTextColumn FieldName="ClientName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
@@ -125,7 +126,6 @@
             </PropertiesComboBox>
         </dx:BootstrapGridViewComboBoxColumn>
 
-        <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
         <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
 
 
@@ -193,7 +193,7 @@
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_PolicyRegister" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select * from tblPolicyRegister Order By CreateDate"></asp:SqlDataSource>
+    SelectCommand="select * from tblPolicyRegister Order By CreateDate desc"></asp:SqlDataSource>
 
 <asp:SqlDataSource ID="SqlDataSource_Insurer" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select InsurerCode,  InsurerName + ' (' + InsurerCode + ')' as InsurerName  from tblInsurer "></asp:SqlDataSource>
@@ -210,7 +210,7 @@
 
 
 <asp:SqlDataSource ID="SqlDataSource_CarType" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select ID, Name from tblCarType Order by Name "></asp:SqlDataSource>
+    SelectCommand="select ID, Code + ' - ' + Name as Name from tblCarType Order by Code "></asp:SqlDataSource>
 
 <asp:SqlDataSource ID="SqlDataSource_CarBrandModel" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select ID, [CarBrand] + ' - ' + [CarModel] as Name from tblCarBrandModel Order by [CarBrand],[CarModel] "></asp:SqlDataSource>
@@ -241,17 +241,13 @@
             if(s.cpnewtask=='savenew' )
             {
                 TaskNewPopup.Hide();
-                //taskGrid.PerformCallback();
                 taskGrid.Refresh();
             }
-            else if(s.cpnewtask=='calpremium' || s.cpnewtask=='calvatstamp')
-            {
-
-            }
-            else
+            else if(s.cpnewtask.indexOf('error') != -1)
             {
                 alert(s.cpnewtask);
             }
+
         }" />
 
 
@@ -313,6 +309,9 @@
                             
                             <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="newClientName" DropDownStyle="DropDown"  
                                 TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" ForceDataBinding="true" EnableCallbackMode="true">
+                               <ClientSideEvents SelectedIndexChanged="function(s,e){
+                                    TaskNewPopup.PerformCallback('clientselect');
+                                   }" />
                             </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>

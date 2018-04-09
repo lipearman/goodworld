@@ -47,6 +47,8 @@ Partial Class Modules_ucPolicyRegister
                 calpremium()
             Case "calvatstamp"
                 calvatstamp()
+            Case "clientselect"
+                clientselect()
             Case "savenew"
                 savenew()
         End Select
@@ -55,6 +57,24 @@ Partial Class Modules_ucPolicyRegister
 
     End Sub
 
+    Private Sub clientselect()
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim _data = (From c In dc.tblPolicyRegisters Where c.ClientName.Equals(newClientName.Value) Order By c.EffectiveDate Descending).FirstOrDefault()
+
+
+            newAddress1.Value = _data.Address1
+            newAddress2.Value = _data.Address2
+            newDOB.Value = _data.DOB
+            newIdentityNo.Value = _data.IdentityNo
+            newTelNo.Value = _data.TelNo
+            newMobile.Value = _data.Mobile
+            newFax.Text = _data.Fax
+            newEmail.Text = _data.Email
+            newSocialMediaNo.Text = _data.SocialMediaNo
+            newBenefitName.Text = _data.BenefitName
+
+        End Using
+    End Sub
 
     Private Sub calvatstamp()
         Dim _Premium = IIf(newPremium.Value IsNot Nothing, newPremium.Value, 0)
@@ -97,6 +117,14 @@ Partial Class Modules_ucPolicyRegister
     Private Sub savenew()
         Try
             Using dc As New DataClasses_GoodWorldExt()
+                If Not String.IsNullOrEmpty(newPolicyNo.Value) Then
+                    Dim chkDuppolicy = (From c In dc.tblPolicyRegisters Where c.PolicyNo.Equals(newPolicyNo.Value)).FirstOrDefault()
+                    If chkDuppolicy IsNot Nothing Then
+                        Throw New Exception(String.Format("หมายเลขกรมธรรม์ {0} นี้มีในระบบแล้ว", newPolicyNo.Value))
+                    End If
+                End If
+
+
 
                 Dim newData As New tblPolicyRegister
                 With newData
@@ -193,7 +221,7 @@ Partial Class Modules_ucPolicyRegister
 
             End Using
         Catch ex As Exception
-            TaskNewPopup.JSProperties("cpnewtask") = ex.Message
+            TaskNewPopup.JSProperties("cpnewtask") = "error - " & ex.Message
         End Try
 
 
@@ -295,6 +323,14 @@ Partial Class Modules_ucPolicyRegister
     Private Sub update(ByVal _ID As String)
         Try
             Using dc As New DataClasses_GoodWorldExt()
+
+                If Not String.IsNullOrEmpty(editPolicyNo.Value) Then
+                    Dim chkDuppolicy = (From c In dc.tblPolicyRegisters Where c.PolicyNo.Equals(editPolicyNo.Value) And c.ID <> (_ID)).FirstOrDefault()
+                    If chkDuppolicy IsNot Nothing Then
+                        Throw New Exception(String.Format("หมายเลขกรมธรรม์ {0} นี้มีในระบบแล้ว", editPolicyNo.Value))
+                    End If
+                End If
+
 
                 Dim data = (From c In dc.tblPolicyRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
 
@@ -420,7 +456,7 @@ Partial Class Modules_ucPolicyRegister
                 TaskEditPopup.JSProperties("cpedittask") = "saveedit"
             End Using
         Catch ex As Exception
-            TaskEditPopup.JSProperties("cpedittask") = ex.Message
+            TaskEditPopup.JSProperties("cpedittask") = "error - " & ex.Message
         End Try
 
     End Sub
