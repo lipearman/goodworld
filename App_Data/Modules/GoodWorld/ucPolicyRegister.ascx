@@ -110,6 +110,11 @@
         
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
 
+
+ <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate"   Caption="ทะเบียนรถ"  ></dx:BootstrapGridViewTextColumn>
+       
+
+
         <dx:BootstrapGridViewComboBoxColumn FieldName="InsureType" Caption="ประเภทการประกันภัย">
             <PropertiesComboBox DataSourceID="SqlDataSource_InsureType" TextField="Name" ValueField="ID">
                 <ValidationSettings>
@@ -126,10 +131,22 @@
             </PropertiesComboBox>
         </dx:BootstrapGridViewComboBoxColumn>
 
-        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" AdaptivePriority="2" SettingsEditForm-Visible="False" />
+        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"  SettingsEditForm-Visible="False" />
 
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+
+
+
+
+
+
+
+
+
+
+
+
 
   <dx:BootstrapGridViewTextColumn FieldName="DOB" Visible="false" Caption="วันเกิด"></dx:BootstrapGridViewTextColumn>
          <dx:BootstrapGridViewTextColumn FieldName="IdentityNo" Visible="false" Caption="บัตรประชาชน"></dx:BootstrapGridViewTextColumn>
@@ -147,7 +164,6 @@
         <dx:BootstrapGridViewTextColumn FieldName="ModifyDate" Visible="false" Caption="วันที่แก้ไข"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="ModifyBy" Visible="false" Caption="เจ้าหน้าที่แก้ไข"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Status" Visible="false" Caption="Status"></dx:BootstrapGridViewTextColumn>
-        <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Visible="false" Caption="ทะเบียนรถ"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CarRegYear" Visible="false" Caption="ปีรุ่น"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CustomerType" Visible="false" Caption="CustomerType"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Fax" Visible="false" Caption="Fax"></dx:BootstrapGridViewTextColumn>
