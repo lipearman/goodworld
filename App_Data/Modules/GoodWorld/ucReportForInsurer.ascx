@@ -122,7 +122,7 @@
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Caption="หมายเลขกรมธรรม์"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
         <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
-        <dx:BootstrapGridViewTextColumn FieldName="Name" Caption="ผู้เอาประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="InsureType" Caption="ประเภทประกันภัย"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Chassis" Caption="เลขถัง"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="Suminsured" Caption="จำนวนเงินเอาประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}"></dx:BootstrapGridViewSpinEditColumn>
@@ -145,3 +145,55 @@
 
 
 <asp:SqlDataSource ID="SqlDataSource_Export" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
+
+
+ <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+<dx:ASPxPopupControl ID="clientReportPreview" runat="server" ClientInstanceName="clientReportPreview"
+    Modal="True" Maximized="true"
+    PopupHorizontalAlign="WindowCenter"
+    PopupVerticalAlign="WindowCenter"
+    HeaderText="XtraReports"
+    AllowDragging="true"
+    AllowResize="True"
+    DragElement="Window"
+    EnableAnimation="true"
+    CloseAction="CloseButton"
+    EnableCallbackAnimation="true"
+    EnableViewState="true"
+    ShowPageScrollbarWhenModal="true"
+    ScrollBars="Auto"
+    ShowMaximizeButton="true"
+    HeaderImage-IconID="businessobjects_botask_32x32"
+    HeaderStyle-BackColor="WindowFrame"
+    Width="800"
+    Height="680"
+    FooterText=""
+    ShowFooter="false">
+
+    <HeaderStyle BackColor="#4796CE" ForeColor="White" />
+
+    <ContentStyle>
+        <Paddings Padding="0px" />
+    </ContentStyle>
+
+    <ClientSideEvents Shown="function(s,e){ 
+                    LoadingPanel.Show();
+                }"
+        CloseButtonClick="function(s,e){
+            grid.Refresh();
+        }" />
+
+    <ContentCollection>
+        <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
+
+
+
+
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server"></rsweb:ReportViewer>
+            
+
+
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>

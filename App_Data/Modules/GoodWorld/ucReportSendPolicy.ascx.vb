@@ -16,6 +16,7 @@ Imports DevExpress.Web.Data
 Imports DevExpress.Web.Bootstrap
 Imports DevExpress.XtraPrinting
 Imports DevExpress.Export
+Imports Microsoft.Reporting.WebForms
 
 Partial Class Modules_ucReportSendPolicy
     Inherits PortalModuleControl
@@ -26,14 +27,14 @@ Partial Class Modules_ucReportSendPolicy
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         If datefrom.Value Is Nothing Then
             If Now.Year < 2500 Then
-                datefrom.Value = Today.AddYears(543)
+                datefrom.Value = Today
             Else
                 datefrom.Value = Today
             End If
         End If
         If dateto.Value Is Nothing Then
             If Now.Year < 2500 Then
-                dateto.Value = Today.AddYears(543)
+                dateto.Value = Today
             Else
                 dateto.Value = Today
             End If
@@ -194,16 +195,30 @@ Partial Class Modules_ucReportSendPolicy
         sb.AppendFormat(" where  convert(varchar,EffectiveDate,112) between '{0}' and '{1}' ", DirectCast(datefrom.Value, Date).ToString("yyyyMMdd"), DirectCast(dateto.Value, Date).ToString("yyyyMMdd"))
         sb.AppendFormat(" and InsurerCode='{0}' ", _InsurerCode)
 
-        SqlDataSource_Export.DataSourceMode = SqlDataSourceMode.DataReader
-        '============ todo2=======================
-        SqlDataSource_Export.SelectCommand = sb.ToString()
-        SqlDataSource_Export.DataBind()
+        'SqlDataSource_Export.DataSourceMode = SqlDataSourceMode.DataReader
+        ''============ todo2=======================
+        'SqlDataSource_Export.SelectCommand = sb.ToString()
+        'SqlDataSource_Export.DataBind()
 
-        ExportGrid.DataSourceID = "SqlDataSource_Export"
-        ExportGrid.DataBind()
+        'ExportGrid.DataSourceID = "SqlDataSource_Export"
+        'ExportGrid.DataBind()
 
 
-        ExportGrid.ExportXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
+        'ExportGrid.ExportXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
 
+
+
+        Dim ReportFile = "Report1.rdl"
+        Dim ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
+
+        ReportViewer1.Reset()
+        ReportViewer1.LocalReport.Dispose()
+        ReportViewer1.LocalReport.DataSources.Clear()
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
+        ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds.Tables(0)))
+        'ReportViewer1.LocalReport.SetParameters(New ReportParameter("FiscalYear", "2018"))
+        ReportViewer1.LocalReport.Refresh()
+
+        clientReportPreview.ShowOnPageLoad() = True
     End Sub
 End Class

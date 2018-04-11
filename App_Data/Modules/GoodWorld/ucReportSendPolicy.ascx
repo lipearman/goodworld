@@ -17,7 +17,6 @@
             <ContentCollection>
                 <dx:ContentControl>
                     <dx:BootstrapDateEdit runat="server" ID="dateto" DisplayFormatString="{0:dd/MM/yyyy}" ValidationSettings-RequiredField-IsRequired="true">
-                        
                     </dx:BootstrapDateEdit>
                 </dx:ContentControl>
             </ContentCollection>
@@ -25,7 +24,7 @@
         <dx:BootstrapLayoutItem ShowCaption="False">
             <ContentCollection>
                 <dx:ContentControl>
-                    <dx:BootstrapButton ID="btnSearch" Text="Search"   AutoPostBack="false" runat="server">
+                    <dx:BootstrapButton ID="btnSearch" Text="Search" AutoPostBack="false" runat="server">
                         <SettingsBootstrap RenderOption="Primary" />
                         <ClientSideEvents Click="function(s,e){
 
@@ -79,46 +78,55 @@
 
 
 <dx:ASPxCallback ID="cbExport" runat="server" ClientInstanceName="cbExport">
-
 </dx:ASPxCallback>
 
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid" Visible="false"
-    AutoGenerateColumns="False" 
-    KeyFieldName="InsurerCode" 
+    AutoGenerateColumns="False"
+    KeyFieldName="InsurerCode"
     Width="100%" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
     PopupAnimationType="Fade" CloseOnEscape="true" CloseAction="None">
     <CssClasses Control="tasks-grid" PreviewRow="text-muted" />
 
     <Columns>
 
-<dx:BootstrapGridViewDataColumn>
-    <DataItemTemplate>
+        <dx:BootstrapGridViewDataColumn>
+            <DataItemTemplate>
 
 
-        <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("InsurerCode") %>' CssClasses-Icon="image fa fa-download" UseSubmitBehavior="False">
-
-        </dx:BootstrapButton>
-
-
-    </DataItemTemplate>
-
-</dx:BootstrapGridViewDataColumn>
+                <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("InsurerCode") %>' CssClasses-Icon="image fa fa-download" UseSubmitBehavior="False">
+                </dx:BootstrapButton>
 
 
-<dx:BootstrapGridViewTextColumn FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
-<dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
-<dx:BootstrapGridViewSpinEditColumn FieldName="PolicyCount" Caption="จำนวนกรมธรรม์" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}"></dx:BootstrapGridViewSpinEditColumn>
-<dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" Caption="เบี้ยประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
-<dx:BootstrapGridViewSpinEditColumn FieldName="Brokerage" Caption="ค่าคอม(ตามกฎหมาย)" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+            </DataItemTemplate>
+
+        </dx:BootstrapGridViewDataColumn>
+
+
+        <dx:BootstrapGridViewTextColumn FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewSpinEditColumn FieldName="PolicyCount" Caption="จำนวนกรมธรรม์" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}">
+      
+        </dx:BootstrapGridViewSpinEditColumn>
+        <dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" Caption="เบี้ยประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+
+        </dx:BootstrapGridViewSpinEditColumn>
+        <dx:BootstrapGridViewSpinEditColumn FieldName="Brokerage" Caption="ค่าคอม(ตามกฎหมาย)" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+
+        </dx:BootstrapGridViewSpinEditColumn>
 
     </Columns>
-
-    <SettingsPager Mode="ShowAllRecords" >
- 
+    <TotalSummary>
+      
+        <dx:ASPxSummaryItem FieldName="PolicyCount" SummaryType="Sum" DisplayFormat="{0:N0}"  />
+        <dx:ASPxSummaryItem FieldName="TotalPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="Brokerage" SummaryType="Sum" DisplayFormat="{0:N2}"  />
+    </TotalSummary>
+    <SettingsPager Mode="ShowAllRecords">
     </SettingsPager>
     <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
-
+     <Settings ShowFooter="True" />
+    
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_gridData" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
@@ -128,15 +136,14 @@
 
 <dx:BootstrapGridView ID="ExportGrid" runat="server"
     ClientInstanceName="ExportGrid" Visible="false"
-    AutoGenerateColumns="False"
-    >
+    AutoGenerateColumns="False">
     <Columns>
         <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="ClientName" Caption="ผู้เอาประกัน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Caption="หมายเลขกรมธรรม์"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
         <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
-        <dx:BootstrapGridViewTextColumn FieldName="Name" Caption="ผู้เอาประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="InsureType" Caption="ประเภทประกันภัย"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Chassis" Caption="เลขถัง"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="Suminsured" Caption="จำนวนเงินเอาประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}"></dx:BootstrapGridViewSpinEditColumn>
@@ -151,12 +158,62 @@
         <dx:BootstrapGridViewTextColumn FieldName="BrokerageAmt" Caption="ค่าคอม(บาท)"></dx:BootstrapGridViewTextColumn>
 
     </Columns>
- 
+
     <SettingsPager Mode="ShowAllRecords">
-      
     </SettingsPager>
- 
+
 </dx:BootstrapGridView>
 
 
 <asp:SqlDataSource ID="SqlDataSource_Export" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
+
+
+
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+<dx:ASPxPopupControl ID="clientReportPreview" runat="server" ClientInstanceName="clientReportPreview"
+    Modal="True" Maximized="true"
+    PopupHorizontalAlign="WindowCenter"
+    PopupVerticalAlign="WindowCenter"
+    HeaderText="XtraReports"
+    AllowDragging="true"
+    AllowResize="True"
+    DragElement="Window"
+    EnableAnimation="true"
+    CloseAction="CloseButton"
+    EnableCallbackAnimation="true"
+    EnableViewState="true"
+    ShowPageScrollbarWhenModal="true"
+    ScrollBars="Auto"
+    ShowMaximizeButton="true"
+    HeaderImage-IconID="businessobjects_botask_32x32"
+    HeaderStyle-BackColor="WindowFrame"
+    Width="800"
+    Height="680"
+    FooterText=""
+    ShowFooter="false">
+
+    <HeaderStyle BackColor="#4796CE" ForeColor="White" />
+
+    <ContentStyle>
+        <Paddings Padding="0px" />
+    </ContentStyle>
+
+    <ClientSideEvents Shown="function(s,e){ 
+                    //LoadingPanel.Show();
+                }"
+        CloseButtonClick="function(s,e){
+            //grid.Refresh();
+        }" />
+
+    <ContentCollection>
+        <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
+
+
+
+
+            <rsweb:ReportViewer ID="ReportViewer1" Width="100%" runat="server"></rsweb:ReportViewer>
+
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
