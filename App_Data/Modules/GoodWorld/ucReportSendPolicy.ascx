@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportSendPolicy.ascx.vb" Inherits="Modules_ucReportSendPolicy" %>
-
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
 <dx:BootstrapFormLayout ID="BootstrapFormLayout1" runat="server" ClientInstanceName="frmEnquiry" LayoutType="Vertical">
     <Items>
+
         <dx:BootstrapLayoutItem Caption="จากวันที่" ColSpanLg="4" ColSpanSm="6">
             <ContentCollection>
                 <dx:ContentControl>
@@ -90,11 +90,11 @@
 
     <Columns>
 
-        <dx:BootstrapGridViewDataColumn>
-            <DataItemTemplate>
+        <dx:BootstrapGridViewDataColumn HorizontalAlign="Center">
+            <DataItemTemplate >
 
 
-                <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("InsurerCode") %>' CssClasses-Icon="image fa fa-download" UseSubmitBehavior="False">
+                <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("InsurerCode") %>' CssClasses-Icon="image fa fa-print" UseSubmitBehavior="False">
                 </dx:BootstrapButton>
 
 
@@ -103,30 +103,27 @@
         </dx:BootstrapGridViewDataColumn>
 
 
-        <dx:BootstrapGridViewTextColumn FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn HorizontalAlign="Center" FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="PolicyCount" Caption="จำนวนกรมธรรม์" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}">
-      
         </dx:BootstrapGridViewSpinEditColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" Caption="เบี้ยประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
-
         </dx:BootstrapGridViewSpinEditColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="Brokerage" Caption="ค่าคอม(ตามกฎหมาย)" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
-
         </dx:BootstrapGridViewSpinEditColumn>
 
     </Columns>
     <TotalSummary>
-      
-        <dx:ASPxSummaryItem FieldName="PolicyCount" SummaryType="Sum" DisplayFormat="{0:N0}"  />
+
+        <dx:ASPxSummaryItem FieldName="PolicyCount" SummaryType="Sum" DisplayFormat="{0:N0}" />
         <dx:ASPxSummaryItem FieldName="TotalPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
-        <dx:ASPxSummaryItem FieldName="Brokerage" SummaryType="Sum" DisplayFormat="{0:N2}"  />
+        <dx:ASPxSummaryItem FieldName="Brokerage" SummaryType="Sum" DisplayFormat="{0:N2}" />
     </TotalSummary>
     <SettingsPager Mode="ShowAllRecords">
     </SettingsPager>
     <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
-     <Settings ShowFooter="True" />
-    
+    <Settings ShowFooter="True" />
+
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_gridData" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
@@ -175,7 +172,7 @@
     Modal="True" Maximized="true"
     PopupHorizontalAlign="WindowCenter"
     PopupVerticalAlign="WindowCenter"
-    HeaderText="XtraReports"
+    HeaderText="Reports"
     AllowDragging="true"
     AllowResize="True"
     DragElement="Window"
@@ -196,7 +193,7 @@
     <HeaderStyle BackColor="#4796CE" ForeColor="White" />
 
     <ContentStyle>
-        <Paddings Padding="0px" />
+        <Paddings Padding="1px" />
     </ContentStyle>
 
     <ClientSideEvents Shown="function(s,e){ 
@@ -208,12 +205,55 @@
 
     <ContentCollection>
         <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
+            <%--  
+
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="100%" >
+               <LocalReport ReportPath="App_Data\Reports\Report1.rdl">
+                  <DataSources>
+                        <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="DataSet1" />
+                    </DataSources>
+                </LocalReport>
+            </rsweb:ReportViewer>
+            --%>
 
 
+            <dx:ASPxSpreadsheet ID="Spreadsheet" Width="100%"  ReadOnly="true"
+                runat="server"
+                ActiveTabIndex="0" RibbonMode="None"
+                ShowConfirmOnLosingChanges="false"
+                ShowFormulaBar="false"
+                ShowSheetTabs="false">
+  <%--              <RibbonTabs>
+                    <dx:SRHomeTab >
+                        <Groups>
+                            <dx:SRFileCommonGroup>
+                                <Items>
+                                    <dx:SRFilePrintCommand />
+                                 
+                                </Items>
+                            </dx:SRFileCommonGroup> 
+                        </Groups>
+                    </dx:SRHomeTab>
+                </RibbonTabs>--%>
+
+<%--                  <SettingsDialogs>
+                    <SaveFileDialog DisplaySectionMode="ShowDownloadSection" />
+                </SettingsDialogs>--%>
+            </dx:ASPxSpreadsheet>
 
 
-            <rsweb:ReportViewer ID="ReportViewer1" Width="100%" runat="server"></rsweb:ReportViewer>
+             <dx:BootstrapButton ID="btnExport" Text="Download" AutoPostBack="false" CssClasses-Icon="image fa fa-download"  runat="server">
+                        <SettingsBootstrap RenderOption="Primary" />
+                        <ClientSideEvents Click="function(s,e){
+
+                                  e.processOnServer = true;
+
+                            }" />
+                    </dx:BootstrapButton>
+
 
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+ 

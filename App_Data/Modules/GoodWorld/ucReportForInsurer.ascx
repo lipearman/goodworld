@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportForInsurer.ascx.vb" Inherits="Modules_ucReportForInsurer" %>
-
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
@@ -58,11 +57,11 @@
 
     <Columns>
 
-        <dx:BootstrapGridViewDataColumn>
+        <dx:BootstrapGridViewDataColumn HorizontalAlign="Center">
             <DataItemTemplate>
 
 
-                <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("AgentCode") %>' CssClasses-Icon="image fa fa-download" UseSubmitBehavior="False">
+                <dx:BootstrapButton runat="server" ID="exportButton" OnClick="exportButton_Click" CommandArgument='<%# Eval("AgentCode") %>' CssClasses-Icon="image fa fa-print" UseSubmitBehavior="False">
                 </dx:BootstrapButton>
 
 
@@ -71,7 +70,7 @@
         </dx:BootstrapGridViewDataColumn>
 
 
-        <dx:BootstrapGridViewTextColumn FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="RowNo" HorizontalAlign="Center" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="AgentCode" Caption="รหัสตัวแทน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="AgentName" Caption="ตัวแทน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="PolicyCount" Caption="จำนวนกรมธรรม์" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}"></dx:BootstrapGridViewSpinEditColumn>
@@ -87,11 +86,18 @@
 
 
     </Columns>
+      <TotalSummary>
 
+        <dx:ASPxSummaryItem FieldName="PolicyCount" SummaryType="Sum" DisplayFormat="{0:N0}" />
+        <dx:ASPxSummaryItem FieldName="Premium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="Stamp" SummaryType="Sum" DisplayFormat="{0:N2}" />
+          <dx:ASPxSummaryItem FieldName="Vat" SummaryType="Sum" DisplayFormat="{0:N2}" />
+          <dx:ASPxSummaryItem FieldName="GrossPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+    </TotalSummary>
     <SettingsPager Mode="ShowAllRecords">
     </SettingsPager>
     <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
-
+     <Settings ShowFooter="True" />
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_gridData" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
@@ -147,13 +153,13 @@
 <asp:SqlDataSource ID="SqlDataSource_Export" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
 
 
- <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"></asp:ScriptManager>
 
 <dx:ASPxPopupControl ID="clientReportPreview" runat="server" ClientInstanceName="clientReportPreview"
     Modal="True" Maximized="true"
     PopupHorizontalAlign="WindowCenter"
     PopupVerticalAlign="WindowCenter"
-    HeaderText="XtraReports"
+    HeaderText="Reports"
     AllowDragging="true"
     AllowResize="True"
     DragElement="Window"
@@ -178,22 +184,35 @@
     </ContentStyle>
 
     <ClientSideEvents Shown="function(s,e){ 
-                    LoadingPanel.Show();
+                    //LoadingPanel.Show();
                 }"
         CloseButtonClick="function(s,e){
-            grid.Refresh();
+            //grid.Refresh();
         }" />
 
     <ContentCollection>
         <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
 
+            <dx:ASPxSpreadsheet ID="Spreadsheet" Width="100%"  ReadOnly="true"
+                runat="server"
+                ActiveTabIndex="0" RibbonMode="None"
+                ShowConfirmOnLosingChanges="false"
+                ShowFormulaBar="false"
+                ShowSheetTabs="false">
+            </dx:ASPxSpreadsheet>
 
 
+             <dx:BootstrapButton ID="btnExport" Text="Download" AutoPostBack="false" CssClasses-Icon="image fa fa-download"  runat="server">
+                        <SettingsBootstrap RenderOption="Primary" />
+                        <ClientSideEvents Click="function(s,e){
 
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server"></rsweb:ReportViewer>
-            
+                                  e.processOnServer = true;
 
+                            }" />
+                    </dx:BootstrapButton>
 
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+  

@@ -205,7 +205,7 @@
     </SettingsCommandButton>
 
     <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
-
+    <SettingsSearchPanel  Visible="true"/>
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_PolicyRegister" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"

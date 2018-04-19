@@ -34,7 +34,7 @@
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Caption="หมายเลขกรมธรรม์"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
         <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
-        <dx:BootstrapGridViewTextColumn FieldName="Name" Caption="ผู้เอาประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="ClientName" Caption="ผู้เอาประกันภัย"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียน"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Chassis" Caption="เลขถัง"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="Suminsured" Caption="จำนวนเงินเอาประกันภัย" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N0}"></dx:BootstrapGridViewSpinEditColumn>

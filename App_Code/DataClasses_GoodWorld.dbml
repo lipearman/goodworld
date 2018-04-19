@@ -245,4 +245,28 @@
       <Column Name="GUID" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.v_Report1" Member="v_Report1s">
+    <Type Name="v_Report1">
+      <Column Name="InsurerCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InsurerName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ClientName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExpiredDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="InsureType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CarLicensePlate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Chassis" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Suminsured" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Premium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Stamp" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="GrossPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="NewRenew" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Brokerage" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BrokerageAmt" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Monthly" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

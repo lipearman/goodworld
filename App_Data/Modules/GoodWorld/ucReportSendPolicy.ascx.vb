@@ -18,6 +18,12 @@ Imports DevExpress.XtraPrinting
 Imports DevExpress.Export
 Imports Microsoft.Reporting.WebForms
 
+
+Imports DevExpress.Spreadsheet
+Imports DevExpress.XtraRichEdit
+Imports DevExpress.ClipboardSource.SpreadsheetML
+Imports DevExpress.XtraPrintingLinks
+
 Partial Class Modules_ucReportSendPolicy
     Inherits PortalModuleControl
     Protected PageName As String
@@ -39,6 +45,8 @@ Partial Class Modules_ucReportSendPolicy
                 dateto.Value = Today
             End If
         End If
+
+
     End Sub
 
 
@@ -207,10 +215,14 @@ Partial Class Modules_ucReportSendPolicy
         'ExportGrid.ExportXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
 
 
+        'SqlDataSource1.SelectCommand = sb.ToString()
+
 
         Dim ReportFile = "Report1.rdl"
         Dim ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
 
+        'Session("Report1") = ds.Tables(0)
+        Dim ReportViewer1 As New ReportViewer()
         ReportViewer1.Reset()
         ReportViewer1.LocalReport.Dispose()
         ReportViewer1.LocalReport.DataSources.Clear()
@@ -219,6 +231,66 @@ Partial Class Modules_ucReportSendPolicy
         'ReportViewer1.LocalReport.SetParameters(New ReportParameter("FiscalYear", "2018"))
         ReportViewer1.LocalReport.Refresh()
 
+        Dim warnings As Warning()
+        Dim streamids As String()
+        Dim mimeType As String
+        Dim encoding As String
+        Dim extension As String
+        Dim bytes As Byte() = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamids, warnings)
+
+        Session("GUID") = System.Guid.NewGuid().ToString()
+
+        Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+
+        Using fs As FileStream = New FileStream(FileName, FileMode.Create)
+            fs.Write(bytes, 0, bytes.Length)
+            fs.Close()
+        End Using
+
         clientReportPreview.ShowOnPageLoad() = True
+
+        Spreadsheet.Open(FileName)
     End Sub
+
+    'Protected Sub ReportViewer1_DataBinding(sender As Object, e As EventArgs) Handles ReportViewer1.DataBinding
+    '    'ReportViewer1.LocalReport.DataSources.Add(New Microsoft.Reporting.WebForms.ReportDataSource("DataSet1", Session("Report1")))
+
+    '    'ReportViewer1.LocalReport.Refresh()
+    'End Sub
+    'Protected Sub ReportViewer1_PageNavigation(sender As Object, e As PageNavigationEventArgs) Handles ReportViewer1.PageNavigation
+
+    '    ReportViewer1.CurrentPage = e.NewPage
+
+    '    'ReportViewer1.LocalReport.Refresh()
+    'End Sub
+
+
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+
+        Page.Response.Clear()
+        Page.Response.Buffer = False
+        Page.Response.AppendHeader("Content-Type", "application/vnd.ms-excel")
+        Page.Response.AppendHeader("content-disposition", "attachment; filename=myfile.xls")
+        Page.Response.BinaryWrite(StreamFile(FileName))
+        Page.Response.End()
+    End Sub
+
+    Private Function StreamFile(ByVal filename As String) As Byte()
+        Dim ImageData As Byte() = New Byte(-1) {}
+        Dim fs As FileStream = New FileStream(filename, FileMode.Open, FileAccess.Read)
+        Try
+            ImageData = New Byte(fs.Length - 1) {}
+            fs.Read(ImageData, 0, System.Convert.ToInt32(fs.Length))
+        Catch ex As Exception
+            Throw ex
+        Finally
+            If fs IsNot Nothing Then
+                fs.Close()
+            End If
+        End Try
+
+        Return ImageData
+    End Function
 End Class

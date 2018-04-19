@@ -225,6 +225,12 @@ Partial Public Class DataClasses_GoodWorldDataContext
 			Return Me.GetTable(Of tblXtraReport)
 		End Get
 	End Property
+	
+	Public ReadOnly Property v_Report1s() As System.Data.Linq.Table(Of v_Report1)
+		Get
+			Return Me.GetTable(Of v_Report1)
+		End Get
+	End Property
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblBrokerage")>  _
@@ -4830,7 +4836,7 @@ Partial Public Class tblXtraReport
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LayoutData", DbType:="VarBinary(MAX)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LayoutData", DbType:="VarBinary(MAX)", CanBeNull:=true, UpdateCheck:=UpdateCheck.Never)>  _
 	Public Property LayoutData() As System.Data.Linq.Binary
 		Get
 			Return Me._LayoutData
@@ -4943,4 +4949,294 @@ Partial Public Class tblXtraReport
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_Report1")>  _
+Partial Public Class v_Report1
+	
+	Private _InsurerCode As String
+	
+	Private _InsurerName As String
+	
+	Private _ClientName As String
+	
+	Private _PolicyNo As String
+	
+	Private _EffectiveDate As System.Nullable(Of Date)
+	
+	Private _ExpiredDate As System.Nullable(Of Date)
+	
+	Private _InsureType As String
+	
+	Private _CarLicensePlate As String
+	
+	Private _Chassis As String
+	
+	Private _Suminsured As System.Nullable(Of Integer)
+	
+	Private _Premium As System.Nullable(Of Decimal)
+	
+	Private _Vat As System.Nullable(Of Decimal)
+	
+	Private _Stamp As System.Nullable(Of Decimal)
+	
+	Private _GrossPremium As System.Nullable(Of Decimal)
+	
+	Private _NewRenew As String
+	
+	Private _AgentCode As String
+	
+	Private _AgentName As String
+	
+	Private _Brokerage As Decimal
+	
+	Private _BrokerageAmt As Decimal
+	
+	Private _Monthly As System.Nullable(Of Date)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsurerCode", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property InsurerCode() As String
+		Get
+			Return Me._InsurerCode
+		End Get
+		Set
+			If (String.Equals(Me._InsurerCode, value) = false) Then
+				Me._InsurerCode = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsurerName", DbType:="NVarChar(255)")>  _
+	Public Property InsurerName() As String
+		Get
+			Return Me._InsurerName
+		End Get
+		Set
+			If (String.Equals(Me._InsurerName, value) = false) Then
+				Me._InsurerName = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClientName", DbType:="NVarChar(255)")>  _
+	Public Property ClientName() As String
+		Get
+			Return Me._ClientName
+		End Get
+		Set
+			If (String.Equals(Me._ClientName, value) = false) Then
+				Me._ClientName = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PolicyNo", DbType:="NVarChar(50)")>  _
+	Public Property PolicyNo() As String
+		Get
+			Return Me._PolicyNo
+		End Get
+		Set
+			If (String.Equals(Me._PolicyNo, value) = false) Then
+				Me._PolicyNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EffectiveDate", DbType:="Date")>  _
+	Public Property EffectiveDate() As System.Nullable(Of Date)
+		Get
+			Return Me._EffectiveDate
+		End Get
+		Set
+			If (Me._EffectiveDate.Equals(value) = false) Then
+				Me._EffectiveDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExpiredDate", DbType:="Date")>  _
+	Public Property ExpiredDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ExpiredDate
+		End Get
+		Set
+			If (Me._ExpiredDate.Equals(value) = false) Then
+				Me._ExpiredDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsureType", DbType:="NVarChar(255)")>  _
+	Public Property InsureType() As String
+		Get
+			Return Me._InsureType
+		End Get
+		Set
+			If (String.Equals(Me._InsureType, value) = false) Then
+				Me._InsureType = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarLicensePlate", DbType:="NVarChar(50)")>  _
+	Public Property CarLicensePlate() As String
+		Get
+			Return Me._CarLicensePlate
+		End Get
+		Set
+			If (String.Equals(Me._CarLicensePlate, value) = false) Then
+				Me._CarLicensePlate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Chassis", DbType:="NVarChar(150)")>  _
+	Public Property Chassis() As String
+		Get
+			Return Me._Chassis
+		End Get
+		Set
+			If (String.Equals(Me._Chassis, value) = false) Then
+				Me._Chassis = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Suminsured", DbType:="Int")>  _
+	Public Property Suminsured() As System.Nullable(Of Integer)
+		Get
+			Return Me._Suminsured
+		End Get
+		Set
+			If (Me._Suminsured.Equals(value) = false) Then
+				Me._Suminsured = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Premium", DbType:="Decimal(18,2)")>  _
+	Public Property Premium() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Premium
+		End Get
+		Set
+			If (Me._Premium.Equals(value) = false) Then
+				Me._Premium = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vat", DbType:="Decimal(18,2)")>  _
+	Public Property Vat() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Vat
+		End Get
+		Set
+			If (Me._Vat.Equals(value) = false) Then
+				Me._Vat = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Stamp", DbType:="Decimal(18,2)")>  _
+	Public Property Stamp() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Stamp
+		End Get
+		Set
+			If (Me._Stamp.Equals(value) = false) Then
+				Me._Stamp = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrossPremium", DbType:="Decimal(18,2)")>  _
+	Public Property GrossPremium() As System.Nullable(Of Decimal)
+		Get
+			Return Me._GrossPremium
+		End Get
+		Set
+			If (Me._GrossPremium.Equals(value) = false) Then
+				Me._GrossPremium = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NewRenew", DbType:="NVarChar(2)")>  _
+	Public Property NewRenew() As String
+		Get
+			Return Me._NewRenew
+		End Get
+		Set
+			If (String.Equals(Me._NewRenew, value) = false) Then
+				Me._NewRenew = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgentCode", DbType:="NVarChar(50)")>  _
+	Public Property AgentCode() As String
+		Get
+			Return Me._AgentCode
+		End Get
+		Set
+			If (String.Equals(Me._AgentCode, value) = false) Then
+				Me._AgentCode = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgentName", DbType:="NVarChar(255)")>  _
+	Public Property AgentName() As String
+		Get
+			Return Me._AgentName
+		End Get
+		Set
+			If (String.Equals(Me._AgentName, value) = false) Then
+				Me._AgentName = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Brokerage", DbType:="Decimal(18,2) NOT NULL")>  _
+	Public Property Brokerage() As Decimal
+		Get
+			Return Me._Brokerage
+		End Get
+		Set
+			If ((Me._Brokerage = value)  _
+						= false) Then
+				Me._Brokerage = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrokerageAmt", DbType:="Decimal(18,2) NOT NULL")>  _
+	Public Property BrokerageAmt() As Decimal
+		Get
+			Return Me._BrokerageAmt
+		End Get
+		Set
+			If ((Me._BrokerageAmt = value)  _
+						= false) Then
+				Me._BrokerageAmt = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Monthly", DbType:="Date")>  _
+	Public Property Monthly() As System.Nullable(Of Date)
+		Get
+			Return Me._Monthly
+		End Get
+		Set
+			If (Me._Monthly.Equals(value) = false) Then
+				Me._Monthly = value
+			End If
+		End Set
+	End Property
 End Class

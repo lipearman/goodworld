@@ -86,5 +86,11 @@
         <elementListCompartment Id="9ef4747f-5d18-4f67-92ef-d18a39a9b10e" absoluteBounds="2.2649999999999997, 4.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="df66e6e7-ce7b-406d-ba87-c60e68da6c59" absoluteBounds="2.75, 7.625, 2, 4.6554182942708326">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/v_Report1" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e9dbe494-96a5-4abe-863e-4bfc55e91ce8" absoluteBounds="2.765, 8.085, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
