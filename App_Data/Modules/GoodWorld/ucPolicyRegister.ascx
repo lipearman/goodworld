@@ -18,7 +18,11 @@
     }
 </style>
 
-
+<script>
+    function OnGetRowValues(values) {
+        TaskNewPopup.PerformCallback('clientselect');
+    }
+</script>
 
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
@@ -99,20 +103,20 @@
         </dx:BootstrapGridViewDataColumn>
         <dx:BootstrapGridViewTextColumn FieldName="ID" Visible="false">
         </dx:BootstrapGridViewTextColumn>
-         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"   />
-       
+        <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
 
-    <%--     <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
+
+        <%--     <dx:BootstrapGridViewDateColumn FieldName="CreateDate" SortOrder="Descending" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy HH:mm:ss" SettingsEditForm-Visible="False" />
        <dx:BootstrapGridViewTextColumn FieldName="FirstName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="LastName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         --%>
         <dx:BootstrapGridViewTextColumn FieldName="ClientName" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
-        
+
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
 
 
- <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate"   Caption="ทะเบียนรถ"  ></dx:BootstrapGridViewTextColumn>
-       
+        <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียนรถ"></dx:BootstrapGridViewTextColumn>
+
 
 
         <dx:BootstrapGridViewComboBoxColumn FieldName="InsureType" Caption="ประเภทการประกันภัย">
@@ -131,7 +135,7 @@
             </PropertiesComboBox>
         </dx:BootstrapGridViewComboBoxColumn>
 
-        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"  SettingsEditForm-Visible="False" />
+        <dx:BootstrapGridViewDateColumn FieldName="ExpiredDate" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" SettingsEditForm-Visible="False" />
 
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
@@ -148,9 +152,9 @@
 
 
 
-  <dx:BootstrapGridViewTextColumn FieldName="DOB" Visible="false" Caption="วันเกิด"></dx:BootstrapGridViewTextColumn>
-         <dx:BootstrapGridViewTextColumn FieldName="IdentityNo" Visible="false" Caption="บัตรประชาชน"></dx:BootstrapGridViewTextColumn>
-       
+        <dx:BootstrapGridViewTextColumn FieldName="DOB" Visible="false" Caption="วันเกิด"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="IdentityNo" Visible="false" Caption="บัตรประชาชน"></dx:BootstrapGridViewTextColumn>
+
 
 
         <dx:BootstrapGridViewTextColumn FieldName="Suminsured" Visible="false" Caption="จำนวนเงินเอาประกันภัย"></dx:BootstrapGridViewTextColumn>
@@ -205,7 +209,7 @@
     </SettingsCommandButton>
 
     <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
-    <SettingsSearchPanel  Visible="true"/>
+    <SettingsSearchPanel Visible="true" />
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_PolicyRegister" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
@@ -233,10 +237,7 @@
 
 
 <asp:SqlDataSource ID="SqlDataSource_ClientName" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select ClientName
-    from tblPolicyRegister 
-    Group By ClientName
-    Order By ClientName"></asp:SqlDataSource>
+    SelectCommand="select ClientName from tblPolicyRegister Group By ClientName Order By ClientName"></asp:SqlDataSource>
 
 
 <dx:BootstrapPopupControl ID="TaskNewPopup" ClientInstanceName="TaskNewPopup" runat="server"
@@ -318,22 +319,51 @@
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
-                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6"  >
+                    <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <%--<dx:BootstrapTextBox runat="server" ID="newFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>--%>
-                            
-                            <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="newClientName" DropDownStyle="DropDown"  
-                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" ForceDataBinding="true" EnableCallbackMode="true">
+
+                  <dx:BootstrapComboBox runat="server" ID="newClientName" 
+                      DropDownStyle="DropDown"  
+                              TextField="ClientName" 
+                              ValueField="ClientName"  ValueType="System.String"
+                              SelectedIndex="0"  
+                      OnItemRequestedByValue="newClientName_ItemRequestedByValue"
+                       OnItemsRequestedByFilterCondition="newClientName_ItemsRequestedByFilterCondition"
+                              CallbackPageSize="25" 
+                              ForceDataBinding="true" 
+                              EnableCallbackMode="true">
                                <ClientSideEvents SelectedIndexChanged="function(s,e){
                                     TaskNewPopup.PerformCallback('clientselect');
                                    }" />
                             </dx:BootstrapComboBox>
+
+                                <%--<dx:ASPxComboBox ID="newClientName"
+                                    ClientInstanceName="newClientNames"
+                                    runat="server"
+                                    EnableCallbackMode="true"
+                                    CallbackPageSize="10"
+                                    ValueType="System.String"
+                                    ValueField="ClientName"
+                                    TextFormatString="{0}"
+                                    Width="287px"
+                                    DropDownStyle="DropDown"     
+OnItemsRequestedByFilterCondition="ASPxComboBox_OnItemsRequestedByFilterCondition_SQL"
+OnItemRequestedByValue="ASPxComboBox_OnItemRequestedByValue_SQL"                                
+                                    >
+
+                                    <Columns >
+                                        <dx:ListBoxColumn  FieldName="ClientName" />
+                                    </Columns>
+                                </dx:ASPxComboBox>--%>
+
+
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-<%--                    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6">
+                    <%--                    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newLastName" NullText="พิมพ์นามสกุล..."></dx:BootstrapTextBox>
@@ -355,7 +385,6 @@
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="newIdentityNo" NullText="พิมพ์บัตรประชาชน...">
-                            
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -681,7 +710,7 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
-                                     <ClientSideEvents ValueChanged="function(s,e){
+                                    <ClientSideEvents ValueChanged="function(s,e){
                                         TaskNewPopup.PerformCallback('calpremium');
                                         }" />
                                 </dx:BootstrapSpinEdit>
@@ -693,7 +722,7 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newStamp" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
-                                     <ClientSideEvents ValueChanged="function(s,e){
+                                    <ClientSideEvents ValueChanged="function(s,e){
                                         TaskNewPopup.PerformCallback('calvatstamp');
                                         }" />
                                 </dx:BootstrapSpinEdit>
@@ -705,7 +734,7 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="newVat" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false" Number="0.00">
-                                      <ClientSideEvents ValueChanged="function(s,e){
+                                    <ClientSideEvents ValueChanged="function(s,e){
                                         TaskNewPopup.PerformCallback('calvatstamp');
                                         }" />
                                 </dx:BootstrapSpinEdit>
@@ -833,7 +862,7 @@
     </ContentCollection>
 </dx:BootstrapPopupControl>
 
-
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>" />
 
 <dx:BootstrapPopupControl ID="TaskEditPopup" ClientInstanceName="TaskEditPopup" runat="server"
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ลงทะเบียนกรมธรรม์"
@@ -929,19 +958,19 @@
                     <dx:BootstrapLayoutItem Caption="ชื่อ" ColSpanMd="6" FieldName="ClientName">
                         <ContentCollection>
                             <dx:ContentControl>
-                               <%-- <dx:BootstrapTextBox runat="server" ID="editFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>
-                            --%>
-                              <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="editClientName" DropDownStyle="DropDown"  
-                                TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
-                                  <ClientSideEvents SelectedIndexChanged="function(s,e){
+                                <%-- <dx:BootstrapTextBox runat="server" ID="editFirstName" NullText="พิมพ์ชื่อ..."></dx:BootstrapTextBox>
+                                --%>
+                                <dx:BootstrapComboBox runat="server" DataSourceID="SqlDataSource_ClientName" ID="editClientName" DropDownStyle="DropDown"
+                                    TextField="ClientName" ValueField="ClientName" SelectedIndex="0" CallbackPageSize="25" EnableCallbackMode="true">
+                                    <ClientSideEvents SelectedIndexChanged="function(s,e){
                                     TaskEditPopup.PerformCallback('clientselect');
                                    }" />
-                            </dx:BootstrapComboBox>
+                                </dx:BootstrapComboBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
 
-                <%--    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6" FieldName="LastName">
+                    <%--    <dx:BootstrapLayoutItem Caption="นามสกุล" ColSpanMd="6" FieldName="LastName">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editLastName" NullText="พิมพ์นามสกุล..."></dx:BootstrapTextBox>
@@ -961,7 +990,6 @@
                         <ContentCollection>
                             <dx:ContentControl>
                                 <dx:BootstrapTextBox runat="server" ID="editIdentityNo" NullText="พิมพ์บัตรประชาชน...">
-                                   
                                 </dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -1284,7 +1312,7 @@
                             <dx:ContentControl>
                                 <dx:BootstrapSpinEdit ID="editPremium" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="พิมพ์เบี้ยประกันภัย..."
                                     SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
-                                     <ClientSideEvents ValueChanged="function(s,e){
+                                    <ClientSideEvents ValueChanged="function(s,e){
                                         TaskEditPopup.PerformCallback('calpremium');
                                         }" />
                                 </dx:BootstrapSpinEdit>

@@ -86,6 +86,7 @@ Partial Class Modules_ucPolicyImport
         ''=============================== Summary ================================================
         Dim PolicyRegisters As New List(Of tblPolicyRegister)
         For r As Integer = 1 To range_Summary.RowCount - 1
+            'InsurerCode.
             'Agent Code.
             'เลขที่กรมธรรม์
             'ชื่อผู้เอาประกันภัย
@@ -96,15 +97,16 @@ Partial Class Modules_ucPolicyImport
             'ภาษี
             'เบี้ยรวม
 
-            PolicyRegisters.Add(New tblPolicyRegister With {.AgentCode = range_Summary(r, 0).Value.ToString _
-                                                            , .PolicyNo = range_Summary(r, 1).Value.ToString _
-                                                            , .ClientName = range_Summary(r, 2).Value.ToString _
-                                                            , .EffectiveDate = range_Summary(r, 3).Value.DateTimeValue _
-                                                            , .ExpiredDate = range_Summary(r, 4).Value.DateTimeValue _
-                                                            , .Premium = range_Summary(r, 5).Value.NumericValue _
-                                                            , .Stamp = range_Summary(r, 6).Value.NumericValue _
-                                                            , .Vat = range_Summary(r, 7).Value.NumericValue _
-                                                            , .GrossPremium = range_Summary(r, 8).Value.NumericValue _
+            PolicyRegisters.Add(New tblPolicyRegister With {.InsurerCode = range_Summary(r, 0).Value.ToString _
+                                                            , .AgentCode = range_Summary(r, 1).Value.ToString _
+                                                            , .PolicyNo = range_Summary(r, 2).Value.ToString _
+                                                            , .ClientName = range_Summary(r, 3).Value.ToString _
+                                                            , .EffectiveDate = range_Summary(r, 4).Value.DateTimeValue _
+                                                            , .ExpiredDate = range_Summary(r, 5).Value.DateTimeValue _
+                                                            , .Premium = range_Summary(r, 6).Value.NumericValue _
+                                                            , .Stamp = range_Summary(r, 7).Value.NumericValue _
+                                                            , .Vat = range_Summary(r, 8).Value.NumericValue _
+                                                            , .GrossPremium = range_Summary(r, 9).Value.NumericValue _
                                                             , .CreateBy = HttpContext.Current.User.Identity.Name _
                                                             , .CreateDate = Now
                                 })
