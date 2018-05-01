@@ -14,7 +14,8 @@ Imports DevExpress.Web
 Imports DevExpress.Web.ASPxTreeList
 Imports DevExpress.Web.Data
 Imports DevExpress.Web.Bootstrap
-
+Imports DevExpress.Data.Filtering
+Imports Microsoft.Reporting.WebForms
 
 Partial Class Modules_ucBillingRegister
     Inherits PortalModuleControl
@@ -28,37 +29,14 @@ Partial Class Modules_ucBillingRegister
 
         Session("PortalId") = webconfig._PortalID
 
-
-    End Sub
-    Protected Sub TaskNewPopup_Callback(ByVal sender As Object, ByVal e As CallbackEventArgsBase) Handles TaskNewPopup.Callback
-
-        'If Not MyUtils.chkIDCard(newIdentityNo.Value) Then
-        '    Throw New Exception("หมายเลขบัตรประชาชนไม่ถูกต้อง")
-        'End If
-
-
-        Dim args = e.Parameter.ToString()
-        TaskNewPopup.JSProperties("cpnewtask") = args.ToLower()
-
-
-        Select Case args.ToLower()
-            Case "calbrokerage"
-                'calbrokerage()
-            Case "savenew"
-                'savenew()
-        End Select
-
-
-
+        SqlDataSource_BillingRegister.InsertParameters("UserName").DefaultValue = HttpContext.Current.User.Identity.Name
     End Sub
 
 
 
 
 
-
-
-    Protected Sub TaskEditPopup_Callback(ByVal sender As Object, ByVal e As CallbackEventArgsBase) Handles TaskEditPopup.Callback
+    Protected Sub TaskEditPopup_Callback(ByVal sender As Object, ByVal e As CallbackEventArgsBase) Handles TaskEditPopup.WindowCallback
         Dim args = e.Parameter.ToString()
 
         If args.ToLower().StartsWith("edit") Then
@@ -68,6 +46,45 @@ Partial Class Modules_ucBillingRegister
             hdID.Set("ID", _ID)
             edit(_ID)
             TaskEditPopup.ShowOnPageLoad = True
+
+        ElseIf args.ToLower().StartsWith("addpolicy") Then
+            Dim params = args.Split("|")
+            Dim _PolicyID = params(1)
+            If String.IsNullOrEmpty(_PolicyID.Replace("null", "")) Then
+                TaskEditPopup.JSProperties("cpedittask") = "No Data"
+                Return
+            End If
+
+            Using dc As New DataClasses_GoodWorldExt()
+                Dim data = (From c In dc.v_Report1s Where c.ID.Equals(_PolicyID)).FirstOrDefault()
+
+                If data Is Nothing Then
+                    TaskEditPopup.JSProperties("cpedittask") = "No Data"
+                Else
+                    Dim newData As New tblBillingDetail()
+
+                    With newData
+                        .BillingID = CInt(hdID("ID"))
+                        .PolicyID = CInt(_PolicyID)
+
+                        .CreateBy = HttpContext.Current.User.Identity.Name
+                        .CreateDate = Now
+
+
+
+                    End With
+
+
+                    dc.tblBillingDetails.InsertOnSubmit(newData)
+                    dc.SubmitChanges()
+
+                    TaskEditPopup.JSProperties("cpedittask") = "cpaddtask"
+                End If
+
+
+            End Using
+            TaskEditPopup.ShowOnPageLoad = True
+
         Else
 
             Select Case args.ToLower()
@@ -89,15 +106,15 @@ Partial Class Modules_ucBillingRegister
 
     Private Sub edit(ByVal _ID As String)
         Using dc As New DataClasses_GoodWorldExt()
-            Dim data = (From c In dc.tblPolicyRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
+            Dim data = (From c In dc.v_BillingRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
 
-         
-            BootstrapFormLayout8.DataSource = data
-            BootstrapFormLayout8.DataBind()
- 
+
+            formPreview.DataSource = data
+            formPreview.DataBind()
+
         End Using
     End Sub
-   
+
 
 
 
@@ -114,4 +131,141 @@ Partial Class Modules_ucBillingRegister
 
 
     End Sub
+
+
+
+    Protected Sub MyGridDetails_RowInserting(ByVal sender As Object, ByVal e As ASPxDataInsertingEventArgs) Handles MyGridDetails.RowInserting
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim _ID = e.NewValues("ID")
+            Dim data = (From c In dc.v_BillingRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
+
+
+
+        End Using
+
+
+        MyGridDetails.CancelEdit()
+        e.Cancel = True
+    End Sub
+
+
+    Protected Sub PolicyNo_ItemRequestedByValue(source As Object, e As ListEditItemRequestedByValueEventArgs) Handles PolicyNoFilter.ItemRequestedByValue
+        Dim value As Long = 0
+        If e.Value Is Nothing Then
+            Return
+        End If
+        Dim comboBox As ASPxComboBox = CType(source, ASPxComboBox)
+        SqlDataSource1.SelectCommand = "select ClientName from v_Report1 where PolicyNo like @PolicyNo and isnull(PolicyNo,'') <> ''"
+
+        SqlDataSource1.SelectParameters.Clear()
+        SqlDataSource1.SelectParameters.Add("PolicyNo", TypeCode.String, e.Value.ToString())
+        comboBox.DataSource = SqlDataSource1
+        comboBox.DataBind()
+    End Sub
+    Protected Sub PolicyNo_ItemsRequestedByFilterCondition(source As Object, e As ListEditItemsRequestedByFilterConditionEventArgs) Handles PolicyNoFilter.ItemsRequestedByFilterCondition
+        Dim comboBox As ASPxComboBox = CType(source, ASPxComboBox)
+
+        Dim sb As New StringBuilder()
+        sb.Append(" SELECT st.* ")
+        sb.Append(" FROM (")
+        sb.Append(" select v_Report1.* ")
+        sb.Append(" , row_number()over(order by v_Report1.PolicyNo) as [rn] ")
+        sb.Append(" from v_Report1 ")
+        sb.Append(" where PolicyNo LIKE @filter and isnull(PolicyNo,'') <> '' ")
+        sb.Append(" ) as st ")
+        sb.Append(" where st.[rn] between @startIndex and @endIndex")
+
+        SqlDataSource1.SelectCommand = sb.ToString()
+
+        SqlDataSource1.SelectParameters.Clear()
+        SqlDataSource1.SelectParameters.Add("filter", TypeCode.String, String.Format("%{0}%", e.Filter))
+        SqlDataSource1.SelectParameters.Add("startIndex", TypeCode.Int64, (e.BeginIndex + 1).ToString())
+        SqlDataSource1.SelectParameters.Add("endIndex", TypeCode.Int64, (e.EndIndex + 1).ToString())
+        comboBox.DataSource = SqlDataSource1
+        comboBox.DataBind()
+    End Sub
+
+
+    Protected Sub btnPreview_Click(sender As Object, e As EventArgs)
+        Dim _BillingID = CInt(hdID("ID"))
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim _BillingDetails = (From c In dc.tblBillingRegisters Where c.ID.Equals(_BillingID)).FirstOrDefault()
+
+
+            Dim sb As New StringBuilder()
+            sb.Append(" SELECT * ")
+            sb.Append(" FROM v_BillingDetails ")
+            sb.AppendFormat(" where BillingID='{0}' ", _BillingDetails.ID)
+
+            Dim ReportFile As String = ""
+            If _BillingDetails.BillingType = "P" Then
+                ReportFile = "rptBilling1.rdl"
+            ElseIf _BillingDetails.BillingType = "C" Then
+                ReportFile = "rptBilling2.rdl"
+            End If
+
+            Dim ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
+
+            'Session("Report1") = ds.Tables(0)
+            Dim ReportViewer1 As New ReportViewer()
+            ReportViewer1.Reset()
+            ReportViewer1.LocalReport.Dispose()
+            ReportViewer1.LocalReport.DataSources.Clear()
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
+            ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds.Tables(0)))
+            ReportViewer1.LocalReport.SetParameters(New ReportParameter("TaxP", _BillingDetails.TaxP / 100))
+            ReportViewer1.LocalReport.SetParameters(New ReportParameter("DiscountP", _BillingDetails.DiscountP / 100))
+            ReportViewer1.LocalReport.Refresh()
+
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType As String
+            Dim encoding As String
+            Dim extension As String
+            Dim bytes As Byte() = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamids, warnings)
+
+            Session("GUID") = System.Guid.NewGuid().ToString()
+
+            Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+
+            Using fs As FileStream = New FileStream(FileName, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+            End Using
+
+            clientReportPreview.ShowOnPageLoad() = True
+
+            Spreadsheet.Open(FileName)
+
+        End Using
+    End Sub
+
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+
+        Page.Response.Clear()
+        Page.Response.Buffer = False
+        Page.Response.AppendHeader("Content-Type", "application/vnd.ms-excel")
+        Page.Response.AppendHeader("content-disposition", "attachment; filename=myfile.xls")
+        Page.Response.BinaryWrite(StreamFile(FileName))
+        Page.Response.End()
+    End Sub
+
+    Private Function StreamFile(ByVal filename As String) As Byte()
+        Dim ImageData As Byte() = New Byte(-1) {}
+        Dim fs As FileStream = New FileStream(filename, FileMode.Open, FileAccess.Read)
+        Try
+            ImageData = New Byte(fs.Length - 1) {}
+            fs.Read(ImageData, 0, System.Convert.ToInt32(fs.Length))
+        Catch ex As Exception
+            Throw ex
+        Finally
+            If fs IsNot Nothing Then
+                fs.Close()
+            End If
+        End Try
+
+        Return ImageData
+    End Function
 End Class

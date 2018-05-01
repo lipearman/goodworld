@@ -540,15 +540,15 @@ Partial Class Modules_ucPolicyRegister
         sb.Append(" FROM (")
         sb.Append(" select ClientName")
         sb.Append(" , row_number()over(order by t.ClientName) as [rn] ")
-        sb.Append(" from (select ClientName from tblPolicyRegister where ClientName like @filter Group By ClientName) as t ")
-        sb.Append(" where ClientName LIKE @filter")
+        sb.AppendFormat(" from (select ClientName from tblPolicyRegister where ClientName like N'%{0}%' Group By ClientName) as t ", Trim(e.Filter.ToString()))
+        sb.AppendFormat(" where ClientName LIKE N'%{0}%'", Trim(e.Filter.ToString()))
         sb.Append(" ) as st ")
         sb.Append(" where st.[rn] between @startIndex and @endIndex")
 
         SqlDataSource1.SelectCommand = sb.ToString()
 
         SqlDataSource1.SelectParameters.Clear()
-        SqlDataSource1.SelectParameters.Add("filter", TypeCode.String, String.Format("%{0}%", e.Filter))
+        'SqlDataSource1.SelectParameters.Add("filter", TypeCode.String, String.Format("%{0}%", e.Filter))
         SqlDataSource1.SelectParameters.Add("startIndex", TypeCode.Int64, (e.BeginIndex + 1).ToString())
         SqlDataSource1.SelectParameters.Add("endIndex", TypeCode.Int64, (e.EndIndex + 1).ToString())
         comboBox.DataSource = SqlDataSource1

@@ -82,50 +82,77 @@ Partial Class Modules_ucPolicyImport
 
         Dim worksheet_Summary As Worksheet = ASPxSpreadsheet1.Document.Worksheets(0)
         Dim range_Summary As Range = worksheet_Summary.GetUsedRange()
+        Using dc As New DataClasses_GoodWorldExt()
 
-        ''=============================== Summary ================================================
-        Dim PolicyRegisters As New List(Of tblPolicyRegister)
-        For r As Integer = 1 To range_Summary.RowCount - 1
-            'InsurerCode.
-            'Agent Code.
-            'เลขที่กรมธรรม์
-            'ชื่อผู้เอาประกันภัย
-            'วันเริ่มคุ้มครอง
-            'วันสิ้นสุด
-            'เบี้ยสุทธิ
-            'อากร
-            'ภาษี
-            'เบี้ยรวม
 
-            PolicyRegisters.Add(New tblPolicyRegister With {.InsurerCode = range_Summary(r, 0).Value.ToString _
-                                                            , .AgentCode = range_Summary(r, 1).Value.ToString _
-                                                            , .PolicyNo = range_Summary(r, 2).Value.ToString _
-                                                            , .ClientName = range_Summary(r, 3).Value.ToString _
-                                                            , .EffectiveDate = range_Summary(r, 4).Value.DateTimeValue _
-                                                            , .ExpiredDate = range_Summary(r, 5).Value.DateTimeValue _
-                                                            , .Premium = range_Summary(r, 6).Value.NumericValue _
-                                                            , .Stamp = range_Summary(r, 7).Value.NumericValue _
-                                                            , .Vat = range_Summary(r, 8).Value.NumericValue _
-                                                            , .GrossPremium = range_Summary(r, 9).Value.NumericValue _
-                                                            , .CreateBy = HttpContext.Current.User.Identity.Name _
-                                                            , .CreateDate = Now
-                                })
-        Next
+            ''=============================== Summary ================================================
+            Dim PolicyRegisters As New List(Of tblPolicyRegister)
+            Dim _InsureType = (From c In dc.tblInsureTypes).ToList()
 
-        Dim sb As New StringBuilder()
+            For r As Integer = 1 To range_Summary.RowCount - 1
+                'Insurer Code
+                'Agent ID.
+                'เลขที่กรมธรรม์
+                'ชื่อผู้เอาประกันภัย
+                'วันเริ่มคุ้มครอง
+                'วันสิ้นสุด
+                'ประเภทประกันภัย
+                'ทะเบียนรถ
+                'เลขตัวถัง
+                'จำนวนเงินเอาประกัน
+                'เบี้ยสุทธิ
+                'อากร
+                'ภาษี
+                'เบี้ยรวม
 
-        If PolicyRegisters.Count = 0 Then
-            sb.Append("No Summary or Data")
-        Else
-            Using dc As New DataClasses_GoodWorldExt()
+                Dim _InsureTypeID As Integer = 0
+
+                If Not String.IsNullOrEmpty(range_Summary(r, 6).Value.TextValue) Then
+                    Dim _InsureCode = range_Summary(r, 6).Value.TextValue
+                    Dim _InsureTypeData = _InsureType.Single(Function(c) c.Code.Equals(_InsureCode))
+                    If _InsureCode IsNot Nothing Then
+                        _InsureTypeID = _InsureTypeData.ID
+                    End If
+                End If
+
+
+
+                PolicyRegisters.Add(New tblPolicyRegister With {.InsurerCode = range_Summary(r, 0).Value.TextValue _
+                                                                , .AgentCode = range_Summary(r, 1).Value.TextValue _
+                                                                , .PolicyNo = range_Summary(r, 2).Value.TextValue _
+                                                                , .ClientName = range_Summary(r, 3).Value.TextValue _
+                                                                , .EffectiveDate = range_Summary(r, 4).Value.DateTimeValue _
+                                                                , .ExpiredDate = range_Summary(r, 5).Value.DateTimeValue _
+                                                                , .InsureType = _InsureTypeID _
+                                                                , .CarLicensePlate = range_Summary(r, 7).Value.TextValue _
+                                                                , .Chassis = range_Summary(r, 8).Value.TextValue _
+                                                                , .Suminsured = range_Summary(r, 9).Value.NumericValue _
+                                                                , .Premium = range_Summary(r, 10).Value.NumericValue _
+                                                                , .Stamp = range_Summary(r, 11).Value.NumericValue _
+                                                                , .Vat = range_Summary(r, 12).Value.NumericValue _
+                                                                , .GrossPremium = range_Summary(r, 13).Value.NumericValue _
+                                                                , .CreateBy = HttpContext.Current.User.Identity.Name _
+                                                                , .CreateDate = Now
+                                    })
+            Next
+
+            Dim sb As New StringBuilder()
+
+            If PolicyRegisters.Count = 0 Then
+                sb.Append("No Summary or Data")
+            Else
+
                 dc.tblPolicyRegisters.InsertAllOnSubmit(PolicyRegisters)
                 dc.SubmitChanges()
-            End Using
 
-            sb.Append("success")
-        End If
 
-        e.Result = sb.ToString()
+                sb.Append("success")
+            End If
+
+
+            e.Result = sb.ToString()
+        End Using
+
 
     End Sub
 
