@@ -33,7 +33,7 @@
     <Columns>
         <dx:BootstrapGridViewDataColumn Width="50">
             <DataItemTemplate>
-                <dx:BootstrapButton runat="server" ID="EditButton" Text=" " AutoPostBack="false" CssClasses-Icon="image fa fa-plus-square-o" UseSubmitBehavior="False">
+                <dx:BootstrapButton runat="server" ID="EditButton" Text="เพิ่มรายการ" AutoPostBack="false" CssClasses-Icon="image fa fa-plus-square-o" UseSubmitBehavior="False">
                     <ClientSideEvents Click="function(s,e){
                                 TaskEditPopup.PerformCallback('edit|' + s.cpID);
                                  TaskEditPopup.Show();
@@ -162,6 +162,7 @@
 
             if(s.cpedittask=='edit' )
             {
+                MyGridDetails.Refresh();
                 ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup.GetMainElement());
             }
             else if(s.cpedittask=='cpaddtask' )
@@ -333,7 +334,7 @@
 
                                                           <dx:GridViewToolbarItem BeginGroup="true">
                                                             <Template>
-                                                                <dx:ASPxButton ID="btnPreview" runat="server" RenderMode="Button" OnClick="btnPreview_Click"
+                                                                <dx:ASPxButton ID="btnPreview" runat="server"  RenderMode="Button" OnClick="btnPreview_Click"
                                                                     Width="90px" Text="Preview" CausesValidation="false">
                                                                     <Image IconID="print_preview_16x16office2013"></Image>
                                                                    
@@ -472,11 +473,14 @@
 
 
 <asp:SqlDataSource ID="SqlDataSource_BilingDetails" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select * from v_BillingDetails Order By ClientName"
+    SelectCommand="select * from v_BillingDetails where BillingID=@BillingID Order By ClientName"
     DeleteCommand="delete from tblBillingDetails where ID=@ID;">
     <DeleteParameters>
         <asp:Parameter Name="ID" />
     </DeleteParameters>
+    <SelectParameters>
+        <asp:SessionParameter Name="BillingID"  SessionField="BillingID" />
+    </SelectParameters>
 
 </asp:SqlDataSource>
 
@@ -484,7 +488,7 @@
 
 
 
-<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"></asp:ScriptManager>
+<%--<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"></asp:ScriptManager>--%>
 
 <dx:ASPxPopupControl ID="clientReportPreview" runat="server" ClientInstanceName="clientReportPreview"
     Modal="True" Maximized="true"
@@ -519,7 +523,7 @@
     <ContentCollection>
         <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
 
-            <dx:ASPxSpreadsheet ID="Spreadsheet" Width="100%"  ReadOnly="true"
+            <%--<dx:ASPxSpreadsheet ID="Spreadsheet" Width="100%"  ReadOnly="true"
                 runat="server"
                 ActiveTabIndex="0" RibbonMode="None"
                 ShowConfirmOnLosingChanges="false"
@@ -535,8 +539,22 @@
                                   e.processOnServer = true;
 
                             }" />
-                    </dx:BootstrapButton>
+                    </dx:BootstrapButton>--%>
 
+
+            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server"  AllowedPermissions="All" Height="100%">
+
+            </GleamTech:DocumentViewerControl>
+            
+    <%--        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" ProcessingMode="Local" Visible="false">
+                <LocalReport ReportPath="~/App_Data/reports/" >
+                    
+                </LocalReport>
+            </rsweb:ReportViewer>--%>
+             
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+
+ 

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "176w6gr",
+  "CachePdfKey": "176w6gr/176w6gr-1k3kk2s.pdf",
+  "CacheXpzKey": "176w6gr/176w6gr-1kloaoi.xpz",
+  "CacheInfoKey": "176w6gr/176w6gr-1kloaoi.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/59a0a2ce-9913-469e-a35d-d71e9cf236d8.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "59a0a2ce-9913-469e-a35d-d71e9cf236d8.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "176w6gr",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

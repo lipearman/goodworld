@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "fb4fik",
+  "CachePdfKey": "fb4fik/fb4fik-1k3kk2s.pdf",
+  "CacheXpzKey": "fb4fik/fb4fik-1l8qyzw.xpz",
+  "CacheInfoKey": "fb4fik/fb4fik-1l8qyzw.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/b529055f-570e-4c95-a980-53d37db4c00f.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "b529055f-570e-4c95-a980-53d37db4c00f.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "fb4fik",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

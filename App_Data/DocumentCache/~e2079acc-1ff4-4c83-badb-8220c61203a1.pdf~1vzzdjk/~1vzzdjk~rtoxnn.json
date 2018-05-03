@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1vzzdjk",
+  "CachePdfKey": "1vzzdjk/1vzzdjk-1k3kk2s.pdf",
+  "CacheXpzKey": "1vzzdjk/1vzzdjk-rtoxnn.xpz",
+  "CacheInfoKey": "1vzzdjk/1vzzdjk-rtoxnn.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/e2079acc-1ff4-4c83-badb-8220c61203a1.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "e2079acc-1ff4-4c83-badb-8220c61203a1.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1vzzdjk",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

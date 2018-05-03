@@ -116,5 +116,17 @@
         <elementListCompartment Id="f445f82d-141f-4d80-8e8f-45f16c6ce85b" absoluteBounds="22.89, 14.335, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="990d63b2-bdc7-4e5a-9ee4-1d09f18e1aff" absoluteBounds="3.125, 3.5, 2, 4.2708154296875">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblPaymentRegister" />
+      <nestedChildShapes>
+        <elementListCompartment Id="93a817bc-d718-4537-88c8-9d1a098afcde" absoluteBounds="3.14, 3.96, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ed90d11c-cfdc-4039-8a87-d60d4bb2f64d" absoluteBounds="3.5, 0.5, 2, 8.1168440755208326">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/v_PaymentRegister" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc74a980-69b0-4f60-aebb-cfc67d044306" absoluteBounds="3.515, 0.96, 1.9700000000000002, 7.556844075520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "kqywsc",
+  "CachePdfKey": "kqywsc/kqywsc-1k3kk2s.pdf",
+  "CacheXpzKey": "kqywsc/kqywsc-1agm1t1.xpz",
+  "CacheInfoKey": "kqywsc/kqywsc-1agm1t1.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/a46a41ce-dd4a-4abe-9b42-709501376d7e.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "a46a41ce-dd4a-4abe-9b42-709501376d7e.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "kqywsc",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

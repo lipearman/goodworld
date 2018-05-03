@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "9q2lmc",
+  "CachePdfKey": "9q2lmc/9q2lmc-1k3kk2s.pdf",
+  "CacheXpzKey": "9q2lmc/9q2lmc-1jpo1fl.xpz",
+  "CacheInfoKey": "9q2lmc/9q2lmc-1jpo1fl.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/c1efd30a-73f8-4acb-90d5-44832e6130b4.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "c1efd30a-73f8-4acb-90d5-44832e6130b4.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "9q2lmc",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

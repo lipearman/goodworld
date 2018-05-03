@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1d06dj1",
+  "CachePdfKey": "1d06dj1/1d06dj1-1k3kk2s.pdf",
+  "CacheXpzKey": "1d06dj1/1d06dj1-xovol6.xpz",
+  "CacheInfoKey": "1d06dj1/1d06dj1-xovol6.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/59d3c18d-9551-45e8-a564-7a66a8f811d0.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "59d3c18d-9551-45e8-a564-7a66a8f811d0.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1d06dj1",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

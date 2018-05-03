@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "xg39td",
+  "CachePdfKey": "xg39td/xg39td-1k3kk2s.pdf",
+  "CacheXpzKey": "xg39td/xg39td-1sjfr47.xpz",
+  "CacheInfoKey": "xg39td/xg39td-1sjfr47.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/54503291-f068-441d-960c-900968e34dc6.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "54503291-f068-441d-960c-900968e34dc6.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "xg39td",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

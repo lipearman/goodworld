@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "nit2qw",
+  "CachePdfKey": "nit2qw/nit2qw-1k3kk2s.pdf",
+  "CacheXpzKey": "nit2qw/nit2qw-1dysae8.xpz",
+  "CacheInfoKey": "nit2qw/nit2qw-1dysae8.json",
+  "CacheCopyKey": null,
+  "Document": "~/UploadFiles/90b30c2b-7f31-4a90-8be7-90616143fffd.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "90b30c2b-7f31-4a90-8be7-90616143fffd.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "nit2qw",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "ygoywx",
+  "CachePdfKey": "ygoywx/ygoywx-1k3kk2s.pdf",
+  "CacheXpzKey": "ygoywx/ygoywx-14vq9g0.xpz",
+  "CacheInfoKey": "ygoywx/ygoywx-14vq9g0.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/e2041e74-fa4d-4995-b5cf-473376dc6279.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "e2041e74-fa4d-4995-b5cf-473376dc6279.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "ygoywx",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

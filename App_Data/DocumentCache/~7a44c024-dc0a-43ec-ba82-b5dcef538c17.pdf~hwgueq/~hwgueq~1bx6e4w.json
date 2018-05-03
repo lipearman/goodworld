@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "hwgueq",
+  "CachePdfKey": "hwgueq/hwgueq-1k3kk2s.pdf",
+  "CacheXpzKey": "hwgueq/hwgueq-1bx6e4w.xpz",
+  "CacheInfoKey": "hwgueq/hwgueq-1bx6e4w.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/7a44c024-dc0a-43ec-ba82-b5dcef538c17.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "7a44c024-dc0a-43ec-ba82-b5dcef538c17.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "hwgueq",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

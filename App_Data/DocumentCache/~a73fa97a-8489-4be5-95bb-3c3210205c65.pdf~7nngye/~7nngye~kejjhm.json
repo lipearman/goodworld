@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "7nngye",
+  "CachePdfKey": "7nngye/7nngye-1k3kk2s.pdf",
+  "CacheXpzKey": "7nngye/7nngye-kejjhm.xpz",
+  "CacheInfoKey": "7nngye/7nngye-kejjhm.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/a73fa97a-8489-4be5-95bb-3c3210205c65.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "a73fa97a-8489-4be5-95bb-3c3210205c65.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "7nngye",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

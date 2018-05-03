@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "d74jr5",
+  "CachePdfKey": "d74jr5/d74jr5-1k3kk2s.pdf",
+  "CacheXpzKey": "d74jr5/d74jr5-11m4rza.xpz",
+  "CacheInfoKey": "d74jr5/d74jr5-11m4rza.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/11c04f47-c9a9-409d-8c90-9b1b73c799bc.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "11c04f47-c9a9-409d-8c90-9b1b73c799bc.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "d74jr5",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

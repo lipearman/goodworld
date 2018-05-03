@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "12mje27",
+  "CachePdfKey": "12mje27/12mje27-1k3kk2s.pdf",
+  "CacheXpzKey": "12mje27/12mje27-7crsge.xpz",
+  "CacheInfoKey": "12mje27/12mje27-7crsge.json",
+  "CacheCopyKey": null,
+  "Document": "~/UploadFiles/76f263c0-ceb1-46ef-95cb-60543b930a28.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "76f263c0-ceb1-46ef-95cb-60543b930a28.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "12mje27",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

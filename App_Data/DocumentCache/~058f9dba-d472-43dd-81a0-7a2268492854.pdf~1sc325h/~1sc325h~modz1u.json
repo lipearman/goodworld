@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1sc325h",
+  "CachePdfKey": "1sc325h/1sc325h-1k3kk2s.pdf",
+  "CacheXpzKey": "1sc325h/1sc325h-modz1u.xpz",
+  "CacheInfoKey": "1sc325h/1sc325h-modz1u.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/058f9dba-d472-43dd-81a0-7a2268492854.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "058f9dba-d472-43dd-81a0-7a2268492854.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1sc325h",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

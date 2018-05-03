@@ -16,6 +16,8 @@ Imports DevExpress.Web.Data
 Imports DevExpress.Web.Bootstrap
 Imports DevExpress.Data.Filtering
 Imports Microsoft.Reporting.WebForms
+Imports System.Threading
+Imports System.Globalization
 
 Partial Class Modules_ucBillingRegister
     Inherits PortalModuleControl
@@ -30,6 +32,9 @@ Partial Class Modules_ucBillingRegister
         Session("PortalId") = webconfig._PortalID
 
         SqlDataSource_BillingRegister.InsertParameters("UserName").DefaultValue = HttpContext.Current.User.Identity.Name
+
+
+
     End Sub
 
 
@@ -45,7 +50,11 @@ Partial Class Modules_ucBillingRegister
             TaskEditPopup.JSProperties("cpedittask") = params(0)
             hdID.Set("ID", _ID)
             edit(_ID)
+
+            Session("BillingID") = _ID
+
             TaskEditPopup.ShowOnPageLoad = True
+
 
         ElseIf args.ToLower().StartsWith("addpolicy") Then
             Dim params = args.Split("|")
@@ -84,7 +93,9 @@ Partial Class Modules_ucBillingRegister
 
             End Using
             TaskEditPopup.ShowOnPageLoad = True
+            PolicyNoFilter.Value = ""
 
+            edit(hdID("ID"))
         Else
 
             Select Case args.ToLower()
@@ -188,6 +199,9 @@ Partial Class Modules_ucBillingRegister
 
     Protected Sub btnPreview_Click(sender As Object, e As EventArgs)
         Dim _BillingID = CInt(hdID("ID"))
+
+        edit(_BillingID)
+
         Using dc As New DataClasses_GoodWorldExt()
             Dim _BillingDetails = (From c In dc.tblBillingRegisters Where c.ID.Equals(_BillingID)).FirstOrDefault()
 
@@ -198,9 +212,9 @@ Partial Class Modules_ucBillingRegister
             sb.AppendFormat(" where BillingID='{0}' ", _BillingDetails.ID)
 
             Dim ReportFile As String = ""
-            If _BillingDetails.BillingType = "P" Then
+            If _BillingDetails.BillingType = "C" Then
                 ReportFile = "rptBilling1.rdl"
-            ElseIf _BillingDetails.BillingType = "C" Then
+            Else
                 ReportFile = "rptBilling2.rdl"
             End If
 
@@ -222,11 +236,12 @@ Partial Class Modules_ucBillingRegister
             Dim mimeType As String
             Dim encoding As String
             Dim extension As String
-            Dim bytes As Byte() = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamids, warnings)
+            Dim bytes As Byte() = ReportViewer1.LocalReport.Render("PDF", Nothing, mimeType, encoding, extension, streamids, warnings)
 
-            Session("GUID") = System.Guid.NewGuid().ToString()
+            Dim _GUID = System.Guid.NewGuid().ToString()
+            Session("GUID") = _GUID
 
-            Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+            Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID))
 
             Using fs As FileStream = New FileStream(FileName, FileMode.Create)
                 fs.Write(bytes, 0, bytes.Length)
@@ -235,37 +250,45 @@ Partial Class Modules_ucBillingRegister
 
             clientReportPreview.ShowOnPageLoad() = True
 
-            Spreadsheet.Open(FileName)
+            'Spreadsheet.Open(FileName)
 
+
+
+            documentViewer.Document = String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID)
         End Using
     End Sub
 
 
-    Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
-        Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
+    'Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+    '    Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", Session("GUID").ToString()))
 
-        Page.Response.Clear()
-        Page.Response.Buffer = False
-        Page.Response.AppendHeader("Content-Type", "application/vnd.ms-excel")
-        Page.Response.AppendHeader("content-disposition", "attachment; filename=myfile.xls")
-        Page.Response.BinaryWrite(StreamFile(FileName))
-        Page.Response.End()
-    End Sub
+    '    Page.Response.Clear()
+    '    Page.Response.Buffer = False
+    '    Page.Response.AppendHeader("Content-Type", "application/vnd.ms-excel")
+    '    Page.Response.AppendHeader("content-disposition", "attachment; filename=myfile.xls")
+    '    Page.Response.BinaryWrite(StreamFile(FileName))
+    '    Page.Response.End()
+    'End Sub
 
-    Private Function StreamFile(ByVal filename As String) As Byte()
-        Dim ImageData As Byte() = New Byte(-1) {}
-        Dim fs As FileStream = New FileStream(filename, FileMode.Open, FileAccess.Read)
-        Try
-            ImageData = New Byte(fs.Length - 1) {}
-            fs.Read(ImageData, 0, System.Convert.ToInt32(fs.Length))
-        Catch ex As Exception
-            Throw ex
-        Finally
-            If fs IsNot Nothing Then
-                fs.Close()
-            End If
-        End Try
+    'Private Function StreamFile(ByVal filename As String) As Byte()
+    '    Dim ImageData As Byte() = New Byte(-1) {}
+    '    Dim fs As FileStream = New FileStream(filename, FileMode.Open, FileAccess.Read)
+    '    Try
+    '        ImageData = New Byte(fs.Length - 1) {}
+    '        fs.Read(ImageData, 0, System.Convert.ToInt32(fs.Length))
+    '    Catch ex As Exception
+    '        Throw ex
+    '    Finally
+    '        If fs IsNot Nothing Then
+    '            fs.Close()
+    '        End If
+    '    End Try
 
-        Return ImageData
-    End Function
+    '    Return ImageData
+    'End Function
+    'Protected Sub ReportViewer1_PreRender(sender As Object, e As EventArgs)
+    '    Dim ci As New CultureInfo("en-TH")
+    '    Thread.CurrentThread.CurrentCulture = ci
+    '    Thread.CurrentThread.CurrentUICulture = ci
+    'End Sub
 End Class

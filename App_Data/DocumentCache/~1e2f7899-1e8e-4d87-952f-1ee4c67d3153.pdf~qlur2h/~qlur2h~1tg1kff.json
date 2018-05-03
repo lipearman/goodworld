@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "qlur2h",
+  "CachePdfKey": "qlur2h/qlur2h-1k3kk2s.pdf",
+  "CacheXpzKey": "qlur2h/qlur2h-1tg1kff.xpz",
+  "CacheInfoKey": "qlur2h/qlur2h-1tg1kff.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/1e2f7899-1e8e-4d87-952f-1ee4c67d3153.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "1e2f7899-1e8e-4d87-952f-1ee4c67d3153.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "qlur2h",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

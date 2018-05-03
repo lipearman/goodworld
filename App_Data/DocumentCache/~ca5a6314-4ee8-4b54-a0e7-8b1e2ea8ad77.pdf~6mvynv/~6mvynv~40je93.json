@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "6mvynv",
+  "CachePdfKey": "6mvynv/6mvynv-1k3kk2s.pdf",
+  "CacheXpzKey": "6mvynv/6mvynv-40je93.xpz",
+  "CacheInfoKey": "6mvynv/6mvynv-40je93.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/ca5a6314-4ee8-4b54-a0e7-8b1e2ea8ad77.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "ca5a6314-4ee8-4b54-a0e7-8b1e2ea8ad77.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "6mvynv",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

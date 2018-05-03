@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1s80ri3",
+  "CachePdfKey": "1s80ri3/1s80ri3-1k3kk2s.pdf",
+  "CacheXpzKey": "1s80ri3/1s80ri3-oryraa.xpz",
+  "CacheInfoKey": "1s80ri3/1s80ri3-oryraa.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/89552672-7308-49a4-87cc-225b12934ec1.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "89552672-7308-49a4-87cc-225b12934ec1.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1s80ri3",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

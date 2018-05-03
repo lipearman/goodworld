@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "sdscli",
+  "CachePdfKey": "sdscli/sdscli-1k3kk2s.pdf",
+  "CacheXpzKey": "sdscli/sdscli-12ixks.xpz",
+  "CacheInfoKey": "sdscli/sdscli-12ixks.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/2fdfe03e-95b4-40c0-9938-602f46c0e935.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "2fdfe03e-95b4-40c0-9938-602f46c0e935.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "sdscli",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

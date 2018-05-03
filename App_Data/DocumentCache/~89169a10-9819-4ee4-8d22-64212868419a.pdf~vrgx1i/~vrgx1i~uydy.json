@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "vrgx1i",
+  "CachePdfKey": "vrgx1i/vrgx1i-1k3kk2s.pdf",
+  "CacheXpzKey": "vrgx1i/vrgx1i-uydy.xpz",
+  "CacheInfoKey": "vrgx1i/vrgx1i-uydy.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/89169a10-9819-4ee4-8d22-64212868419a.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "89169a10-9819-4ee4-8d22-64212868419a.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "vrgx1i",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

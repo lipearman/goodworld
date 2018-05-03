@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "232cez",
+  "CachePdfKey": "232cez/232cez-1k3kk2s.pdf",
+  "CacheXpzKey": "232cez/232cez-1lau23s.xpz",
+  "CacheInfoKey": "232cez/232cez-1lau23s.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/a4b572e9-655f-4f37-96cc-7edad27e0271.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "a4b572e9-655f-4f37-96cc-7edad27e0271.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "232cez",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

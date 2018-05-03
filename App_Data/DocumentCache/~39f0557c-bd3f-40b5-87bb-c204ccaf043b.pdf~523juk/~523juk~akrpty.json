@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "523juk",
+  "CachePdfKey": "523juk/523juk-1k3kk2s.pdf",
+  "CacheXpzKey": "523juk/523juk-akrpty.xpz",
+  "CacheInfoKey": "523juk/523juk-akrpty.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/39f0557c-bd3f-40b5-87bb-c204ccaf043b.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "39f0557c-bd3f-40b5-87bb-c204ccaf043b.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "523juk",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

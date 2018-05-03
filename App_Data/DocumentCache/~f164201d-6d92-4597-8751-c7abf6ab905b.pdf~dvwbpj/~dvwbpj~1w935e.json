@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "dvwbpj",
+  "CachePdfKey": "dvwbpj/dvwbpj-1k3kk2s.pdf",
+  "CacheXpzKey": "dvwbpj/dvwbpj-1w935e.xpz",
+  "CacheInfoKey": "dvwbpj/dvwbpj-1w935e.json",
+  "CacheCopyKey": null,
+  "Document": "~/UploadFiles/f164201d-6d92-4597-8751-c7abf6ab905b.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "f164201d-6d92-4597-8751-c7abf6ab905b.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "dvwbpj",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

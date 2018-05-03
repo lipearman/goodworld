@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "ihhfhm",
+  "CachePdfKey": "ihhfhm/ihhfhm-1k3kk2s.pdf",
+  "CacheXpzKey": "ihhfhm/ihhfhm-doiszs.xpz",
+  "CacheInfoKey": "ihhfhm/ihhfhm-doiszs.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/e0645e9c-c81b-4dbf-bb8a-2203650bf9a1.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "e0645e9c-c81b-4dbf-bb8a-2203650bf9a1.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "ihhfhm",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1murg44",
+  "CachePdfKey": "1murg44/1murg44-1k3kk2s.pdf",
+  "CacheXpzKey": "1murg44/1murg44-1m4j4ns.xpz",
+  "CacheInfoKey": "1murg44/1murg44-1m4j4ns.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/c3fcc536-f206-4ce5-9b05-c03b507c3695.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "c3fcc536-f206-4ce5-9b05-c03b507c3695.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1murg44",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

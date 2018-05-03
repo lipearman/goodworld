@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1volc18",
+  "CachePdfKey": "1volc18/1volc18-1k3kk2s.pdf",
+  "CacheXpzKey": "1volc18/1volc18-1xiyzkj.xpz",
+  "CacheInfoKey": "1volc18/1volc18-1xiyzkj.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/9b22919a-c370-4795-9e23-4d18aeed65a4.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "9b22919a-c370-4795-9e23-4d18aeed65a4.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1volc18",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "fts6pi",
+  "CachePdfKey": "fts6pi/fts6pi-1k3kk2s.pdf",
+  "CacheXpzKey": "fts6pi/fts6pi-wn3vdt.xpz",
+  "CacheInfoKey": "fts6pi/fts6pi-wn3vdt.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/38d4e1ea-dabb-488f-8933-4ecf2d00f2b8.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "38d4e1ea-dabb-488f-8933-4ecf2d00f2b8.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "fts6pi",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

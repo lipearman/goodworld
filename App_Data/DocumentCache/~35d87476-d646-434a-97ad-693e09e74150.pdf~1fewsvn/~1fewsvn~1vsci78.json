@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "1fewsvn",
+  "CachePdfKey": "1fewsvn/1fewsvn-1k3kk2s.pdf",
+  "CacheXpzKey": "1fewsvn/1fewsvn-1vsci78.xpz",
+  "CacheInfoKey": "1fewsvn/1fewsvn-1vsci78.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/35d87476-d646-434a-97ad-693e09e74150.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "35d87476-d646-434a-97ad-693e09e74150.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1fewsvn",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

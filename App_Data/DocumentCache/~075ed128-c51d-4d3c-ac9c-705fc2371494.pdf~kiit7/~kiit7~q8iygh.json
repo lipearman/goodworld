@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "kiit7",
+  "CachePdfKey": "kiit7/kiit7-1k3kk2s.pdf",
+  "CacheXpzKey": "kiit7/kiit7-q8iygh.xpz",
+  "CacheInfoKey": "kiit7/kiit7-q8iygh.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/075ed128-c51d-4d3c-ac9c-705fc2371494.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "075ed128-c51d-4d3c-ac9c-705fc2371494.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "kiit7",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "kzus5w",
+  "CachePdfKey": "kzus5w/kzus5w-1k3kk2s.pdf",
+  "CacheXpzKey": "kzus5w/kzus5w-voh8dy.xpz",
+  "CacheInfoKey": "kzus5w/kzus5w-voh8dy.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/982e7a7d-8d68-44c2-b0a5-a5ec0df59a4b.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "982e7a7d-8d68-44c2-b0a5-a5ec0df59a4b.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "kzus5w",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

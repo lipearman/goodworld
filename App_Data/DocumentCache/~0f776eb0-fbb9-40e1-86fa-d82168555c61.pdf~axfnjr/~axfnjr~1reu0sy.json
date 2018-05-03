@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "axfnjr",
+  "CachePdfKey": "axfnjr/axfnjr-1k3kk2s.pdf",
+  "CacheXpzKey": "axfnjr/axfnjr-1reu0sy.xpz",
+  "CacheInfoKey": "axfnjr/axfnjr-1reu0sy.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/0f776eb0-fbb9-40e1-86fa-d82168555c61.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "0f776eb0-fbb9-40e1-86fa-d82168555c61.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "axfnjr",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

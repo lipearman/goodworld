@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "ej06ou",
+  "CachePdfKey": "ej06ou/ej06ou-1k3kk2s.pdf",
+  "CacheXpzKey": "ej06ou/ej06ou-eqrgfp.xpz",
+  "CacheInfoKey": "ej06ou/ej06ou-eqrgfp.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/d8564d4b-976e-45b2-82d8-ae4de844d5b3.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "d8564d4b-976e-45b2-82d8-ae4de844d5b3.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "ej06ou",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

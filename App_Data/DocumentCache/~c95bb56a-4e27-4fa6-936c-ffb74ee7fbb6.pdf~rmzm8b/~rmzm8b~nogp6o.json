@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "rmzm8b",
+  "CachePdfKey": "rmzm8b/rmzm8b-1k3kk2s.pdf",
+  "CacheXpzKey": "rmzm8b/rmzm8b-nogp6o.xpz",
+  "CacheInfoKey": "rmzm8b/rmzm8b-nogp6o.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/c95bb56a-4e27-4fa6-936c-ffb74ee7fbb6.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "c95bb56a-4e27-4fa6-936c-ffb74ee7fbb6.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "rmzm8b",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "mwi13h",
+  "CachePdfKey": "mwi13h/mwi13h-1k3kk2s.pdf",
+  "CacheXpzKey": "mwi13h/mwi13h-lp5xw1.xpz",
+  "CacheInfoKey": "mwi13h/mwi13h-lp5xw1.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/24b7fe94-aead-4c7d-85ec-d5f38c354b3a.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "24b7fe94-aead-4c7d-85ec-d5f38c354b3a.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "mwi13h",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

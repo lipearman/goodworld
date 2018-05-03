@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "18ampm5",
+  "CachePdfKey": "18ampm5/18ampm5-1k3kk2s.pdf",
+  "CacheXpzKey": "18ampm5/18ampm5-1sy6g5s.xpz",
+  "CacheInfoKey": "18ampm5/18ampm5-1sy6g5s.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/b340e0e9-734b-4329-ab35-6d0161e2b226.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "b340e0e9-734b-4329-ab35-6d0161e2b226.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "18ampm5",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

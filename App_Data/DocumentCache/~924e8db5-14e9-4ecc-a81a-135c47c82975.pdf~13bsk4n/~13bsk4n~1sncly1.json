@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "13bsk4n",
+  "CachePdfKey": "13bsk4n/13bsk4n-1k3kk2s.pdf",
+  "CacheXpzKey": "13bsk4n/13bsk4n-1sncly1.xpz",
+  "CacheInfoKey": "13bsk4n/13bsk4n-1sncly1.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/924e8db5-14e9-4ecc-a81a-135c47c82975.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "924e8db5-14e9-4ecc-a81a-135c47c82975.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "13bsk4n",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "zvtdky",
+  "CachePdfKey": "zvtdky/zvtdky-1k3kk2s.pdf",
+  "CacheXpzKey": "zvtdky/zvtdky-1mtw4kv.xpz",
+  "CacheInfoKey": "zvtdky/zvtdky-1mtw4kv.json",
+  "CacheCopyKey": null,
+  "Document": "~/UploadFiles/4289eab0-d968-423b-9bd3-0475f37af0de.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "4289eab0-d968-423b-9bd3-0475f37af0de.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "zvtdky",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

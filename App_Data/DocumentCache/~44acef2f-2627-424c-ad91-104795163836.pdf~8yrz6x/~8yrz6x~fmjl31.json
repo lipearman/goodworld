@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "8yrz6x",
+  "CachePdfKey": "8yrz6x/8yrz6x-1k3kk2s.pdf",
+  "CacheXpzKey": "8yrz6x/8yrz6x-fmjl31.xpz",
+  "CacheInfoKey": "8yrz6x/8yrz6x-fmjl31.json",
+  "CacheCopyKey": null,
+  "Document": "~/UploadFiles/44acef2f-2627-424c-ad91-104795163836.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "44acef2f-2627-424c-ad91-104795163836.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "8yrz6x",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

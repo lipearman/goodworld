@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "dm28uz",
+  "CachePdfKey": "dm28uz/dm28uz-1k3kk2s.pdf",
+  "CacheXpzKey": "dm28uz/dm28uz-1au7d4g.xpz",
+  "CacheInfoKey": "dm28uz/dm28uz-1au7d4g.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/dd8d1eb5-00b6-4bb6-bc94-25c8a379bce6.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "dd8d1eb5-00b6-4bb6-bc94-25c8a379bce6.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "dm28uz",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}
