@@ -10,7 +10,7 @@
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
-    ClientInstanceName="taskGrid"
+    ClientInstanceName="taskGrid" OnInitNewRow="TaskGrid_InitNewRow"
     AutoGenerateColumns="False"
     KeyFieldName="ID" SettingsBehavior-ConfirmDelete="true"
     SettingsBehavior-AllowDragDrop="true"

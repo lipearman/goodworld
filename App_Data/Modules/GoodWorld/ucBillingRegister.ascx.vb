@@ -291,4 +291,8 @@ Partial Class Modules_ucBillingRegister
     '    Thread.CurrentThread.CurrentCulture = ci
     '    Thread.CurrentThread.CurrentUICulture = ci
     'End Sub
+    Protected Sub TaskGrid_InitNewRow(sender As Object, e As ASPxDataInitNewRowEventArgs)
+        e.NewValues("TaxP") = 0.00
+        e.NewValues("DiscountP") = 0.00
+    End Sub
 End Class
