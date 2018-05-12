@@ -16,23 +16,10 @@ Imports DevExpress.Web.Data
 Imports DevExpress.Web.Bootstrap
 Imports DevExpress.XtraPrinting
 Imports DevExpress.Export
-Imports Microsoft.Reporting.WebForms
 
-
-Imports DevExpress.Spreadsheet
-Imports DevExpress.XtraRichEdit
-Imports DevExpress.ClipboardSource.SpreadsheetML
-Imports DevExpress.XtraPrintingLinks
-
-
-Partial Class Modules_ucReportBilling
+Partial Class Modules_ucBillingReceive
     Inherits PortalModuleControl
     Protected PageName As String
-
-
-
-
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim portalSettings As PortalSettings = CType(HttpContext.Current.Items(webconfig._PortalContextName), PortalSettings)
         If Not PortalSecurity.IsInRoles(portalSettings.ActiveTab.AuthorizedRoles, portalSettings.ActiveTab.TabId) = True Then
@@ -40,6 +27,9 @@ Partial Class Modules_ucReportBilling
         End If
         PageName = portalSettings.ActiveTab.TabName
 
+        Session("PortalId") = webconfig._PortalID
+
+        SqlDataSource_BillingDetails.UpdateParameters("UserName").DefaultValue = HttpContext.Current.User.Identity.Name
     End Sub
 
 
@@ -52,7 +42,6 @@ Partial Class Modules_ucReportBilling
                 TaskGrid.ExportXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
         End Select
     End Sub
-
 
 
 

@@ -32,6 +32,7 @@ Partial Class Modules_ucBillingRegister
         Session("PortalId") = webconfig._PortalID
 
         SqlDataSource_BillingRegister.InsertParameters("UserName").DefaultValue = HttpContext.Current.User.Identity.Name
+        SqlDataSource_BillingRegister.UpdateParameters("UserName").DefaultValue = HttpContext.Current.User.Identity.Name
 
 
 
@@ -203,6 +204,7 @@ Partial Class Modules_ucBillingRegister
         edit(_BillingID)
 
         Using dc As New DataClasses_GoodWorldExt()
+
             Dim _BillingDetails = (From c In dc.tblBillingRegisters Where c.ID.Equals(_BillingID)).FirstOrDefault()
 
 
@@ -211,25 +213,39 @@ Partial Class Modules_ucBillingRegister
             sb.Append(" FROM v_BillingDetails ")
             sb.AppendFormat(" where BillingID='{0}' ", _BillingDetails.ID)
 
-            Dim ReportFile As String = ""
-            If _BillingDetails.BillingType = "C" Then
-                ReportFile = "rptBilling1.rdl"
-            Else
-                ReportFile = "rptBilling2.rdl"
-            End If
 
+            Dim ReportViewer1 As New ReportViewer()
             Dim ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
 
-            'Session("Report1") = ds.Tables(0)
-            Dim ReportViewer1 As New ReportViewer()
-            ReportViewer1.Reset()
-            ReportViewer1.LocalReport.Dispose()
-            ReportViewer1.LocalReport.DataSources.Clear()
-            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
-            ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds.Tables(0)))
-            ReportViewer1.LocalReport.SetParameters(New ReportParameter("TaxP", _BillingDetails.TaxP / 100))
-            ReportViewer1.LocalReport.SetParameters(New ReportParameter("DiscountP", _BillingDetails.DiscountP / 100))
-            ReportViewer1.LocalReport.Refresh()
+            Dim ReportFile As String = ""
+            If _BillingDetails.BillingType = "C" Then
+                ReportViewer1.Reset()
+                ReportViewer1.LocalReport.Dispose()
+                ReportViewer1.LocalReport.DataSources.Clear()
+                ReportFile = "rptBilling1.rdl"
+                ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
+                ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds.Tables(0)))
+
+                If Not String.IsNullOrEmpty(_BillingDetails.TaxID) Then
+                    ReportViewer1.LocalReport.SetParameters(New ReportParameter("TaxID", _BillingDetails.TaxID))
+                Else
+                    ReportViewer1.LocalReport.SetParameters(New ReportParameter("TaxID", ""))
+                End If
+
+
+                ReportViewer1.LocalReport.SetParameters(New ReportParameter("TaxP", _BillingDetails.TaxP / 100))
+                ReportViewer1.LocalReport.SetParameters(New ReportParameter("DiscountP", _BillingDetails.DiscountP / 100))
+                ReportViewer1.LocalReport.Refresh()
+            Else
+                ReportFile = "rptBilling2.rdl"
+                ReportViewer1.Reset()
+                ReportViewer1.LocalReport.Dispose()
+                ReportViewer1.LocalReport.DataSources.Clear()
+                ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
+                ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds.Tables(0)))
+                ReportViewer1.LocalReport.SetParameters(New ReportParameter("DiscountP", _BillingDetails.DiscountP / 100))
+                ReportViewer1.LocalReport.Refresh()
+            End If
 
             Dim warnings As Warning()
             Dim streamids As String()

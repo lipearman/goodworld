@@ -121,17 +121,35 @@ Partial Public Class DataClasses_GoodWorldDataContext
     End Sub
   Partial Private Sub DeletetblBillingDetail(instance As tblBillingDetail)
     End Sub
+  Partial Private Sub InserttblPaymentRegister(instance As tblPaymentRegister)
+    End Sub
+  Partial Private Sub UpdatetblPaymentRegister(instance As tblPaymentRegister)
+    End Sub
+  Partial Private Sub DeletetblPaymentRegister(instance As tblPaymentRegister)
+    End Sub
   Partial Private Sub InserttblBillingRegister(instance As tblBillingRegister)
     End Sub
   Partial Private Sub UpdatetblBillingRegister(instance As tblBillingRegister)
     End Sub
   Partial Private Sub DeletetblBillingRegister(instance As tblBillingRegister)
     End Sub
-  Partial Private Sub InserttblPaymentRegister(instance As tblPaymentRegister)
+  Partial Private Sub InserttblReceiptDetail(instance As tblReceiptDetail)
     End Sub
-  Partial Private Sub UpdatetblPaymentRegister(instance As tblPaymentRegister)
+  Partial Private Sub UpdatetblReceiptDetail(instance As tblReceiptDetail)
     End Sub
-  Partial Private Sub DeletetblPaymentRegister(instance As tblPaymentRegister)
+  Partial Private Sub DeletetblReceiptDetail(instance As tblReceiptDetail)
+    End Sub
+  Partial Private Sub InserttblReceiptRegister(instance As tblReceiptRegister)
+    End Sub
+  Partial Private Sub UpdatetblReceiptRegister(instance As tblReceiptRegister)
+    End Sub
+  Partial Private Sub DeletetblReceiptRegister(instance As tblReceiptRegister)
+    End Sub
+  Partial Private Sub InserttblReceiptPremium(instance As tblReceiptPremium)
+    End Sub
+  Partial Private Sub UpdatetblReceiptPremium(instance As tblReceiptPremium)
+    End Sub
+  Partial Private Sub DeletetblReceiptPremium(instance As tblReceiptPremium)
     End Sub
   #End Region
 	
@@ -244,12 +262,6 @@ Partial Public Class DataClasses_GoodWorldDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property v_BillingRegisters() As System.Data.Linq.Table(Of v_BillingRegister)
-		Get
-			Return Me.GetTable(Of v_BillingRegister)
-		End Get
-	End Property
-	
 	Public ReadOnly Property v_BillingDetails() As System.Data.Linq.Table(Of v_BillingDetail)
 		Get
 			Return Me.GetTable(Of v_BillingDetail)
@@ -259,12 +271,6 @@ Partial Public Class DataClasses_GoodWorldDataContext
 	Public ReadOnly Property tblBillingDetails() As System.Data.Linq.Table(Of tblBillingDetail)
 		Get
 			Return Me.GetTable(Of tblBillingDetail)
-		End Get
-	End Property
-	
-	Public ReadOnly Property tblBillingRegisters() As System.Data.Linq.Table(Of tblBillingRegister)
-		Get
-			Return Me.GetTable(Of tblBillingRegister)
 		End Get
 	End Property
 	
@@ -283,6 +289,42 @@ Partial Public Class DataClasses_GoodWorldDataContext
 	Public ReadOnly Property v_PaymentRegisters() As System.Data.Linq.Table(Of v_PaymentRegister)
 		Get
 			Return Me.GetTable(Of v_PaymentRegister)
+		End Get
+	End Property
+	
+	Public ReadOnly Property tblBillingRegisters() As System.Data.Linq.Table(Of tblBillingRegister)
+		Get
+			Return Me.GetTable(Of tblBillingRegister)
+		End Get
+	End Property
+	
+	Public ReadOnly Property v_BillingRegisters() As System.Data.Linq.Table(Of v_BillingRegister)
+		Get
+			Return Me.GetTable(Of v_BillingRegister)
+		End Get
+	End Property
+	
+	Public ReadOnly Property tblReceiptDetails() As System.Data.Linq.Table(Of tblReceiptDetail)
+		Get
+			Return Me.GetTable(Of tblReceiptDetail)
+		End Get
+	End Property
+	
+	Public ReadOnly Property tblReceiptRegisters() As System.Data.Linq.Table(Of tblReceiptRegister)
+		Get
+			Return Me.GetTable(Of tblReceiptRegister)
+		End Get
+	End Property
+	
+	Public ReadOnly Property v_ReceiptRegisters() As System.Data.Linq.Table(Of v_ReceiptRegister)
+		Get
+			Return Me.GetTable(Of v_ReceiptRegister)
+		End Get
+	End Property
+	
+	Public ReadOnly Property tblReceiptPremiums() As System.Data.Linq.Table(Of tblReceiptPremium)
+		Get
+			Return Me.GetTable(Of tblReceiptPremium)
 		End Get
 	End Property
 End Class
@@ -4890,7 +4932,7 @@ Partial Public Class tblXtraReport
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LayoutData", DbType:="VarBinary(MAX)", CanBeNull:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LayoutData", DbType:="VarBinary(MAX)", UpdateCheck:=UpdateCheck.Never)>  _
 	Public Property LayoutData() As System.Data.Linq.Binary
 		Get
 			Return Me._LayoutData
@@ -5003,155 +5045,6 @@ Partial Public Class tblXtraReport
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_BillingRegister")>  _
-Partial Public Class v_BillingRegister
-	
-	Private _ID As Integer
-	
-	Private _BillingNo As String
-	
-	Private _BillingName As String
-	
-	Private _BillingType As String
-	
-	Private _TaxP As System.Nullable(Of Decimal)
-	
-	Private _DiscountP As System.Nullable(Of Decimal)
-	
-	Private _CreateDate As System.Nullable(Of Date)
-	
-	Private _CreateBy As String
-	
-	Private _ModifyDate As System.Nullable(Of Date)
-	
-	Private _ModifyBy As String
-	
-	Public Sub New()
-		MyBase.New
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.Always, DbType:="Int NOT NULL IDENTITY", IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me._ID = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false)>  _
-	Public Property BillingNo() As String
-		Get
-			Return Me._BillingNo
-		End Get
-		Set
-			If (String.Equals(Me._BillingNo, value) = false) Then
-				Me._BillingNo = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingName", DbType:="NVarChar(255)")>  _
-	Public Property BillingName() As String
-		Get
-			Return Me._BillingName
-		End Get
-		Set
-			If (String.Equals(Me._BillingName, value) = false) Then
-				Me._BillingName = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingType", DbType:="NVarChar(50)")>  _
-	Public Property BillingType() As String
-		Get
-			Return Me._BillingType
-		End Get
-		Set
-			If (String.Equals(Me._BillingType, value) = false) Then
-				Me._BillingType = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxP", DbType:="Decimal(18,2)")>  _
-	Public Property TaxP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TaxP
-		End Get
-		Set
-			If (Me._TaxP.Equals(value) = false) Then
-				Me._TaxP = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiscountP", DbType:="Decimal(18,2)")>  _
-	Public Property DiscountP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._DiscountP
-		End Get
-		Set
-			If (Me._DiscountP.Equals(value) = false) Then
-				Me._DiscountP = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
-	Public Property CreateDate() As System.Nullable(Of Date)
-		Get
-			Return Me._CreateDate
-		End Get
-		Set
-			If (Me._CreateDate.Equals(value) = false) Then
-				Me._CreateDate = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
-	Public Property CreateBy() As String
-		Get
-			Return Me._CreateBy
-		End Get
-		Set
-			If (String.Equals(Me._CreateBy, value) = false) Then
-				Me._CreateBy = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
-	Public Property ModifyDate() As System.Nullable(Of Date)
-		Get
-			Return Me._ModifyDate
-		End Get
-		Set
-			If (Me._ModifyDate.Equals(value) = false) Then
-				Me._ModifyDate = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
-	Public Property ModifyBy() As String
-		Get
-			Return Me._ModifyBy
-		End Get
-		Set
-			If (String.Equals(Me._ModifyBy, value) = false) Then
-				Me._ModifyBy = value
-			End If
-		End Set
-	End Property
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_BillingDetails")>  _
@@ -5706,266 +5599,6 @@ Partial Public Class tblBillingDetail
 				Me._PolicyID = value
 				Me.SendPropertyChanged("PolicyID")
 				Me.OnPolicyIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
-	Public Property CreateDate() As System.Nullable(Of Date)
-		Get
-			Return Me._CreateDate
-		End Get
-		Set
-			If (Me._CreateDate.Equals(value) = false) Then
-				Me.OnCreateDateChanging(value)
-				Me.SendPropertyChanging
-				Me._CreateDate = value
-				Me.SendPropertyChanged("CreateDate")
-				Me.OnCreateDateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
-	Public Property CreateBy() As String
-		Get
-			Return Me._CreateBy
-		End Get
-		Set
-			If (String.Equals(Me._CreateBy, value) = false) Then
-				Me.OnCreateByChanging(value)
-				Me.SendPropertyChanging
-				Me._CreateBy = value
-				Me.SendPropertyChanged("CreateBy")
-				Me.OnCreateByChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
-	Public Property ModifyDate() As System.Nullable(Of Date)
-		Get
-			Return Me._ModifyDate
-		End Get
-		Set
-			If (Me._ModifyDate.Equals(value) = false) Then
-				Me.OnModifyDateChanging(value)
-				Me.SendPropertyChanging
-				Me._ModifyDate = value
-				Me.SendPropertyChanged("ModifyDate")
-				Me.OnModifyDateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
-	Public Property ModifyBy() As String
-		Get
-			Return Me._ModifyBy
-		End Get
-		Set
-			If (String.Equals(Me._ModifyBy, value) = false) Then
-				Me.OnModifyByChanging(value)
-				Me.SendPropertyChanging
-				Me._ModifyBy = value
-				Me.SendPropertyChanged("ModifyBy")
-				Me.OnModifyByChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblBillingRegister")>  _
-Partial Public Class tblBillingRegister
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _BillingNo As String
-	
-	Private _BillingName As String
-	
-	Private _BillingType As String
-	
-	Private _TaxP As System.Nullable(Of Decimal)
-	
-	Private _DiscountP As System.Nullable(Of Decimal)
-	
-	Private _CreateDate As System.Nullable(Of Date)
-	
-	Private _CreateBy As String
-	
-	Private _ModifyDate As System.Nullable(Of Date)
-	
-	Private _ModifyBy As String
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnBillingNoChanging(value As String)
-    End Sub
-    Partial Private Sub OnBillingNoChanged()
-    End Sub
-    Partial Private Sub OnBillingNameChanging(value As String)
-    End Sub
-    Partial Private Sub OnBillingNameChanged()
-    End Sub
-    Partial Private Sub OnBillingTypeChanging(value As String)
-    End Sub
-    Partial Private Sub OnBillingTypeChanged()
-    End Sub
-    Partial Private Sub OnTaxPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTaxPChanged()
-    End Sub
-    Partial Private Sub OnDiscountPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnDiscountPChanged()
-    End Sub
-    Partial Private Sub OnCreateDateChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnCreateDateChanged()
-    End Sub
-    Partial Private Sub OnCreateByChanging(value As String)
-    End Sub
-    Partial Private Sub OnCreateByChanged()
-    End Sub
-    Partial Private Sub OnModifyDateChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnModifyDateChanged()
-    End Sub
-    Partial Private Sub OnModifyByChanging(value As String)
-    End Sub
-    Partial Private Sub OnModifyByChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.Always, DbType:="Int NOT NULL IDENTITY", IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false, IsPrimaryKey:=true)>  _
-	Public Property BillingNo() As String
-		Get
-			Return Me._BillingNo
-		End Get
-		Set
-			If (String.Equals(Me._BillingNo, value) = false) Then
-				Me.OnBillingNoChanging(value)
-				Me.SendPropertyChanging
-				Me._BillingNo = value
-				Me.SendPropertyChanged("BillingNo")
-				Me.OnBillingNoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingName", DbType:="NVarChar(255)")>  _
-	Public Property BillingName() As String
-		Get
-			Return Me._BillingName
-		End Get
-		Set
-			If (String.Equals(Me._BillingName, value) = false) Then
-				Me.OnBillingNameChanging(value)
-				Me.SendPropertyChanging
-				Me._BillingName = value
-				Me.SendPropertyChanged("BillingName")
-				Me.OnBillingNameChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingType", DbType:="NVarChar(2)")>  _
-	Public Property BillingType() As String
-		Get
-			Return Me._BillingType
-		End Get
-		Set
-			If (String.Equals(Me._BillingType, value) = false) Then
-				Me.OnBillingTypeChanging(value)
-				Me.SendPropertyChanging
-				Me._BillingType = value
-				Me.SendPropertyChanged("BillingType")
-				Me.OnBillingTypeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxP", DbType:="Decimal(18,2)")>  _
-	Public Property TaxP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TaxP
-		End Get
-		Set
-			If (Me._TaxP.Equals(value) = false) Then
-				Me.OnTaxPChanging(value)
-				Me.SendPropertyChanging
-				Me._TaxP = value
-				Me.SendPropertyChanged("TaxP")
-				Me.OnTaxPChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiscountP", DbType:="Decimal(18,2)")>  _
-	Public Property DiscountP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._DiscountP
-		End Get
-		Set
-			If (Me._DiscountP.Equals(value) = false) Then
-				Me.OnDiscountPChanging(value)
-				Me.SendPropertyChanging
-				Me._DiscountP = value
-				Me.SendPropertyChanged("DiscountP")
-				Me.OnDiscountPChanged
 			End If
 		End Set
 	End Property
@@ -7363,4 +6996,1350 @@ Partial Public Class v_PaymentRegister
 			End If
 		End Set
 	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblBillingRegister")>  _
+Partial Public Class tblBillingRegister
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _BillingNo As String
+	
+	Private _BillingName As String
+	
+	Private _BillingType As String
+	
+	Private _TaxID As String
+	
+	Private _TaxP As System.Nullable(Of Decimal)
+	
+	Private _DiscountP As System.Nullable(Of Decimal)
+	
+	Private _CreateDate As System.Nullable(Of Date)
+	
+	Private _CreateBy As String
+	
+	Private _ModifyDate As System.Nullable(Of Date)
+	
+	Private _ModifyBy As String
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnBillingNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnBillingNoChanged()
+    End Sub
+    Partial Private Sub OnBillingNameChanging(value As String)
+    End Sub
+    Partial Private Sub OnBillingNameChanged()
+    End Sub
+    Partial Private Sub OnBillingTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnBillingTypeChanged()
+    End Sub
+    Partial Private Sub OnTaxIDChanging(value As String)
+    End Sub
+    Partial Private Sub OnTaxIDChanged()
+    End Sub
+    Partial Private Sub OnTaxPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTaxPChanged()
+    End Sub
+    Partial Private Sub OnDiscountPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnDiscountPChanged()
+    End Sub
+    Partial Private Sub OnCreateDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnCreateDateChanged()
+    End Sub
+    Partial Private Sub OnCreateByChanging(value As String)
+    End Sub
+    Partial Private Sub OnCreateByChanged()
+    End Sub
+    Partial Private Sub OnModifyDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnModifyDateChanged()
+    End Sub
+    Partial Private Sub OnModifyByChanging(value As String)
+    End Sub
+    Partial Private Sub OnModifyByChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.Always, DbType:="Int NOT NULL IDENTITY", IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false, IsPrimaryKey:=true)>  _
+	Public Property BillingNo() As String
+		Get
+			Return Me._BillingNo
+		End Get
+		Set
+			If (String.Equals(Me._BillingNo, value) = false) Then
+				Me.OnBillingNoChanging(value)
+				Me.SendPropertyChanging
+				Me._BillingNo = value
+				Me.SendPropertyChanged("BillingNo")
+				Me.OnBillingNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingName", DbType:="NVarChar(255)")>  _
+	Public Property BillingName() As String
+		Get
+			Return Me._BillingName
+		End Get
+		Set
+			If (String.Equals(Me._BillingName, value) = false) Then
+				Me.OnBillingNameChanging(value)
+				Me.SendPropertyChanging
+				Me._BillingName = value
+				Me.SendPropertyChanged("BillingName")
+				Me.OnBillingNameChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingType", DbType:="NVarChar(2)")>  _
+	Public Property BillingType() As String
+		Get
+			Return Me._BillingType
+		End Get
+		Set
+			If (String.Equals(Me._BillingType, value) = false) Then
+				Me.OnBillingTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._BillingType = value
+				Me.SendPropertyChanged("BillingType")
+				Me.OnBillingTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxID", DbType:="NVarChar(50)")>  _
+	Public Property TaxID() As String
+		Get
+			Return Me._TaxID
+		End Get
+		Set
+			If (String.Equals(Me._TaxID, value) = false) Then
+				Me.OnTaxIDChanging(value)
+				Me.SendPropertyChanging
+				Me._TaxID = value
+				Me.SendPropertyChanged("TaxID")
+				Me.OnTaxIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxP", DbType:="Decimal(18,2)")>  _
+	Public Property TaxP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TaxP
+		End Get
+		Set
+			If (Me._TaxP.Equals(value) = false) Then
+				Me.OnTaxPChanging(value)
+				Me.SendPropertyChanging
+				Me._TaxP = value
+				Me.SendPropertyChanged("TaxP")
+				Me.OnTaxPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiscountP", DbType:="Decimal(18,2)")>  _
+	Public Property DiscountP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._DiscountP
+		End Get
+		Set
+			If (Me._DiscountP.Equals(value) = false) Then
+				Me.OnDiscountPChanging(value)
+				Me.SendPropertyChanging
+				Me._DiscountP = value
+				Me.SendPropertyChanged("DiscountP")
+				Me.OnDiscountPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
+	Public Property CreateDate() As System.Nullable(Of Date)
+		Get
+			Return Me._CreateDate
+		End Get
+		Set
+			If (Me._CreateDate.Equals(value) = false) Then
+				Me.OnCreateDateChanging(value)
+				Me.SendPropertyChanging
+				Me._CreateDate = value
+				Me.SendPropertyChanged("CreateDate")
+				Me.OnCreateDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
+	Public Property CreateBy() As String
+		Get
+			Return Me._CreateBy
+		End Get
+		Set
+			If (String.Equals(Me._CreateBy, value) = false) Then
+				Me.OnCreateByChanging(value)
+				Me.SendPropertyChanging
+				Me._CreateBy = value
+				Me.SendPropertyChanged("CreateBy")
+				Me.OnCreateByChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
+	Public Property ModifyDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ModifyDate
+		End Get
+		Set
+			If (Me._ModifyDate.Equals(value) = false) Then
+				Me.OnModifyDateChanging(value)
+				Me.SendPropertyChanging
+				Me._ModifyDate = value
+				Me.SendPropertyChanged("ModifyDate")
+				Me.OnModifyDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
+	Public Property ModifyBy() As String
+		Get
+			Return Me._ModifyBy
+		End Get
+		Set
+			If (String.Equals(Me._ModifyBy, value) = false) Then
+				Me.OnModifyByChanging(value)
+				Me.SendPropertyChanging
+				Me._ModifyBy = value
+				Me.SendPropertyChanged("ModifyBy")
+				Me.OnModifyByChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_BillingRegister")>  _
+Partial Public Class v_BillingRegister
+	
+	Private _ID As Integer
+	
+	Private _BillingNo As String
+	
+	Private _BillingName As String
+	
+	Private _BillingType As String
+	
+	Private _TaxID As String
+	
+	Private _TaxP As System.Nullable(Of Decimal)
+	
+	Private _DiscountP As System.Nullable(Of Decimal)
+	
+	Private _CreateDate As System.Nullable(Of Date)
+	
+	Private _CreateBy As String
+	
+	Private _ModifyDate As System.Nullable(Of Date)
+	
+	Private _ModifyBy As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.Always, DbType:="Int NOT NULL IDENTITY", IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me._ID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property BillingNo() As String
+		Get
+			Return Me._BillingNo
+		End Get
+		Set
+			If (String.Equals(Me._BillingNo, value) = false) Then
+				Me._BillingNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingName", DbType:="NVarChar(255)")>  _
+	Public Property BillingName() As String
+		Get
+			Return Me._BillingName
+		End Get
+		Set
+			If (String.Equals(Me._BillingName, value) = false) Then
+				Me._BillingName = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BillingType", DbType:="NVarChar(50)")>  _
+	Public Property BillingType() As String
+		Get
+			Return Me._BillingType
+		End Get
+		Set
+			If (String.Equals(Me._BillingType, value) = false) Then
+				Me._BillingType = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxID", DbType:="NVarChar(50)")>  _
+	Public Property TaxID() As String
+		Get
+			Return Me._TaxID
+		End Get
+		Set
+			If (String.Equals(Me._TaxID, value) = false) Then
+				Me._TaxID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxP", DbType:="Decimal(18,2)")>  _
+	Public Property TaxP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TaxP
+		End Get
+		Set
+			If (Me._TaxP.Equals(value) = false) Then
+				Me._TaxP = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiscountP", DbType:="Decimal(18,2)")>  _
+	Public Property DiscountP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._DiscountP
+		End Get
+		Set
+			If (Me._DiscountP.Equals(value) = false) Then
+				Me._DiscountP = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
+	Public Property CreateDate() As System.Nullable(Of Date)
+		Get
+			Return Me._CreateDate
+		End Get
+		Set
+			If (Me._CreateDate.Equals(value) = false) Then
+				Me._CreateDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
+	Public Property CreateBy() As String
+		Get
+			Return Me._CreateBy
+		End Get
+		Set
+			If (String.Equals(Me._CreateBy, value) = false) Then
+				Me._CreateBy = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
+	Public Property ModifyDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ModifyDate
+		End Get
+		Set
+			If (Me._ModifyDate.Equals(value) = false) Then
+				Me._ModifyDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
+	Public Property ModifyBy() As String
+		Get
+			Return Me._ModifyBy
+		End Get
+		Set
+			If (String.Equals(Me._ModifyBy, value) = false) Then
+				Me._ModifyBy = value
+			End If
+		End Set
+	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblReceiptDetails")>  _
+Partial Public Class tblReceiptDetail
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _ReceiptID As System.Nullable(Of Integer)
+	
+	Private _ReceiptDetails As String
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnReceiptIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnReceiptIDChanged()
+    End Sub
+    Partial Private Sub OnReceiptDetailsChanging(value As String)
+    End Sub
+    Partial Private Sub OnReceiptDetailsChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptID", DbType:="Int")>  _
+	Public Property ReceiptID() As System.Nullable(Of Integer)
+		Get
+			Return Me._ReceiptID
+		End Get
+		Set
+			If (Me._ReceiptID.Equals(value) = false) Then
+				Me.OnReceiptIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptID = value
+				Me.SendPropertyChanged("ReceiptID")
+				Me.OnReceiptIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptDetails", DbType:="NVarChar(255)")>  _
+	Public Property ReceiptDetails() As String
+		Get
+			Return Me._ReceiptDetails
+		End Get
+		Set
+			If (String.Equals(Me._ReceiptDetails, value) = false) Then
+				Me.OnReceiptDetailsChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptDetails = value
+				Me.SendPropertyChanged("ReceiptDetails")
+				Me.OnReceiptDetailsChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblReceiptRegister")>  _
+Partial Public Class tblReceiptRegister
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _ReceiptNo As String
+	
+	Private _TaxNo As String
+	
+	Private _InsurerCode As String
+	
+	Private _ReceiveType As String
+	
+	Private _ReceiveDate As System.Nullable(Of Date)
+	
+	Private _ChequeNo As String
+	
+	Private _ChequeBranch As String
+	
+	Private _CreateDate As System.Nullable(Of Date)
+	
+	Private _CreateBy As String
+	
+	Private _ModifyDate As System.Nullable(Of Date)
+	
+	Private _ModifyBy As String
+	
+	Private _Address1 As String
+	
+	Private _Address2 As String
+	
+	Private _Address3 As String
+	
+	Private _Brach As String
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnReceiptNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnReceiptNoChanged()
+    End Sub
+    Partial Private Sub OnTaxNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnTaxNoChanged()
+    End Sub
+    Partial Private Sub OnInsurerCodeChanging(value As String)
+    End Sub
+    Partial Private Sub OnInsurerCodeChanged()
+    End Sub
+    Partial Private Sub OnReceiveTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnReceiveTypeChanged()
+    End Sub
+    Partial Private Sub OnReceiveDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnReceiveDateChanged()
+    End Sub
+    Partial Private Sub OnChequeNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnChequeNoChanged()
+    End Sub
+    Partial Private Sub OnChequeBranchChanging(value As String)
+    End Sub
+    Partial Private Sub OnChequeBranchChanged()
+    End Sub
+    Partial Private Sub OnCreateDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnCreateDateChanged()
+    End Sub
+    Partial Private Sub OnCreateByChanging(value As String)
+    End Sub
+    Partial Private Sub OnCreateByChanged()
+    End Sub
+    Partial Private Sub OnModifyDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnModifyDateChanged()
+    End Sub
+    Partial Private Sub OnModifyByChanging(value As String)
+    End Sub
+    Partial Private Sub OnModifyByChanged()
+    End Sub
+    Partial Private Sub OnAddress1Changing(value As String)
+    End Sub
+    Partial Private Sub OnAddress1Changed()
+    End Sub
+    Partial Private Sub OnAddress2Changing(value As String)
+    End Sub
+    Partial Private Sub OnAddress2Changed()
+    End Sub
+    Partial Private Sub OnAddress3Changing(value As String)
+    End Sub
+    Partial Private Sub OnAddress3Changed()
+    End Sub
+    Partial Private Sub OnBrachChanging(value As String)
+    End Sub
+    Partial Private Sub OnBrachChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.Always, DbType:="Int NOT NULL IDENTITY", IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false, IsPrimaryKey:=true)>  _
+	Public Property ReceiptNo() As String
+		Get
+			Return Me._ReceiptNo
+		End Get
+		Set
+			If (String.Equals(Me._ReceiptNo, value) = false) Then
+				Me.OnReceiptNoChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptNo = value
+				Me.SendPropertyChanged("ReceiptNo")
+				Me.OnReceiptNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxNo", DbType:="NVarChar(50)")>  _
+	Public Property TaxNo() As String
+		Get
+			Return Me._TaxNo
+		End Get
+		Set
+			If (String.Equals(Me._TaxNo, value) = false) Then
+				Me.OnTaxNoChanging(value)
+				Me.SendPropertyChanging
+				Me._TaxNo = value
+				Me.SendPropertyChanged("TaxNo")
+				Me.OnTaxNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsurerCode", DbType:="NVarChar(50)")>  _
+	Public Property InsurerCode() As String
+		Get
+			Return Me._InsurerCode
+		End Get
+		Set
+			If (String.Equals(Me._InsurerCode, value) = false) Then
+				Me.OnInsurerCodeChanging(value)
+				Me.SendPropertyChanging
+				Me._InsurerCode = value
+				Me.SendPropertyChanged("InsurerCode")
+				Me.OnInsurerCodeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiveType", DbType:="NVarChar(50)")>  _
+	Public Property ReceiveType() As String
+		Get
+			Return Me._ReceiveType
+		End Get
+		Set
+			If (String.Equals(Me._ReceiveType, value) = false) Then
+				Me.OnReceiveTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiveType = value
+				Me.SendPropertyChanged("ReceiveType")
+				Me.OnReceiveTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiveDate", DbType:="Date")>  _
+	Public Property ReceiveDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ReceiveDate
+		End Get
+		Set
+			If (Me._ReceiveDate.Equals(value) = false) Then
+				Me.OnReceiveDateChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiveDate = value
+				Me.SendPropertyChanged("ReceiveDate")
+				Me.OnReceiveDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChequeNo", DbType:="NVarChar(50)")>  _
+	Public Property ChequeNo() As String
+		Get
+			Return Me._ChequeNo
+		End Get
+		Set
+			If (String.Equals(Me._ChequeNo, value) = false) Then
+				Me.OnChequeNoChanging(value)
+				Me.SendPropertyChanging
+				Me._ChequeNo = value
+				Me.SendPropertyChanged("ChequeNo")
+				Me.OnChequeNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChequeBranch", DbType:="NVarChar(50)")>  _
+	Public Property ChequeBranch() As String
+		Get
+			Return Me._ChequeBranch
+		End Get
+		Set
+			If (String.Equals(Me._ChequeBranch, value) = false) Then
+				Me.OnChequeBranchChanging(value)
+				Me.SendPropertyChanging
+				Me._ChequeBranch = value
+				Me.SendPropertyChanged("ChequeBranch")
+				Me.OnChequeBranchChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
+	Public Property CreateDate() As System.Nullable(Of Date)
+		Get
+			Return Me._CreateDate
+		End Get
+		Set
+			If (Me._CreateDate.Equals(value) = false) Then
+				Me.OnCreateDateChanging(value)
+				Me.SendPropertyChanging
+				Me._CreateDate = value
+				Me.SendPropertyChanged("CreateDate")
+				Me.OnCreateDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
+	Public Property CreateBy() As String
+		Get
+			Return Me._CreateBy
+		End Get
+		Set
+			If (String.Equals(Me._CreateBy, value) = false) Then
+				Me.OnCreateByChanging(value)
+				Me.SendPropertyChanging
+				Me._CreateBy = value
+				Me.SendPropertyChanged("CreateBy")
+				Me.OnCreateByChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
+	Public Property ModifyDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ModifyDate
+		End Get
+		Set
+			If (Me._ModifyDate.Equals(value) = false) Then
+				Me.OnModifyDateChanging(value)
+				Me.SendPropertyChanging
+				Me._ModifyDate = value
+				Me.SendPropertyChanged("ModifyDate")
+				Me.OnModifyDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
+	Public Property ModifyBy() As String
+		Get
+			Return Me._ModifyBy
+		End Get
+		Set
+			If (String.Equals(Me._ModifyBy, value) = false) Then
+				Me.OnModifyByChanging(value)
+				Me.SendPropertyChanging
+				Me._ModifyBy = value
+				Me.SendPropertyChanged("ModifyBy")
+				Me.OnModifyByChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address1", DbType:="NVarChar(255)")>  _
+	Public Property Address1() As String
+		Get
+			Return Me._Address1
+		End Get
+		Set
+			If (String.Equals(Me._Address1, value) = false) Then
+				Me.OnAddress1Changing(value)
+				Me.SendPropertyChanging
+				Me._Address1 = value
+				Me.SendPropertyChanged("Address1")
+				Me.OnAddress1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address2", DbType:="NVarChar(255)")>  _
+	Public Property Address2() As String
+		Get
+			Return Me._Address2
+		End Get
+		Set
+			If (String.Equals(Me._Address2, value) = false) Then
+				Me.OnAddress2Changing(value)
+				Me.SendPropertyChanging
+				Me._Address2 = value
+				Me.SendPropertyChanged("Address2")
+				Me.OnAddress2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address3", DbType:="NVarChar(255)")>  _
+	Public Property Address3() As String
+		Get
+			Return Me._Address3
+		End Get
+		Set
+			If (String.Equals(Me._Address3, value) = false) Then
+				Me.OnAddress3Changing(value)
+				Me.SendPropertyChanging
+				Me._Address3 = value
+				Me.SendPropertyChanged("Address3")
+				Me.OnAddress3Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Brach", DbType:="NVarChar(50)")>  _
+	Public Property Brach() As String
+		Get
+			Return Me._Brach
+		End Get
+		Set
+			If (String.Equals(Me._Brach, value) = false) Then
+				Me.OnBrachChanging(value)
+				Me.SendPropertyChanging
+				Me._Brach = value
+				Me.SendPropertyChanged("Brach")
+				Me.OnBrachChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_ReceiptRegister")>  _
+Partial Public Class v_ReceiptRegister
+	
+	Private _ID As Integer
+	
+	Private _ReceiptNo As String
+	
+	Private _TaxNo As String
+	
+	Private _InsurerCode As String
+	
+	Private _InsurerName As String
+	
+	Private _ReceiveCode As String
+	
+	Private _ReceiveType As String
+	
+	Private _ReceiveDate As System.Nullable(Of Date)
+	
+	Private _ChequeNo As String
+	
+	Private _ChequeBranch As String
+	
+	Private _CreateDate As System.Nullable(Of Date)
+	
+	Private _CreateBy As String
+	
+	Private _ModifyDate As System.Nullable(Of Date)
+	
+	Private _ModifyBy As String
+	
+	Private _Address1 As String
+	
+	Private _Address2 As String
+	
+	Private _Address3 As String
+	
+	Private _BrachCode As String
+	
+	Private _BrachName As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", DbType:="Int NOT NULL")>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me._ID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptNo", DbType:="NVarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property ReceiptNo() As String
+		Get
+			Return Me._ReceiptNo
+		End Get
+		Set
+			If (String.Equals(Me._ReceiptNo, value) = false) Then
+				Me._ReceiptNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaxNo", DbType:="NVarChar(50)")>  _
+	Public Property TaxNo() As String
+		Get
+			Return Me._TaxNo
+		End Get
+		Set
+			If (String.Equals(Me._TaxNo, value) = false) Then
+				Me._TaxNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsurerCode", DbType:="NVarChar(50)")>  _
+	Public Property InsurerCode() As String
+		Get
+			Return Me._InsurerCode
+		End Get
+		Set
+			If (String.Equals(Me._InsurerCode, value) = false) Then
+				Me._InsurerCode = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InsurerName", DbType:="NVarChar(255)")>  _
+	Public Property InsurerName() As String
+		Get
+			Return Me._InsurerName
+		End Get
+		Set
+			If (String.Equals(Me._InsurerName, value) = false) Then
+				Me._InsurerName = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiveCode", DbType:="NVarChar(50)")>  _
+	Public Property ReceiveCode() As String
+		Get
+			Return Me._ReceiveCode
+		End Get
+		Set
+			If (String.Equals(Me._ReceiveCode, value) = false) Then
+				Me._ReceiveCode = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiveType", DbType:="NVarChar(50)")>  _
+	Public Property ReceiveType() As String
+		Get
+			Return Me._ReceiveType
+		End Get
+		Set
+			If (String.Equals(Me._ReceiveType, value) = false) Then
+				Me._ReceiveType = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiveDate", DbType:="Date")>  _
+	Public Property ReceiveDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ReceiveDate
+		End Get
+		Set
+			If (Me._ReceiveDate.Equals(value) = false) Then
+				Me._ReceiveDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChequeNo", DbType:="NVarChar(50)")>  _
+	Public Property ChequeNo() As String
+		Get
+			Return Me._ChequeNo
+		End Get
+		Set
+			If (String.Equals(Me._ChequeNo, value) = false) Then
+				Me._ChequeNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChequeBranch", DbType:="NVarChar(50)")>  _
+	Public Property ChequeBranch() As String
+		Get
+			Return Me._ChequeBranch
+		End Get
+		Set
+			If (String.Equals(Me._ChequeBranch, value) = false) Then
+				Me._ChequeBranch = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateDate", DbType:="DateTime")>  _
+	Public Property CreateDate() As System.Nullable(Of Date)
+		Get
+			Return Me._CreateDate
+		End Get
+		Set
+			If (Me._CreateDate.Equals(value) = false) Then
+				Me._CreateDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreateBy", DbType:="NVarChar(50)")>  _
+	Public Property CreateBy() As String
+		Get
+			Return Me._CreateBy
+		End Get
+		Set
+			If (String.Equals(Me._CreateBy, value) = false) Then
+				Me._CreateBy = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyDate", DbType:="DateTime")>  _
+	Public Property ModifyDate() As System.Nullable(Of Date)
+		Get
+			Return Me._ModifyDate
+		End Get
+		Set
+			If (Me._ModifyDate.Equals(value) = false) Then
+				Me._ModifyDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModifyBy", DbType:="NVarChar(50)")>  _
+	Public Property ModifyBy() As String
+		Get
+			Return Me._ModifyBy
+		End Get
+		Set
+			If (String.Equals(Me._ModifyBy, value) = false) Then
+				Me._ModifyBy = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address1", DbType:="NVarChar(255)")>  _
+	Public Property Address1() As String
+		Get
+			Return Me._Address1
+		End Get
+		Set
+			If (String.Equals(Me._Address1, value) = false) Then
+				Me._Address1 = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address2", DbType:="NVarChar(255)")>  _
+	Public Property Address2() As String
+		Get
+			Return Me._Address2
+		End Get
+		Set
+			If (String.Equals(Me._Address2, value) = false) Then
+				Me._Address2 = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Address3", DbType:="NVarChar(255)")>  _
+	Public Property Address3() As String
+		Get
+			Return Me._Address3
+		End Get
+		Set
+			If (String.Equals(Me._Address3, value) = false) Then
+				Me._Address3 = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrachCode", DbType:="NVarChar(50)")>  _
+	Public Property BrachCode() As String
+		Get
+			Return Me._BrachCode
+		End Get
+		Set
+			If (String.Equals(Me._BrachCode, value) = false) Then
+				Me._BrachCode = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrachName", DbType:="NVarChar(50)")>  _
+	Public Property BrachName() As String
+		Get
+			Return Me._BrachName
+		End Get
+		Set
+			If (String.Equals(Me._BrachName, value) = false) Then
+				Me._BrachName = value
+			End If
+		End Set
+	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tblReceiptPremium")>  _
+Partial Public Class tblReceiptPremium
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _ReceiptID As System.Nullable(Of Integer)
+	
+	Private _ReceiptTitle As String
+	
+	Private _ReceiptPremium As System.Nullable(Of Decimal)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnReceiptIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnReceiptIDChanged()
+    End Sub
+    Partial Private Sub OnReceiptTitleChanging(value As String)
+    End Sub
+    Partial Private Sub OnReceiptTitleChanged()
+    End Sub
+    Partial Private Sub OnReceiptPremiumChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnReceiptPremiumChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptID", DbType:="Int")>  _
+	Public Property ReceiptID() As System.Nullable(Of Integer)
+		Get
+			Return Me._ReceiptID
+		End Get
+		Set
+			If (Me._ReceiptID.Equals(value) = false) Then
+				Me.OnReceiptIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptID = value
+				Me.SendPropertyChanged("ReceiptID")
+				Me.OnReceiptIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptTitle", DbType:="NVarChar(255)")>  _
+	Public Property ReceiptTitle() As String
+		Get
+			Return Me._ReceiptTitle
+		End Get
+		Set
+			If (String.Equals(Me._ReceiptTitle, value) = false) Then
+				Me.OnReceiptTitleChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptTitle = value
+				Me.SendPropertyChanged("ReceiptTitle")
+				Me.OnReceiptTitleChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ReceiptPremium", DbType:="Decimal(18,2)")>  _
+	Public Property ReceiptPremium() As System.Nullable(Of Decimal)
+		Get
+			Return Me._ReceiptPremium
+		End Get
+		Set
+			If (Me._ReceiptPremium.Equals(value) = false) Then
+				Me.OnReceiptPremiumChanging(value)
+				Me.SendPropertyChanging
+				Me._ReceiptPremium = value
+				Me.SendPropertyChanged("ReceiptPremium")
+				Me.OnReceiptPremiumChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
 End Class

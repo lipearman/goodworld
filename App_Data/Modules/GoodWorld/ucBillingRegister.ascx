@@ -24,9 +24,10 @@
         <dx:BootstrapGridViewToolbar>
             <Items>
                 <dx:BootstrapGridViewToolbarItem Command="New" BeginGroup="true" />
+                   <dx:BootstrapGridViewToolbarItem Command="Edit" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="Refresh" BeginGroup="true" />
-                <dx:BootstrapGridViewToolbarItem Command="ClearSorting" />
-                <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" />
+                <dx:BootstrapGridViewToolbarItem Command="ClearSorting" BeginGroup="true"/>
+                <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" BeginGroup="true" />
             </Items>
         </dx:BootstrapGridViewToolbar>
     </Toolbars>
@@ -47,7 +48,7 @@
 
         <dx:BootstrapGridViewTextColumn FieldName="BillingName" Caption="ออกในนาม" Settings-AllowFilterBySearchPanel="True" PropertiesTextEdit-ValidationSettings-RequiredField-IsRequired="true"></dx:BootstrapGridViewTextColumn>
 
-        <dx:BootstrapGridViewComboBoxColumn FieldName="BillingType" Caption="ปรเภท" PropertiesComboBox-ValidationSettings-RequiredField-IsRequired="true">
+        <dx:BootstrapGridViewComboBoxColumn FieldName="BillingType" Caption="ประเภท" PropertiesComboBox-ValidationSettings-RequiredField-IsRequired="true">
             <PropertiesComboBox>
                 <Items>
                     <dx:BootstrapListEditItem Text="บุคลธรรมดา" Value="P"></dx:BootstrapListEditItem>
@@ -57,6 +58,7 @@
 
         </dx:BootstrapGridViewComboBoxColumn>
 
+        <dx:BootstrapGridViewTextColumn FieldName="TaxID" Caption="เลขประจำตัวผู้เสียภาษี" Settings-AllowFilterBySearchPanel="True" ></dx:BootstrapGridViewTextColumn>
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="TaxP" Caption="หักภาษี(%)" PropertiesSpinEdit-ValidationSettings-RequiredField-IsRequired="true">
             <PropertiesSpinEdit DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
@@ -106,18 +108,43 @@
 
 <asp:SqlDataSource ID="SqlDataSource_BillingRegister" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select * from tblBillingRegister Order By CreateDate desc"
-    InsertCommand="insert into tblBillingRegister(BillingNo,BillingName,BillingType,TaxP,DiscountP,CreateDate,CreateBy)
-    Values(@BillingNo,@BillingName,@BillingType,@TaxP,@DiscountP,getdate(),@UserName)
-    ">
+    InsertCommand="insert into tblBillingRegister(BillingNo,BillingName,BillingType,TaxID,TaxP,DiscountP,CreateDate,CreateBy)
+    Values(@BillingNo,@BillingName,@BillingType,@TaxID,@TaxP,@DiscountP,getdate(),@UserName)
+    "
+    UpdateCommand="
+    update tblBillingRegister
+    set
+    BillingNo=@BillingNo
+    ,BillingName=@BillingName
+    ,BillingType=@BillingType
+    ,TaxID=@TaxID
+    ,TaxP=@TaxP
+    ,DiscountP=@DiscountP
+    ,ModifyDate=getdate()
+    ,ModifyBy=@UserName
+
+    where ID=@ID
+    "
+    >
     <InsertParameters>
         <asp:Parameter Name="BillingNo" />
         <asp:Parameter Name="BillingName" />
         <asp:Parameter Name="BillingType" />
+        <asp:Parameter Name="TaxID" />
         <asp:Parameter Name="TaxP" />
         <asp:Parameter Name="DiscountP" />
         <asp:Parameter Name="UserName" />
     </InsertParameters>
-
+    <UpdateParameters>
+        <asp:Parameter Name="BillingNo" />
+        <asp:Parameter Name="BillingName" />
+        <asp:Parameter Name="BillingType" />
+        <asp:Parameter Name="TaxID" />
+        <asp:Parameter Name="TaxP" />
+        <asp:Parameter Name="DiscountP" />
+        <asp:Parameter Name="UserName" />
+        <asp:Parameter Name="ID" />
+    </UpdateParameters>
 
 </asp:SqlDataSource>
 
@@ -319,7 +346,7 @@
                                             </Styles>
 
 
-                                            <Settings ShowFooter="True"  />
+                                            <Settings ShowFooter="True" />
                                             <SettingsBehavior AllowDragDrop="True" AllowFocusedRow="true" ColumnResizeMode="Control" />
                                             <SettingsSearchPanel CustomEditorID="tbToolbarSearch1" />
                                             <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG" />
@@ -332,12 +359,12 @@
                                                         <dx:GridViewToolbarItem Command="ExportToXlsx" BeginGroup="true" />
                                                         <dx:GridViewToolbarItem Command="Refresh" BeginGroup="true" />
 
-                                                          <dx:GridViewToolbarItem BeginGroup="true">
+                                                        <dx:GridViewToolbarItem BeginGroup="true">
                                                             <Template>
-                                                                <dx:ASPxButton ID="btnPreview" runat="server"  RenderMode="Button" OnClick="btnPreview_Click"
+                                                                <dx:ASPxButton ID="btnPreview" runat="server" RenderMode="Button" OnClick="btnPreview_Click"
                                                                     Width="90px" Text="Preview" CausesValidation="false">
                                                                     <Image IconID="print_preview_16x16office2013"></Image>
-                                                                   
+
                                                                 </dx:ASPxButton>
                                                             </Template>
                                                         </dx:GridViewToolbarItem>
@@ -345,7 +372,7 @@
                                                         <dx:GridViewToolbarItem BeginGroup="true">
                                                             <Template>
                                                                 <dx:ASPxButton ID="btnClose" runat="server" RenderMode="Button"
-                                                                    Width="90px" Text="Close" AutoPostBack="true" CausesValidation="false">
+                                                                    Width="90px" Text="Close" AutoPostBack="false" CausesValidation="false">
                                                                     <Image IconID="actions_close_16x16office2013"></Image>
                                                                     <ClientSideEvents Click="function(s, e) {   TaskEditPopup.Hide();    }" />
                                                                 </dx:ASPxButton>
@@ -479,7 +506,7 @@
         <asp:Parameter Name="ID" />
     </DeleteParameters>
     <SelectParameters>
-        <asp:SessionParameter Name="BillingID"  SessionField="BillingID" />
+        <asp:SessionParameter Name="BillingID" SessionField="BillingID" />
     </SelectParameters>
 
 </asp:SqlDataSource>
@@ -518,7 +545,7 @@
         <Paddings Padding="0px" />
     </ContentStyle>
 
- 
+
 
     <ContentCollection>
         <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
@@ -542,19 +569,16 @@
                     </dx:BootstrapButton>--%>
 
 
-            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server"  AllowedPermissions="All" Height="100%">
-
+            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server" AllowedPermissions="All" Height="100%">
             </GleamTech:DocumentViewerControl>
-            
-    <%--        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" ProcessingMode="Local" Visible="false">
+
+            <%--        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" ProcessingMode="Local" Visible="false">
                 <LocalReport ReportPath="~/App_Data/reports/" >
                     
                 </LocalReport>
             </rsweb:ReportViewer>--%>
-             
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
 
 
- 

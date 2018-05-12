@@ -74,12 +74,12 @@
                     </dx:ListBoxColumn>
                     <dx:ListBoxColumn FieldName="Brokerage" Caption="%" Width="100">
                         <CellTemplate>
-                            <%# Eval("Suminsured", "{0:N2}") %>
+                            <%# Eval("Brokerage", "{0:N2}") %>
                         </CellTemplate>
                     </dx:ListBoxColumn>
                     <dx:ListBoxColumn FieldName="BrokerageAmt" Caption="ค่าคอม" Width="100">
                         <CellTemplate>
-                            <%# Eval("Suminsured", "{0:N2}") %>
+                            <%# Eval("BrokerageAmt", "{0:N2}") %>
                         </CellTemplate>
                     </dx:ListBoxColumn>
 
@@ -216,7 +216,7 @@
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Width="100" Caption="เลขกรมธรรม์" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" Caption="วันเริ่มคุ้มครอง" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
 
-        <dx:BootstrapGridViewDateColumn FieldName="InsurerName" Caption="บริษัทประกันภัย" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
+        <dx:BootstrapGridViewDateColumn FieldName="InsurerName" Caption="บริษัทประกันภัย" Width="100"   />
 
 
 

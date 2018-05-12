@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "vyibau",
+  "CachePdfKey": "vyibau/vyibau-1k3kk2s.pdf",
+  "CacheXpzKey": "vyibau/vyibau-sbhsd8.xpz",
+  "CacheInfoKey": "vyibau/vyibau-sbhsd8.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/b4ff53c5-2af0-40b6-b525-1d990c0db3c5.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "b4ff53c5-2af0-40b6-b525-1d990c0db3c5.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "vyibau",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

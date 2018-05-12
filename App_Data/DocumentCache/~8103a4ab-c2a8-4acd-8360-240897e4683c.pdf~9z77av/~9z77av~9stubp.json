@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "9z77av",
+  "CachePdfKey": "9z77av/9z77av-1k3kk2s.pdf",
+  "CacheXpzKey": "9z77av/9z77av-9stubp.xpz",
+  "CacheInfoKey": "9z77av/9z77av-9stubp.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/8103a4ab-c2a8-4acd-8360-240897e4683c.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "8103a4ab-c2a8-4acd-8360-240897e4683c.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "9z77av",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

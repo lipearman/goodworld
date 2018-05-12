@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "qsxtrs",
+  "CachePdfKey": "qsxtrs/qsxtrs-1k3kk2s.pdf",
+  "CacheXpzKey": "qsxtrs/qsxtrs-tw04oh.xpz",
+  "CacheInfoKey": "qsxtrs/qsxtrs-tw04oh.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/bd2d6256-a4fb-470e-bcd9-87bd5f6756dc.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "bd2d6256-a4fb-470e-bcd9-87bd5f6756dc.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "qsxtrs",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

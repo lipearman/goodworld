@@ -1882,15 +1882,16 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox253">
+                    <Textbox Name="ReceiveDate">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!ReceiveDate.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>dd/MM/yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1899,31 +1900,11 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox253</rd:DefaultName>
+                      <rd:DefaultName>ReceiveDate</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2830,6 +2811,10 @@ FROM            v_Report1</CommandText>
           <DataField>InsurerCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="InsurerName">
           <DataField>InsurerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2860,6 +2845,10 @@ FROM            v_Report1</CommandText>
         </Field>
         <Field Name="Chassis">
           <DataField>Chassis</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InsureTypeCode">
+          <DataField>InsureTypeCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Suminsured">
@@ -2901,6 +2890,22 @@ FROM            v_Report1</CommandText>
         <Field Name="BrokerageAmt">
           <DataField>BrokerageAmt</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Monthly">
+          <DataField>Monthly</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CustomerType">
+          <DataField>CustomerType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CertificateNo">
+          <DataField>CertificateNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ReceiveDate">
+          <DataField>ReceiveDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>

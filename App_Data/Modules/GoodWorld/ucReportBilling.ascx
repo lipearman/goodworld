@@ -4,76 +4,109 @@
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
-<dx:BootstrapFormLayout ID="BootstrapFormLayout1" runat="server" ClientInstanceName="frmEnquiry" LayoutType="Vertical">
-    <Items>
-        <dx:BootstrapLayoutItem Caption="จากวันที่" ColSpanLg="4" ColSpanSm="6">
-            <ContentCollection>
-                <dx:ContentControl>
-                    <dx:BootstrapDateEdit runat="server" ID="datefrom" DisplayFormatString="{0:dd/MM/yyyy}" ValidationSettings-RequiredField-IsRequired="true">
-                    </dx:BootstrapDateEdit>
-                </dx:ContentControl>
-            </ContentCollection>
-        </dx:BootstrapLayoutItem>
-        <dx:BootstrapLayoutItem Caption="ถึงวันที่" ColSpanLg="4" ColSpanSm="6">
-            <ContentCollection>
-                <dx:ContentControl>
-                    <dx:BootstrapDateEdit runat="server" ID="CheckOutDateEdit" DisplayFormatString="{0:dd/MM/yyyy}" ValidationSettings-RequiredField-IsRequired="true">
-                        <DateRangeSettings StartDateEditID="dateto" MinDayCount="1" CalendarColumnCount="1"  />
-                    </dx:BootstrapDateEdit>
-                </dx:ContentControl>
-            </ContentCollection>
-        </dx:BootstrapLayoutItem>
  
 
-        <dx:BootstrapLayoutItem ShowCaption="False">
-            <ContentCollection>
-                <dx:ContentControl>
-                    <dx:BootstrapButton ID="BootstrapButton1" Text="Submit" AutoPostBack="false"  runat="server">
-                        <SettingsBootstrap RenderOption="Primary" />
-                        <ClientSideEvents Click="function(s,e){
+<dx:BootstrapGridView ID="TaskGrid" runat="server"
+    ClientInstanceName="taskGrid" Settings-ShowFooter="true"
+    AutoGenerateColumns="False"
+    KeyFieldName="ID" SettingsBehavior-ConfirmDelete="true"
+    SettingsBehavior-AllowDragDrop="true"
+    SettingsPopup-EditForm-AllowResize="true"
+    DataSourceID="SqlDataSource_gridData"
+    Width="100%" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
+    PopupAnimationType="Fade" CloseOnEscape="true" CloseAction="None">
+    <CssClasses Control="tasks-grid" PreviewRow="text-muted" />
+    <ClientSideEvents ToolbarItemClick="function(s,e){
+                switch (e.item.name) {
 
-                                if(ASPxClientEdit.AreEditorsValid())
-                                {
-                                     cbSend.PerformCallback();
-                                }
-                            }" />
-                    </dx:BootstrapButton>
-                </dx:ContentControl>
-            </ContentCollection>
-        </dx:BootstrapLayoutItem>
-    </Items>
-</dx:BootstrapFormLayout>
+                case 'ExportToXLSX':
+                case 'ExportToXLS':
+                    e.processOnServer = true;
+                    e.usePostBack = true;
+                    break;
 
-
-<dx:ASPxCallback ID="cbSend" runat="server" ClientInstanceName="cbSend">
-    <ClientSideEvents 
-         BeginCallback="function(s,e){
-            LoadingPanel.Show();
-        }"
-        CallbackError="function(s, e) { 
-            LoadingPanel.Hide(); 
-        }"
-        CallbackComplete="function(s, e) { 
-                   LoadingPanel.Hide();
-       ReportPopup.Show();
+ 
+            }
+ 
         }" />
-</dx:ASPxCallback>
+
+    <Toolbars>
+        <dx:BootstrapGridViewToolbar>
+            <Items>
+
+                <dx:BootstrapGridViewToolbarItem Command="Refresh" BeginGroup="true" />
+                <dx:BootstrapGridViewToolbarItem Command="ClearSorting" BeginGroup="true"/>
+                <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" BeginGroup="true"/>
+
+                <dx:BootstrapGridViewToolbarItem Command="Custom" Text="Export To" BeginGroup="true">
+                    <Items>
+                        <dx:BootstrapGridViewToolbarMenuItem Name="ExportToXLSX" Text="XLSX" />
+                        <dx:BootstrapGridViewToolbarMenuItem Name="ExportToXLS" Text="XLS" />
+                    </Items>
+                </dx:BootstrapGridViewToolbarItem>
+ 
+            </Items>
+        </dx:BootstrapGridViewToolbar>
+    </Toolbars>
+
+    <Columns>
+        <dx:BootstrapGridViewTextColumn HorizontalAlign="Center" FieldName="RowNo" Caption="ลำดับที่"></dx:BootstrapGridViewTextColumn>
+
+        
+        <dx:BootstrapGridViewTextColumn FieldName="ClientName" Caption="ผู้เอาประกันภัย"></dx:BootstrapGridViewTextColumn>
+        
+        <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Caption="เลขที่กรมธรรม์"></dx:BootstrapGridViewTextColumn>
+        
+        <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียนรถ"></dx:BootstrapGridViewTextColumn>
+        
+        <dx:BootstrapGridViewTextColumn FieldName="EffectiveDate" Caption="วันที่เริ่มคุ้มครอง" PropertiesTextEdit-DisplayFormatString="{0:dd/MM/yyyy}" ></dx:BootstrapGridViewTextColumn>
+        
+        <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
+
+        <dx:BootstrapGridViewSpinEditColumn FieldName="Premium" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+        </dx:BootstrapGridViewSpinEditColumn>
+        <dx:BootstrapGridViewSpinEditColumn FieldName="Stamp" Caption="อากร" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+        </dx:BootstrapGridViewSpinEditColumn>
+        <dx:BootstrapGridViewSpinEditColumn FieldName="Vat" Caption="ภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+        </dx:BootstrapGridViewSpinEditColumn>
+          <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" Caption="เบี้ยรวม" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
+        </dx:BootstrapGridViewSpinEditColumn>
+    </Columns>
+    <TotalSummary>
+
+        <dx:ASPxSummaryItem FieldName="Premium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="Stamp" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="Vat" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="GrossPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+    </TotalSummary>
+  <SettingsEditing Mode="PopupEditForm" EditFormColumnSpan="12">
+        <FormLayoutProperties LayoutType="Horizontal"></FormLayoutProperties>
+    </SettingsEditing>
+    <SettingsBehavior AllowFocusedRow="true" />
+    <SettingsDataSecurity AllowEdit="true" AllowInsert="true" AllowDelete="false" />
+    <SettingsPager AlwaysShowPager="true" ShowEmptyDataRows="false" PageSize="5">
+        <PageSizeItemSettings Visible="true" Items="5,8,12,20" />
+    </SettingsPager>
+    <SettingsCustomizationDialog Enabled="true" />
+    <SettingsCommandButton>
+        <EditButton CssClass="edit-btn" RenderMode="Button" Text=" " />
+        <UpdateButton RenderMode="Button" Text="Save" CssClass="saveBt" />
+        <CancelButton RenderMode="Button" />
+    </SettingsCommandButton>
+
+    <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" />
+    <SettingsSearchPanel Visible="true" />
+
+</dx:BootstrapGridView>
+
+<asp:SqlDataSource ID="SqlDataSource_gridData" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
+    SelectCommand="SELECT ROW_NUMBER() OVER(ORDER BY InsurerName) AS RowNo,*
+    FROM v_Report1
+    where ReceiveDate is null 
+    "
+    >
+
+</asp:SqlDataSource>
 
 
-
-
-<dx:BootstrapPopupControl ID="ReportPopup" ClientInstanceName="ReportPopup" runat="server" 
-    ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="รายงาน"
-    PopupAnimationType="Fade">
-    <SettingsAdaptivity Mode="Always" FixedHeader="true" VerticalAlign="WindowTop" />
-    <SettingsBootstrap Sizing="Large" />
-     
-
-
-    <ContentCollection>
-        <dx:ContentControl ID="ContentControl5" runat="server">
-            
-            <img src="images/ReportBilling.jpg" width="850" />
-        </dx:ContentControl>
-    </ContentCollection>
-</dx:BootstrapPopupControl>
+ 

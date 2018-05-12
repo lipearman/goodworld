@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "coln7h",
+  "CachePdfKey": "coln7h/coln7h-1k3kk2s.pdf",
+  "CacheXpzKey": "coln7h/coln7h-42kh4.xpz",
+  "CacheInfoKey": "coln7h/coln7h-42kh4.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/0aeee30f-b2bf-40ec-beeb-2a8ff02e59fe.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "0aeee30f-b2bf-40ec-beeb-2a8ff02e59fe.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "coln7h",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}
