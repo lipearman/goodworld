@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReceiptRegister.ascx.vb" Inherits="Modules_ucReceiptRegister" %>
+
 <style>
     legend {
         display: block;

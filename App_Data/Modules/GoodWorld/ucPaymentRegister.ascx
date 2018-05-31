@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucPaymentRegister.ascx.vb" Inherits="Modules_ucPaymentRegister" %>
+
 <style>
     legend {
         display: block;
@@ -37,7 +38,7 @@
                 EnableCallbackMode="true"
                 CallbackPageSize="10"
                 ValueType="System.String"
-                ValueField="PolicyID"
+                ValueField="ID"
                 TextFormatString="{0}"
                 Width="250px"
                 DropDownStyle="DropDown">
@@ -305,7 +306,7 @@
             }
             else
             {
-                alert(s.cpnewtask);
+                //alert(s.cpnewtask);
             }
         }" />
 
@@ -505,21 +506,21 @@
                     <dx:BootstrapLayoutItem Caption="ชำระโดย" ColSpanMd="8">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newPaymentBy" NullText="..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                                <dx:BootstrapTextBox runat="server" ID="newPaymentBy" NullText="..."  ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                     <dx:BootstrapLayoutItem Caption="เลขที่" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="newPaymentNo" NullText="..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
+                                <dx:BootstrapTextBox runat="server" ID="newPaymentNo" NullText="..."  ValidationSettings-ValidationGroup="newPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                     <dx:BootstrapLayoutItem Caption="ลงวันที่" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="newPaymentDate" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="newPolicyForm" runat="server" NullText="เลือกวันที่..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="newPaymentDate" ValidationSettings-ValidationGroup="newPolicyForm" runat="server" NullText="เลือกวันที่..." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>
@@ -795,21 +796,21 @@
                     <dx:BootstrapLayoutItem Caption="ชำระโดย" FieldName="PaymentBy" ColSpanMd="8">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editPaymentBy" NullText="..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                                <dx:BootstrapTextBox runat="server" ID="editPaymentBy" NullText="..."  ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                     <dx:BootstrapLayoutItem Caption="เลขที่" FieldName="PaymentNo" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapTextBox runat="server" ID="editPaymentNo" NullText="..." ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
+                                <dx:BootstrapTextBox runat="server" ID="editPaymentNo" NullText="..."  ValidationSettings-ValidationGroup="editPolicyForm"></dx:BootstrapTextBox>
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:BootstrapLayoutItem>
                     <dx:BootstrapLayoutItem Caption="ลงวันที่" FieldName="PaymentDate" ColSpanMd="4">
                         <ContentCollection>
                             <dx:ContentControl>
-                                <dx:BootstrapDateEdit ID="editPaymentDate" ValidationSettings-RequiredField-IsRequired="true" ValidationSettings-ValidationGroup="editPolicyForm" runat="server" NullText="เลือกวันที่..." EditFormatString="dd/MM/yyyy">
+                                <dx:BootstrapDateEdit ID="editPaymentDate" ValidationSettings-ValidationGroup="editPolicyForm" runat="server" NullText="เลือกวันที่..." EditFormatString="dd/MM/yyyy">
                                 </dx:BootstrapDateEdit>
                             </dx:ContentControl>
                         </ContentCollection>

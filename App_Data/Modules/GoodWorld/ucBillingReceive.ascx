@@ -107,33 +107,34 @@
         <dx:BootstrapGridViewSpinEditColumn FieldName="Premium" PropertiesSpinEdit-SpinButtons-ClientVisible="false"  ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"  PropertiesSpinEdit-DisplayFormatInEditMode="true">
             
         </dx:BootstrapGridViewSpinEditColumn>
-        <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยรวมภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
+        <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" Caption="เบี้ยรวมภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
              
         </dx:BootstrapGridViewSpinEditColumn>
 
         <dx:BootstrapGridViewDateColumn FieldName="ReceiveDate" Caption="วันที่่ชำระ" 
             PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" >
-            <PropertiesDateEdit >
-                <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
-            </PropertiesDateEdit>
+      
         </dx:BootstrapGridViewDateColumn>
 
 
         <dx:BootstrapGridViewComboBoxColumn FieldName="ReceiveType" Caption="ชำระโดย" >
-            <PropertiesComboBox>
-                <Items>
+            <PropertiesComboBox DropDownStyle="DropDown">
+                <Items> 
                     <dx:BootstrapListEditItem Text="เงินสด" Value="CA"></dx:BootstrapListEditItem>
                     <dx:BootstrapListEditItem Text="เงินโอน" Value="TR"></dx:BootstrapListEditItem>
                     <dx:BootstrapListEditItem Text="เช็ค" Value="CH"></dx:BootstrapListEditItem>
                 </Items>
 
-                <ValidationSettings RequiredField-IsRequired="true">
-
-                </ValidationSettings>
+      
             </PropertiesComboBox>
 
         </dx:BootstrapGridViewComboBoxColumn>
 
+        
+        <dx:BootstrapGridViewDateColumn FieldName="PaymentDate" Caption="วันที่่จ่ายประกัน" 
+            PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" >
+    
+        </dx:BootstrapGridViewDateColumn>
 
         <dx:BootstrapGridViewDateColumn FieldName="CreateDate" Caption="วันที่่บันทึก"
             Visible="false"
@@ -161,6 +162,7 @@
      UpdateCommand="update tblBillingDetails 
     set ReceiveType=@ReceiveType
     ,ReceiveDate=@ReceiveDate
+    ,PaymentDate=@PaymentDate
     ,ModifyDate=getdate()
     ,ModifyBy=@UserName
     where ID=@ID
@@ -171,6 +173,8 @@
     <UpdateParameters>
         <asp:Parameter Name="ReceiveType" />
          <asp:Parameter Name="ReceiveDate" />
+        <asp:Parameter Name="PaymentDate" />
+        
          <asp:Parameter Name="UserName" />
          <asp:Parameter Name="ID" />
     </UpdateParameters>

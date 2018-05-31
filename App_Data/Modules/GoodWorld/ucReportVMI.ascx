@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportVMI.ascx.vb" Inherits="Modules_ucReportVMI" %>
 
-
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>

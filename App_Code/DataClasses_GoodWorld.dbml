@@ -470,4 +470,35 @@
       <Column Name="ReceiptPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tblBrokeragePaymentRegister" Member="tblBrokeragePaymentRegisters">
+    <Type Name="tblBrokeragePaymentRegister">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Branchid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Accountcode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AGENT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MainClass" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubClass" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Dftxno" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="InsureName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExpireDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ApproveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ReceivePremium" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BrokerCommAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="WageCommAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="WageOVAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AgentCommAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NetPayment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RVDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BrokerSurveyAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AA" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BB" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

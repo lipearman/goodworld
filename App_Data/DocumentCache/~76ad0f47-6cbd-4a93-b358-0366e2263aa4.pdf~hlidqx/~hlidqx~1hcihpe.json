@@ -1,0 +1,27 @@
+{
+  "CacheSourceKey": "hlidqx",
+  "CachePdfKey": "hlidqx/hlidqx-1k3kk2s.pdf",
+  "CacheXpzKey": "hlidqx/hlidqx-1hcihpe.xpz",
+  "CacheInfoKey": "hlidqx/hlidqx-1hcihpe.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/76ad0f47-6cbd-4a93-b358-0366e2263aa4.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "76ad0f47-6cbd-4a93-b358-0366e2263aa4.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "hlidqx",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}

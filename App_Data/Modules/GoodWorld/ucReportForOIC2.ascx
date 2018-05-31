@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportForOIC.ascx.vb" Inherits="Modules_ucReportForOIC" %>
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportForOIC2.ascx.vb" Inherits="Modules_ucReportForOIC2" %>
 
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>

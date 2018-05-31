@@ -167,7 +167,7 @@ Partial Class Modules_ucBillingRegister
             Return
         End If
         Dim comboBox As ASPxComboBox = CType(source, ASPxComboBox)
-        SqlDataSource1.SelectCommand = "select ClientName from v_Report1 where PolicyNo like @PolicyNo and isnull(PolicyNo,'') <> ''"
+        SqlDataSource1.SelectCommand = "select ClientName from v_Report1 where v_Report1.ID not in (select PolicyID from tblBillingDetails) and PolicyNo <> '' and  PolicyNo like @PolicyNo and isnull(PolicyNo,'') <> ''"
 
         SqlDataSource1.SelectParameters.Clear()
         SqlDataSource1.SelectParameters.Add("PolicyNo", TypeCode.String, e.Value.ToString())
@@ -183,7 +183,7 @@ Partial Class Modules_ucBillingRegister
         sb.Append(" select v_Report1.* ")
         sb.Append(" , row_number()over(order by v_Report1.PolicyNo) as [rn] ")
         sb.Append(" from v_Report1 ")
-        sb.Append(" where PolicyNo LIKE @filter and isnull(PolicyNo,'') <> '' ")
+        sb.Append(" where v_Report1.ID not in (select PolicyID from tblBillingDetails) and PolicyNo <> '' and PolicyNo LIKE @filter and isnull(PolicyNo,'') <> '' ")
         sb.Append(" ) as st ")
         sb.Append(" where st.[rn] between @startIndex and @endIndex")
 

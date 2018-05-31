@@ -116,7 +116,7 @@ Partial Class Modules_ucPaymentRegister
 
     Private Sub newpayment(ByVal _ID As String)
         Using dc As New DataClasses_GoodWorldExt()
-            Dim data = (From c In dc.v_BillingDetails Where c.PolicyID.Equals(_ID)).FirstOrDefault()
+            Dim data = (From c In dc.v_Report1s Where c.ID.Equals(_ID)).FirstOrDefault()
 
 
             newPolicyForm.DataSource = data
@@ -155,7 +155,8 @@ Partial Class Modules_ucPaymentRegister
             Dim _ServiceFreeVAT7Amt = _ServiceFreeAmt * 7 / 100
             Dim _ServiceFreeTAX3Amt = _ServiceFreeAmt * 3 / 100
 
-            Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
+            'Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
+            Dim _TotalPremium = _GrossPremium - _BrokerageAmt - _VAT7Amt + _TAX3Amt - _ServiceFreeAmt - _ServiceFreeVAT7Amt + _ServiceFreeTAX3Amt
 
             newBrokerageAmt.Value = _BrokerageAmt
             newVAT7Amt.Value = _VAT7Amt
@@ -186,7 +187,8 @@ Partial Class Modules_ucPaymentRegister
             Dim _ServiceFreeVAT7Amt = _ServiceFreeAmt * 7 / 100
             Dim _ServiceFreeTAX3Amt = _ServiceFreeAmt * 3 / 100
 
-            Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
+            'Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
+            Dim _TotalPremium = _GrossPremium - _BrokerageAmt - _VAT7Amt + _TAX3Amt - _ServiceFreeAmt - _ServiceFreeVAT7Amt + _ServiceFreeTAX3Amt
 
             editBrokerageAmt.Value = _BrokerageAmt
             editVAT7Amt.Value = _VAT7Amt
@@ -318,7 +320,7 @@ Partial Class Modules_ucPaymentRegister
             Return
         End If
         Dim comboBox As ASPxComboBox = CType(source, ASPxComboBox)
-        SqlDataSource1.SelectCommand = "select ClientName from v_BillingDetails where PolicyNo like @PolicyNo and isnull(PolicyNo,'') <> '' and PolicyID not in (select PolicyID from tblPaymentRegister)"
+        SqlDataSource1.SelectCommand = "select ClientName from v_Report1 where PolicyNo like @PolicyNo and isnull(PolicyNo,'') <> '' and ID not in (select PolicyID from tblPaymentRegister)"
         SqlDataSource1.SelectParameters.Clear()
         SqlDataSource1.SelectParameters.Add("PolicyNo", TypeCode.String, e.Value.ToString())
         comboBox.DataSource = SqlDataSource1
@@ -333,10 +335,10 @@ Partial Class Modules_ucPaymentRegister
         Dim sb As New StringBuilder()
         sb.Append(" SELECT st.* ")
         sb.Append(" FROM (")
-        sb.Append(" select v_BillingDetails.* ")
-        sb.Append(" , row_number()over(order by v_BillingDetails.PolicyNo) as [rn] ")
-        sb.Append(" from v_BillingDetails ")
-        sb.Append(" where PolicyNo LIKE @filter and isnull(PolicyNo,'') <> '' and PolicyID not in (select PolicyID from tblPaymentRegister)")
+        sb.Append(" select v_Report1.* ")
+        sb.Append(" , row_number()over(order by v_Report1.PolicyNo) as [rn] ")
+        sb.Append(" from v_Report1 ")
+        sb.Append(" where PolicyNo LIKE @filter and isnull(PolicyNo,'') <> '' and ID not in (select PolicyID from tblPaymentRegister)")
         sb.Append(" ) as st ")
         sb.Append(" where st.[rn] between @startIndex and @endIndex")
 
