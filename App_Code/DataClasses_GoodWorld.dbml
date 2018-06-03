@@ -501,4 +501,83 @@
       <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tblSubBillingRegister" Member="tblSubBillingRegisters">
+    <Type Name="tblSubBillingRegister">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BillingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSubBillingPremium" Member="tblSubBillingPremiums">
+    <Type Name="tblSubBillingPremium">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubBillingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubBillingTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubBillingPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_SubBillingRegister" Member="v_SubBillingRegisters">
+    <Type Name="v_SubBillingRegister">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="BillingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CommissionAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSubBillingPolicy" Member="tblSubBillingPolicies">
+    <Type Name="tblSubBillingPolicy">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubBillingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PolicyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Commission" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Premium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TotalPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CommissionAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BillingAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_SubBillingDetails" Member="v_SubBillingDetails">
+    <Type Name="v_SubBillingDetail">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubBillingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PolicyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Commission" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CommissionAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BillingAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="InsurerCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InsurerName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ClientName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExpiredDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="InsureType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="InsureTypeCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CarLicensePlate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Chassis" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Suminsured" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Premium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Stamp" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="GrossPremium" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="NewRenew" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="AgentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AgentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Brokerage" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BrokerageAmt" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Monthly" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomerType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CertificateNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReceiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

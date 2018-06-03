@@ -268,13 +268,13 @@ Partial Class Modules_ucPaymentRegister
 
                 dc.SubmitChanges()
 
-                TaskNewPopup.JSProperties("cpedittask") = "saveedit"
+                TaskEditPopup.JSProperties("cpedittask") = "saveedit"
 
 
 
             End Using
         Catch ex As Exception
-            TaskNewPopup.JSProperties("cpedittask") = "error - " & ex.Message
+            TaskEditPopup.JSProperties("cpedittask") = "error - " & ex.Message
         End Try
 
     End Sub

@@ -122,7 +122,7 @@
     AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
     KeyFieldName="ID" SettingsBehavior-ConfirmDelete="true"
     SettingsBehavior-AllowDragDrop="true"
-    SettingsPopup-EditForm-AllowResize="true"
+    SettingsPopup-EditForm-AllowResize="true" Settings-ShowFooter="true"
     DataSourceID="SqlDataSource_PaymentRegister"
     Width="100%"
     PopupAnimationType="Fade" CloseOnEscape="true" CloseAction="None">
@@ -212,6 +212,9 @@
         </dx:BootstrapGridViewDataColumn>
 
 
+        
+        <dx:BootstrapGridViewTextColumn FieldName="RowNo" Width="50" Caption="No." Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+        
         <dx:BootstrapGridViewTextColumn FieldName="ClientName" Width="300" Caption="ชื่อผู้เอาประกันภัย" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Width="100" Caption="ทะเบียนรถ" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Width="100" Caption="เลขกรมธรรม์" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
@@ -223,7 +226,6 @@
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="Premium" Width="100" AdaptivePriority="2" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
 
-        <dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" Width="100" AdaptivePriority="2" Caption="จ่ายสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
 
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" Width="100" AdaptivePriority="2" Caption="เบี้ยรวมภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
@@ -258,13 +260,28 @@
             <SettingsEditForm Visible="False" />
         </dx:BootstrapGridViewTextColumn>
 
+
+
+                <dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" Width="100" AdaptivePriority="2" Caption="จ่ายสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+
     </Columns>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Premium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="GrossPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="BRCommAmt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="VAT7Amt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="TAX3Amt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="ServiceFreeAmt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="ServiceFreeVAT7Amt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+         <dx:ASPxSummaryItem FieldName="ServiceFreeTAX3Amt" SummaryType="Sum" DisplayFormat="{0:N2}" />
+        <dx:ASPxSummaryItem FieldName="TotalPremium" SummaryType="Sum" DisplayFormat="{0:N2}" />
+    </TotalSummary>
 
 
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_PaymentRegister" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select * from v_PaymentRegister Order By CreateDate desc"
+    SelectCommand="select ROW_NUMBER() OVER(ORDER BY CreateDate desc) AS RowNo,* from v_PaymentRegister "
     DeleteCommand="delete from tblPaymentRegister where ID=@ID">
     <DeleteParameters>
         <asp:Parameter Name="ID" />

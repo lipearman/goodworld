@@ -1,0 +1,51 @@
+{
+  "CacheSourceKey": "1nqw1o7",
+  "CachePdfKey": "1nqw1o7/1nqw1o7-84k8vm.pdf",
+  "CacheXpzKey": "1nqw1o7/1nqw1o7-l32j97.xpz",
+  "CacheInfoKey": "1nqw1o7/1nqw1o7-l32j97.json",
+  "CacheCopyKey": null,
+  "Document": "~/App_Data/UploadTemp/3365d567-f6ed-4acc-80bc-d012675a5d55.pdf",
+  "DocumentHandlerType": null,
+  "DocumentHandlerParameters": null,
+  "DocumentLocation": null,
+  "DocumentFileName": "3365d567-f6ed-4acc-80bc-d012675a5d55.pdf",
+  "InputOptions": {
+    "Format": "Pdf",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [
+      {
+        "$type": "GleamTech.DocumentUltimate.TextWatermark, GleamTech.DocumentUltimate",
+        "Text": "DocumentUltimate",
+        "TextAlignment": "Left",
+        "Font": null,
+        "FontColor": "Red",
+        "UseFontSize": false,
+        "HorizontalAlignment": "Center",
+        "VerticalAlignment": "Center",
+        "HorizontalDistance": 0.0,
+        "VerticalDistance": 0.0,
+        "DistanceIsPercentage": false,
+        "Width": 50.0,
+        "Height": 50.0,
+        "SizeIsPercentage": true,
+        "Rotation": 0.0,
+        "Opacity": 50.0,
+        "InBackground": false,
+        "AnnotationMode": false,
+        "PrintVisible": true,
+        "ScreenVisible": true,
+        "PageRange": "all"
+      }
+    ],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1nqw1o7",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  }
+}
