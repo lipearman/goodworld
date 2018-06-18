@@ -76,7 +76,7 @@
                 <table>
                     <tr>
                         <td style="color:white"><a id="A1" runat="server" href="#">
-                            <img src="Content/Images/logo.png" height="64" title="Good World" />
+                            <img src="Content/Images/logo.png" height="64" title="<%=SiteName %>" />
                         </a></td>
 
 
@@ -146,7 +146,7 @@
         <div class="footer">
             <center>
             <div>
-                <span>Copyright © <%=Now.Year%> <%=_PortalContextName %></span>
+                <span>Copyright © <%=Now.Year%> <%=SiteName %></span>
             </div>
 
             </center>

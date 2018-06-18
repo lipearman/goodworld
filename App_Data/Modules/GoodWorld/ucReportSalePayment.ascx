@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucReportSalePayment.ascx.vb" Inherits="Modules_ucReportSalePayment" %>
-
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>

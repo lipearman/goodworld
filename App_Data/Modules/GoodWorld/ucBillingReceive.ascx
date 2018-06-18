@@ -27,6 +27,7 @@
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
 
+
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid"
     AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"

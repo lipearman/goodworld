@@ -21,6 +21,8 @@ Public Class ucUserTabs
         If (Not IsPostBack) Then
             Session("UserName") = Nothing
         End If
+
+
     End Sub
 
 
@@ -227,5 +229,8 @@ Public Class ucUserTabs
             nameTable.Add(node.Key, String.Format("{0}", node("TabName")))
         Next node
         e.Properties("cpDefaultPage") = nameTable
+    End Sub
+    Protected Sub TreeList2_Init(sender As Object, e As EventArgs)
+        DirectCast(sender, ASPxTreeList).ExpandAll()
     End Sub
 End Class

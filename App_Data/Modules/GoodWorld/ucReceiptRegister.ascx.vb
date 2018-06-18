@@ -138,8 +138,8 @@ Partial Class Modules_ucReceiptRegister
                 Case "calpremium"
 
                 Case "saveedit"
-                    update(hdID("ID"))
-                    TaskEditPopup.JSProperties("cpedittask") = "saveedit"
+                    'update(hdID("ID"))
+                    'TaskEditPopup.JSProperties("cpedittask") = "saveedit"
             End Select
 
 
@@ -151,49 +151,49 @@ Partial Class Modules_ucReceiptRegister
 
     End Sub
 
-    Private Sub update(ByVal _ID As String)
-        Try
-            Using dc As New DataClasses_GoodWorldExt()
+    'Private Sub update(ByVal _ID As String)
+    '    Try
+    '        Using dc As New DataClasses_GoodWorldExt()
 
-                Dim data = (From c In dc.tblPaymentRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
-
-
-                With data
-
-                    '.PaymentBy = editPaymentBy.Value
-                    '.PaymentDate = editPaymentDate.Value
-                    '.PaymentNo = editPaymentNo.Value
-
-                    '.BRCommP = editBrokerage.Value
-                    '.BRCommAmt = editBrokerageAmt.Value
-
-                    '.VAT7Amt = editVAT7Amt.Value
-                    '.TAX3Amt = editTAX3Amt.Value
-
-                    '.ServiceFreeP = editServiceFreeP.Value
-                    '.ServiceFreeAmt = editServiceFreeAmt.Value
-                    '.ServiceFreeTAX3Amt = editServiceFreeTAX3Amt.Value
-                    '.ServiceFreeVAT7Amt = editServiceFreeVAT7Amt.Value
-                    '.TotalPremium = editTotalPremium.Value
-
-                    .ModifyDate = DateTime.Now
-                    .ModifyBy = HttpContext.Current.User.Identity.Name
+    '            Dim data = (From c In dc.tblUWBillingPolicies Where c.ID.Equals(_ID)).FirstOrDefault()
 
 
-                End With
+    '            With data
 
-                dc.SubmitChanges()
+    '                '.PaymentBy = editPaymentBy.Value
+    '                '.PaymentDate = editPaymentDate.Value
+    '                '.PaymentNo = editPaymentNo.Value
 
-                TaskNewPopup.JSProperties("cpedittask") = "saveedit"
+    '                '.BRCommP = editBrokerage.Value
+    '                '.BRCommAmt = editBrokerageAmt.Value
+
+    '                '.VAT7Amt = editVAT7Amt.Value
+    '                '.TAX3Amt = editTAX3Amt.Value
+
+    '                '.ServiceFreeP = editServiceFreeP.Value
+    '                '.ServiceFreeAmt = editServiceFreeAmt.Value
+    '                '.ServiceFreeTAX3Amt = editServiceFreeTAX3Amt.Value
+    '                '.ServiceFreeVAT7Amt = editServiceFreeVAT7Amt.Value
+    '                '.TotalPremium = editTotalPremium.Value
+
+    '                .ModifyDate = DateTime.Now
+    '                .ModifyBy = HttpContext.Current.User.Identity.Name
+
+
+    '            End With
+
+    '            dc.SubmitChanges()
+
+    '            TaskNewPopup.JSProperties("cpedittask") = "saveedit"
 
 
 
-            End Using
-        Catch ex As Exception
-            TaskNewPopup.JSProperties("cpedittask") = "error - " & ex.Message
-        End Try
+    '        End Using
+    '    Catch ex As Exception
+    '        TaskNewPopup.JSProperties("cpedittask") = "error - " & ex.Message
+    '    End Try
 
-    End Sub
+    'End Sub
 
 
 
@@ -209,7 +209,7 @@ Partial Class Modules_ucReceiptRegister
             With data
                 editReceiptNo.Value = .ReceiptNo
                 editInsurerCode.Value = .InsurerCode
-                editInsurerName.Value = .ReceiveDate.Value.ToString("dd/MM/yyyy")
+                editInsurerName.Value = .InsurerName
                 editTaxNo.Value = .TaxNo
                 editReceiveType.Value = .ReceiveType
                 editBranchName.Value = .BrachName
@@ -219,7 +219,7 @@ Partial Class Modules_ucReceiptRegister
                 editChequeNo.Value = .ChequeNo
                 editChequeBranch.Value = .ChequeBranch
 
-
+                editReceiveDate.Value = .ReceiveDate.Value.ToString("dd/MM/yyyy")
 
             End With
 

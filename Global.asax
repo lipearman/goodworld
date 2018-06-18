@@ -22,23 +22,23 @@
         Dim _PortalContextName As String = ConfigurationSettings.AppSettings("PortalContextName")
         Dim _PageID As String = ""
         'Dim _PageID As String = ""
-        If Not (Request.Params("pageid") Is Nothing) Then
-            _PageID = Request.Params("pageid")
-        Else
-            Dim fullOrigionalpath = Request.Url.ToString().Split("/")
-            If fullOrigionalpath.Count > 0 Then
-                Dim repath = fullOrigionalpath(fullOrigionalpath.Count - 1).Replace(".aspx", "").Replace("#", "")
-                Using dc As New DataClasses_PortalDataContextExt()
-                    Dim data = (From c In dc.PortalCfg_Tabs Where c.PortalId.Equals(ConfigurationSettings.AppSettings("PortalID")) And c.TabName.ToLower().Equals(repath.ToLower())).FirstOrDefault()
-                    If data IsNot Nothing Then
-                        _PageID = data.PageID
+        'If Not (Request.Params("pageid") Is Nothing) Then
+        _PageID = Request.Params("pageid")
+        'Else
+        '    Dim fullOrigionalpath = Request.Url.ToString().Split("/")
+        '    If fullOrigionalpath.Count > 0 Then
+        '        Dim repath = fullOrigionalpath(fullOrigionalpath.Count - 1).Replace(".aspx", "").Replace("#", "")
+        '        Using dc As New DataClasses_PortalDataContextExt()
+        '            Dim data = (From c In dc.PortalCfg_Tabs Where c.PortalId.Equals(ConfigurationSettings.AppSettings("PortalID")) And c.TabName.ToLower().Equals(repath.ToLower())).FirstOrDefault()
+        '            If data IsNot Nothing Then
+        '                _PageID = data.PageID
 
-                        Context.RewritePath("~/DesktopDefault.aspx?PageId=" & _PageID)
+        '                Context.RewritePath("~/DesktopDefault.aspx?PageId=" & _PageID)
 
-                    End If
-                End Using
-            End If
-        End If
+        '            End If
+        '        End Using
+        '    End If
+        'End If
 
         ' Build and add the PortalSettings object to the current Context 
         Context.Items.Add(_PortalContextName, New Portal.Components.PortalSettings(_PageID))
@@ -102,7 +102,7 @@
             exception = exception.InnerException
         End If
         ' Log an exception
-        AddToLog(exception.Message, exception.StackTrace)
+        If exception IsNot Nothing Then AddToLog(exception.Message, exception.StackTrace)
     End Sub
     Sub AddToLog(ByVal message As String, ByVal stackTrace As String)
         Dim sb As New StringBuilder()

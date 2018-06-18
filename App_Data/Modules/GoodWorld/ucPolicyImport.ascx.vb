@@ -131,6 +131,7 @@ Partial Class Modules_ucPolicyImport
                                                                 , .Stamp = range_Summary(r, 11).Value.NumericValue _
                                                                 , .Vat = range_Summary(r, 12).Value.NumericValue _
                                                                 , .GrossPremium = range_Summary(r, 13).Value.NumericValue _
+                                                                , .Status = 1 _
                                                                 , .CreateBy = HttpContext.Current.User.Identity.Name _
                                                                 , .CreateDate = Now
                                     })

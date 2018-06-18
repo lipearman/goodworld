@@ -172,8 +172,9 @@
                             <DropDownWindowTemplate>
                                 <div>
                                     <dx:ASPxTreeList ID="TreeList2" ClientInstanceName="TreeList2" runat="server"
-                                        Width="500px" SettingsBehavior-AutoExpandAllNodes="true"
-                                        DataSourceID="SqlDataSource_UserTabs" DataCacheMode="Disabled"  
+                                        Width="500px"  
+                                        DataSourceID="SqlDataSource_UserTabs" 
+                                        DataCacheMode="Disabled" 
                                         OnCustomJSProperties="TreeList2_CustomJSProperties"
                                         KeyFieldName="TabId" 
                                         ParentFieldName="ParentID">

@@ -101,8 +101,8 @@ Partial Class Modules_ucSubBillingRegister
                 Case "calpremium"
 
                 Case "saveedit"
-                    update(hdID("ID"))
-                    TaskEditPopup.JSProperties("cpedittask") = "saveedit"
+                    'update(hdID("ID"))
+                    'TaskEditPopup.JSProperties("cpedittask") = "saveedit"
             End Select
 
 
@@ -130,109 +130,113 @@ Partial Class Modules_ucSubBillingRegister
 
 
 
-    Private Sub update(ByVal _ID As String)
-        Try
-            Using dc As New DataClasses_GoodWorldExt()
+    'Private Sub update(ByVal _ID As String)
+    '    Try
+    '        Using dc As New DataClasses_GoodWorldExt()
 
-                Dim data = (From c In dc.tblPaymentRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
-
-
-                With data
-
-                    '.PaymentBy = editPaymentBy.Value
-                    '.PaymentDate = editPaymentDate.Value
-                    '.PaymentNo = editPaymentNo.Value
-
-                    '.BRCommP = editBrokerage.Value
-                    '.BRCommAmt = editBrokerageAmt.Value
-
-                    '.VAT7Amt = editVAT7Amt.Value
-                    '.TAX3Amt = editTAX3Amt.Value
-
-                    '.ServiceFreeP = editServiceFreeP.Value
-                    '.ServiceFreeAmt = editServiceFreeAmt.Value
-                    '.ServiceFreeTAX3Amt = editServiceFreeTAX3Amt.Value
-                    '.ServiceFreeVAT7Amt = editServiceFreeVAT7Amt.Value
-                    '.TotalPremium = editTotalPremium.Value
-
-                    .ModifyDate = DateTime.Now
-                    .ModifyBy = HttpContext.Current.User.Identity.Name
+    '            Dim data = (From c In dc.tblUWBillingPolicies Where c.ID.Equals(_ID)).FirstOrDefault()
 
 
-                End With
+    '            With data
 
-                dc.SubmitChanges()
+    '                '.PaymentBy = editPaymentBy.Value
+    '                '.PaymentDate = editPaymentDate.Value
+    '                '.PaymentNo = editPaymentNo.Value
 
-                TaskEditPopup.JSProperties("cpedittask") = "saveedit"
+    '                '.BRCommP = editBrokerage.Value
+    '                '.BRCommAmt = editBrokerageAmt.Value
+
+    '                '.VAT7Amt = editVAT7Amt.Value
+    '                '.TAX3Amt = editTAX3Amt.Value
+
+    '                '.ServiceFreeP = editServiceFreeP.Value
+    '                '.ServiceFreeAmt = editServiceFreeAmt.Value
+    '                '.ServiceFreeTAX3Amt = editServiceFreeTAX3Amt.Value
+    '                '.ServiceFreeVAT7Amt = editServiceFreeVAT7Amt.Value
+    '                '.TotalPremium = editTotalPremium.Value
+
+    '                .ModifyDate = DateTime.Now
+    '                .ModifyBy = HttpContext.Current.User.Identity.Name
+
+
+    '            End With
+
+    '            dc.SubmitChanges()
+
+    '            TaskEditPopup.JSProperties("cpedittask") = "saveedit"
 
 
 
-            End Using
-        Catch ex As Exception
-            TaskEditPopup.JSProperties("cpedittask") = "error - " & ex.Message
-        End Try
+    '        End Using
+    '    Catch ex As Exception
+    '        TaskEditPopup.JSProperties("cpedittask") = "error - " & ex.Message
+    '    End Try
 
-    End Sub
+    'End Sub
 
     Protected Sub btnPreview_Click(sender As Object, e As EventArgs)
         Dim _SubBillingID = CInt(hdID("ID"))
 
         edit(_SubBillingID)
 
+        Using dc As New DataClasses_GoodWorldExt()
+            Dim data = (From c In dc.v_SubBillingRegisters Where c.ID.Equals(_SubBillingID)).FirstOrDefault()
 
 
-        Dim sb As New StringBuilder()
-        sb.Append(" SELECT * ")
-        sb.Append(" FROM v_SubBillingDetails ")
-        sb.AppendFormat(" where SubBillingID='{0}' ", _SubBillingID)
-        Dim ds1 = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
+            Dim sb As New StringBuilder()
+            sb.Append(" SELECT * ")
+            sb.Append(" FROM v_SubBillingDetails ")
+            sb.AppendFormat(" where SubBillingID='{0}' ", _SubBillingID)
+            Dim ds1 = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
 
-        sb = New StringBuilder()
-        sb.Append(" SELECT * ")
-        sb.Append(" FROM tblSubBillingPremium ")
-        sb.AppendFormat(" where SubBillingID='{0}' ", _SubBillingID)
-        Dim ds2 = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
-
-
-        Dim ReportViewer1 As New ReportViewer()
-        Dim ReportFile As String = "rptSubBilling.rdl"
-        ReportViewer1.Reset()
-        ReportViewer1.LocalReport.Dispose()
-        ReportViewer1.LocalReport.DataSources.Clear()
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
-        ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds1.Tables(0)))
-        ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet2", ds2.Tables(0)))
+            sb = New StringBuilder()
+            sb.Append(" SELECT * ")
+            sb.Append(" FROM tblSubBillingPremium ")
+            sb.AppendFormat(" where SubBillingID='{0}' ", _SubBillingID)
+            Dim ds2 = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings("PortalConnectionString").ConnectionString, System.Data.CommandType.Text, sb.ToString())
 
 
+            Dim ReportViewer1 As New ReportViewer()
+            Dim ReportFile As String = "rptSubBilling.rdl"
+            ReportViewer1.Reset()
+            ReportViewer1.LocalReport.Dispose()
+            ReportViewer1.LocalReport.DataSources.Clear()
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/App_Data/reports/" & ReportFile)
+            ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet1", ds1.Tables(0)))
+            ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("DataSet2", ds2.Tables(0)))
 
-        ReportViewer1.LocalReport.Refresh()
+            'BillingDate
+            ReportViewer1.LocalReport.SetParameters(New ReportParameter("BillingDate", data.BillingDate.Value.ToString("dd/MM/yyyy")))
 
 
-        Dim warnings As Warning()
-        Dim streamids As String()
-        Dim mimeType As String
-        Dim encoding As String
-        Dim extension As String
-        Dim bytes As Byte() = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamids, warnings)
+            ReportViewer1.LocalReport.Refresh()
 
-        Dim _GUID = System.Guid.NewGuid().ToString()
-        Session("GUID") = _GUID
 
-        Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", _GUID))
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType As String
+            Dim encoding As String
+            Dim extension As String
+            Dim bytes As Byte() = ReportViewer1.LocalReport.Render("Excel", Nothing, mimeType, encoding, extension, streamids, warnings)
 
-        Using fs As FileStream = New FileStream(FileName, FileMode.Create)
-            fs.Write(bytes, 0, bytes.Length)
-            fs.Close()
+            Dim _GUID = System.Guid.NewGuid().ToString()
+            Session("GUID") = _GUID
+
+            Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.xls", _GUID))
+
+            Using fs As FileStream = New FileStream(FileName, FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+            End Using
+
+            clientReportPreview.ShowOnPageLoad() = True
+
+            'documentViewer.Document = String.Format("~/App_Data/UploadTemp/{0}.xls", _GUID)
+
+            clientReportPreview.ShowOnPageLoad() = True
+
+            Spreadsheet.Open(FileName)
         End Using
-
-        clientReportPreview.ShowOnPageLoad() = True
-
-        'documentViewer.Document = String.Format("~/App_Data/UploadTemp/{0}.xls", _GUID)
-
-        clientReportPreview.ShowOnPageLoad() = True
-
-        Spreadsheet.Open(FileName)
-
 
     End Sub
     Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click

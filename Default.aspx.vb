@@ -44,12 +44,12 @@ Partial Public Class _Default
             If _defaultPage IsNot Nothing Then
                 Dim defaulttab = (From c In dc.v_DesktopTabs Where c.TabId = _defaultPage.TabId And c.PortalId.Equals(ConfigurationSettings.AppSettings("PortalID"))).FirstOrDefault()
 
-                ASPxWebControl.RedirectOnCallback(defaulttab.TabName & ".aspx")
-                'ASPxWebControl.RedirectOnCallback(String.Format("~/DesktopDefault.aspx?pageid={0}", defaulttab.PageId))
+                'ASPxWebControl.RedirectOnCallback(defaulttab.TabName & ".aspx")
+                ASPxWebControl.RedirectOnCallback(String.Format("~/DesktopDefault.aspx?pageid={0}", defaulttab.PageId))
             Else
 
-                'ASPxWebControl.RedirectOnCallback(String.Format("~/DesktopDefault.aspx?pageid={0}", webconfig._DefaultPageID))
-                ASPxWebControl.RedirectOnCallback("home.aspx")
+                ASPxWebControl.RedirectOnCallback(String.Format("~/DesktopDefault.aspx?pageid={0}", webconfig._DefaultPageID))
+                'ASPxWebControl.RedirectOnCallback("home.aspx")
             End If
 
 

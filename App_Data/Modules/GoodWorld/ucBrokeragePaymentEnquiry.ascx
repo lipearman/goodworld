@@ -50,7 +50,7 @@
     </Toolbars>
 
     <Columns>
-        <dx:BootstrapGridViewTextColumn FieldName="Branchid"></dx:BootstrapGridViewTextColumn>
+         <dx:BootstrapGridViewTextColumn FieldName="Branchid" ></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="Accountcode"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="AgentName"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewTextColumn FieldName="AGENT"></dx:BootstrapGridViewTextColumn>
@@ -70,8 +70,9 @@
         <dx:BootstrapGridViewSpinEditColumn FieldName="NetPayment" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
         <dx:BootstrapGridViewTextColumn FieldName="RVDate" PropertiesTextEdit-DisplayFormatString="{0:dd/MM/yyyy}"></dx:BootstrapGridViewTextColumn>
         <dx:BootstrapGridViewSpinEditColumn FieldName="BrokerSurveyAmt" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
-        <dx:BootstrapGridViewTextColumn FieldName="AA"></dx:BootstrapGridViewTextColumn>
-        <dx:BootstrapGridViewTextColumn FieldName="BB"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="AA" Caption="วันที่จ่าย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="BB" Caption="ชำระโดย"></dx:BootstrapGridViewTextColumn>
+       
     </Columns>
 
     <SettingsEditing Mode="PopupEditForm" EditFormColumnSpan="12">

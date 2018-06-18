@@ -78,7 +78,8 @@ Partial Class DesktopDefault
 
                 Dim _subMenuHeader = (From c In _tabs Where c.ParentId = _menu.TabId).ToList()
                 For Each item In _subMenuHeader
-                    _GroupNode.Items.Add(item.TabName, item.TabId, "", item.TabName & ".aspx")
+                    '_GroupNode.Items.Add(item.TabName, item.TabId, "", item.TabName & ".aspx")
+                    _GroupNode.Items.Add(item.TabName, item.TabId, "", String.Format("DesktopDefault.aspx?pageid={0}", item.PageId))
                 Next
             Next
 

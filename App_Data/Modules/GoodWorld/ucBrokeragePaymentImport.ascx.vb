@@ -122,8 +122,8 @@ Partial Class Modules_ucBrokeragePaymentImport
                                                                 , .NetPayment = range_Summary(r, 17).Value.NumericValue _
                                                                 , .RVDate = range_Summary(r, 18).Value.DateTimeValue _
                                                                 , .BrokerSurveyAmt = range_Summary(r, 19).Value.NumericValue _
-                                                                , .AA = range_Summary(r, 20).Value.NumericValue _
-                                                                , .BB = range_Summary(r, 21).Value.NumericValue _
+                                                                , .AA = range_Summary(r, 20).Value.DateTimeValue _
+                                                                , .BB = range_Summary(r, 21).Value.TextValue _
                                                                 , .CreateBy = HttpContext.Current.User.Identity.Name _
                                                                 , .CreateDate = Now
                                     })

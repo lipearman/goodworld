@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucSubBillingRegister.ascx.vb" Inherits="Modules_ucSubBillingRegister" %>
-
 <style>
     legend {
         display: block;
@@ -86,6 +85,9 @@
     </tr>
 </table>
 <br />
+
+
+
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid"
     AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
@@ -133,7 +135,7 @@
     <Toolbars>
         <dx:BootstrapGridViewToolbar>
             <Items>
-                <dx:BootstrapGridViewToolbarItem Command="Edit" BeginGroup="true" />
+                <dx:BootstrapGridViewToolbarItem Command="Delete" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="Refresh" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="ClearSorting" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" BeginGroup="true" />
@@ -243,7 +245,7 @@
 
 
 
-<dx:ASPxPopupControl ID="TaskEditPopup" ClientInstanceName="TaskEditPopup" runat="server"
+<dx:ASPxPopupControl ID="TaskEditPopup" ClientInstanceName="TaskEditPopup" runat="server" ScrollBars="Auto"
     ShowHeader="true" CloseOnEscape="false" CloseAction="CloseButton" HeaderText="ใบเสร็จรับเงิน"
     Modal="true" Maximized="true"
     PopupAnimationType="Fade">
@@ -263,12 +265,12 @@
 
             if(s.cpedittask=='edit' )
             {
-                MyGridDetails.Refresh();
+                //MyGridDetails.Refresh();
                 ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup.GetMainElement());
             }
             else if(s.cpedittask=='cpaddtask' )
             {
-                MyGridDetails.Refresh();
+                //MyGridDetails.Refresh();
             }
             else if(s.cpedittask=='No Data' )
             {
@@ -294,7 +296,7 @@
                     <LayoutItem Caption-Font-Bold="true"></LayoutItem>
                 </Styles>
                 <Items>
-                    <dx:LayoutGroup GroupBoxDecoration="Box" ShowCaption="False" ColCount="2">
+                    <dx:LayoutGroup GroupBoxDecoration="Box" ShowCaption="False" ColCount="3">
                         <Items>
                             <dx:LayoutItem Caption="รหัสตัวแทน" FieldName="AgentCode">
                                 <LayoutItemNestedControlCollection>
@@ -305,7 +307,6 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-
                             <dx:LayoutItem Caption="ชื่อตัวแทน" FieldName="AgentName">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
@@ -315,8 +316,6 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-
-
                             <dx:LayoutItem Caption="วันที่วางบิล" FieldName="BillingDate">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer12" runat="server">
@@ -331,7 +330,7 @@
 
 
 
-                            <dx:LayoutItem Caption="รายละเอียด" VerticalAlign="Top" ColSpan="2">
+                            <dx:LayoutItem Caption="รายละเอียด" VerticalAlign="Top" ColSpan="3">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer7" runat="server">
 
@@ -452,7 +451,7 @@
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
 
-                            <dx:LayoutItem Caption="จำนวนเงิน" ColSpan="2">
+                            <dx:LayoutItem Caption="จำนวนเงิน" ColSpan="3">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer14" runat="server">
 
@@ -490,7 +489,7 @@
                             </dx:LayoutItem>
 
 
-                            <dx:LayoutItem Caption=" " ColSpan="2">
+                            <dx:LayoutItem Caption=" " ColSpan="3">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer15" runat="server">
 
