@@ -248,5 +248,11 @@
         <elementListCompartment Id="2641008d-5be6-48c3-ab84-253a17db41f0" absoluteBounds="24.765, 6.21, 1.9700000000000002, 7.556844075520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="5d333161-be81-4bd5-8dcf-a4894e329846" absoluteBounds="3.75, 3.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tblUWBillingPayment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26132a64-915e-4550-bc54-c3ff9e9afbcd" absoluteBounds="3.765, 4.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

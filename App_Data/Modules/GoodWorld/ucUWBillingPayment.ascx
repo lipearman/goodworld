@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucSubBillingPayment.ascx.vb" Inherits="Modules_ucSubBillingPayment" %>
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ucUWBillingPayment.ascx.vb" Inherits="Modules_ucUWBillingPayment" %>
 <style>
     legend {
         display: block;
@@ -49,7 +49,6 @@
 
 
                     <dx:ListBoxColumn FieldName="PolicyNo" Caption="เลขกรมธรรม์" Width="200" />
-                    <dx:ListBoxColumn FieldName="AgentName" Caption="ตัวแทน" Width="150" />
                     <dx:ListBoxColumn FieldName="ClientName" Caption="ชื่อผู้เอาประกันภัย" Width="150" />
                     <dx:ListBoxColumn FieldName="EffectiveDate" Caption="วันเริ่มคุ้มครอง" Width="100">
                         <CellTemplate>
@@ -69,21 +68,51 @@
                             <%# Eval("GrossPremium", "{0:N2}") %>
                         </CellTemplate>
                     </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="Commission" Caption="%" Width="100">
+            <dx:ListBoxColumn FieldName="BRCommP" Caption="%" Width="100">
                         <CellTemplate>
-                            <%# Eval("Brokerage", "{0:N2}") %>
+                            <%# Eval("BRCommP", "{0:N2}") %>
                         </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="CommissionAmount" Caption="ค่าคอม" Width="100">
+                    </dx:ListBoxColumn>                    
+   <dx:ListBoxColumn FieldName="BRCommAmt" Caption="ค่าคอม" Width="100">
                         <CellTemplate>
-                            <%# Eval("BrokerageAmt", "{0:N2}") %>
+                            <%# Eval("BRCommAmt", "{0:N2}") %>
                         </CellTemplate>
-                    </dx:ListBoxColumn>
-                     <dx:ListBoxColumn FieldName="BillingAmount" Caption="จ่ายเบี้ยสุทธิ" Width="100">
+                    </dx:ListBoxColumn>    
+  <dx:ListBoxColumn FieldName="VAT7Amt" Caption="Vat(7%)" Width="100">
                         <CellTemplate>
-                            <%# Eval("BrokerageAmt", "{0:N2}") %>
+                            <%# Eval("VAT7Amt", "{0:N2}") %>
                         </CellTemplate>
-                    </dx:ListBoxColumn>
+                    </dx:ListBoxColumn> 
+    <dx:ListBoxColumn FieldName="TAX3Amt" Caption="Vat(3%)" Width="100">
+                        <CellTemplate>
+                            <%# Eval("TAX3Amt", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>                   
+  <dx:ListBoxColumn FieldName="ServiceFreeP" Caption="%" Width="100">
+                        <CellTemplate>
+                            <%# Eval("ServiceFreeP", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>  
+  <dx:ListBoxColumn FieldName="ServiceFreeAmt" Caption="ค่าจัดการ" Width="100">
+                        <CellTemplate>
+                            <%# Eval("ServiceFreeAmt", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>                      
+  <dx:ListBoxColumn FieldName="ServiceFreeVAT7Amt" Caption="Vat 7%" Width="100">
+                        <CellTemplate>
+                            <%# Eval("ServiceFreeVAT7Amt", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>   
+  <dx:ListBoxColumn FieldName="ServiceFreeTAX3Amt" Caption="Vat 3%" Width="100">
+                        <CellTemplate>
+                            <%# Eval("ServiceFreeTAX3Amt", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>   
+   <dx:ListBoxColumn FieldName="PaymentDate" Caption="Vat 3%" Width="100">
+                        <CellTemplate>
+                            <%# Eval("PaymentDate", "{0:N2}") %>
+                        </CellTemplate>
+                    </dx:ListBoxColumn>   
 
                 </Columns>
 
@@ -214,34 +243,29 @@ BillingAmount		จ่ายเบี้ยสุทธิ--%>
 
 
 
-        <dx:BootstrapGridViewCommandColumn ShowEditButton="true" Width="50"></dx:BootstrapGridViewCommandColumn>
- <dx:BootstrapGridViewTextColumn FieldName="PolicyNo"  ReadOnly="true" Width="100" Caption="เลขกรมธรรม์" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
-   <dx:BootstrapGridViewTextColumn FieldName="AgentName"  ReadOnly="true" Width="100" Caption="ตัวแทน" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
-  <dx:BootstrapGridViewTextColumn FieldName="ClientName"  ReadOnly="true" Width="100" Caption="ชื่อผู้เอาประกันภัย" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
- <dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" PropertiesDateEdit-DropDownButton-ClientVisible="false" ReadOnly="true" Caption="วันเริ่มคุ้มครอง" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"  PropertiesDateEdit-DisplayFormatInEditMode="true" />
-    <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate"  ReadOnly="true" Width="100" Caption="ทะเบียนรถ" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
-        <dx:BootstrapGridViewSpinEditColumn FieldName="Premium" PropertiesSpinEdit-SpinButtons-ClientVisible="false"  ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"  PropertiesSpinEdit-DisplayFormatInEditMode="true">
-            
-        </dx:BootstrapGridViewSpinEditColumn>                                
- <dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" Caption="เบี้ยรวมภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
-             
-        </dx:BootstrapGridViewSpinEditColumn>
+<%--<dx:BootstrapGridViewCommandColumn ShowEditButton="true" Width="50"></dx:BootstrapGridViewCommandColumn>--%>
 
-   
- <dx:BootstrapGridViewSpinEditColumn FieldName="Commission"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" Caption="% คอม" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
-             
-        </dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewTextColumn FieldName="ClientName" Width="300" ReadOnly="true" Caption="ชื่อผู้เอาประกันภัย" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+<dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Width="100" ReadOnly="true" Caption="ทะเบียนรถ" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+<dx:BootstrapGridViewTextColumn FieldName="PolicyNo" Width="100" ReadOnly="true" Caption="เลขกรมธรรม์" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
+<dx:BootstrapGridViewDateColumn FieldName="EffectiveDate" ReadOnly="true" Caption="วันเริ่มคุ้มครอง" Width="100" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
+<dx:BootstrapGridViewTextColumn FieldName="InsurerName" ReadOnly="true"  Caption="บริษัทประกันภัย" Width="100" />
+<dx:BootstrapGridViewSpinEditColumn FieldName="Premium" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="GrossPremium" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยรวมภาษี" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="BRCommP" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="%" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="BRCommAmt" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="ค่าคอม" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="VAT7Amt" ReadOnly="true"  Width="100" AdaptivePriority="2" Caption="Vat(7%)" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="TAX3Amt" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="Tax(3%)" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="ServiceFreeP" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="%" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="ServiceFreeAmt" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="ค่าจัดการ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="ServiceFreeVAT7Amt" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="Vat 7%" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="ServiceFreeTAX3Amt" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="Tax 3%" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
+<dx:BootstrapGridViewSpinEditColumn FieldName="TotalPremium" ReadOnly="true" Width="100" AdaptivePriority="2" Caption="เบี้ยรวม" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}"></dx:BootstrapGridViewSpinEditColumn>
 
- <dx:BootstrapGridViewSpinEditColumn FieldName="CommissionAmount"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" Caption="ค่าคอม" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
-             
-        </dx:BootstrapGridViewSpinEditColumn>
+        
 
-         <dx:BootstrapGridViewSpinEditColumn FieldName="BillingAmount"  PropertiesSpinEdit-SpinButtons-ClientVisible="false" ReadOnly="true" Width="100" Caption="จ่ายเบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}" PropertiesSpinEdit-DisplayFormatInEditMode="true">
-             
-        </dx:BootstrapGridViewSpinEditColumn>
-        <dx:BootstrapGridViewDateColumn FieldName="PaymentDate" Caption="วันที่่จ่าย"  PropertiesDateEdit-ValidationSettings-RequiredField-IsRequired="true"
-            PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" >
-        </dx:BootstrapGridViewDateColumn>
+<dx:BootstrapGridViewDateColumn FieldName="PaymentDate" Caption="วันที่่บันทึก" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" PropertiesDateEdit-ValidationSettings-RequiredField-IsRequired="true" />
+
 
 
 
@@ -267,14 +291,15 @@ BillingAmount		จ่ายเบี้ยสุทธิ--%>
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_BillingDetails" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select * from v_SubBillingPayment Order By CreateDate desc"
-     UpdateCommand="update tblSubBillingPayment
+    SelectCommand="select * from v_UWBillingPayment Order By CreateDate desc"
+
+     UpdateCommand="update tblUWBillingPayment
     set PaymentDate=@PaymentDate
     ,ModifyDate=getdate()
     ,ModifyBy=@UserName
     where ID=@ID
     "
-    DeleteCommand="delete from tblSubBillingPayment where ID=@ID"
+    DeleteCommand="delete from tblUWBillingPayment where ID=@ID"
     >
 
     <UpdateParameters> 
