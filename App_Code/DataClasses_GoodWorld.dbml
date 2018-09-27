@@ -794,4 +794,21 @@
       <Column Name="PaymentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tmpPaymentDate" Member="tmpPaymentDates">
+    <Type Name="tmpPaymentDate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GUID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_ImportPayment" Member="v_ImportPayments">
+    <Type Name="v_ImportPayment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GUID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PolicyNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IsValid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

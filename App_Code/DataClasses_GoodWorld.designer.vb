@@ -205,6 +205,12 @@ Partial Public Class DataClasses_GoodWorldDataContext
     End Sub
   Partial Private Sub DeletetblUWBillingPayment(instance As tblUWBillingPayment)
     End Sub
+  Partial Private Sub InserttmpPaymentDate(instance As tmpPaymentDate)
+    End Sub
+  Partial Private Sub UpdatetmpPaymentDate(instance As tmpPaymentDate)
+    End Sub
+  Partial Private Sub DeletetmpPaymentDate(instance As tmpPaymentDate)
+    End Sub
   #End Region
 	
 	Public Sub New()
@@ -481,6 +487,18 @@ Partial Public Class DataClasses_GoodWorldDataContext
 	Public ReadOnly Property tblUWBillingPayments() As System.Data.Linq.Table(Of tblUWBillingPayment)
 		Get
 			Return Me.GetTable(Of tblUWBillingPayment)
+		End Get
+	End Property
+	
+	Public ReadOnly Property tmpPaymentDates() As System.Data.Linq.Table(Of tmpPaymentDate)
+		Get
+			Return Me.GetTable(Of tmpPaymentDate)
+		End Get
+	End Property
+	
+	Public ReadOnly Property v_ImportPayments() As System.Data.Linq.Table(Of v_ImportPayment)
+		Get
+			Return Me.GetTable(Of v_ImportPayment)
 		End Get
 	End Property
 End Class
@@ -13205,4 +13223,212 @@ Partial Public Class tblUWBillingPayment
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tmpPaymentDate")>  _
+Partial Public Class tmpPaymentDate
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _GUID As String
+	
+	Private _PolicyNo As String
+	
+	Private _PaymentDate As System.Nullable(Of Date)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnGUIDChanging(value As String)
+    End Sub
+    Partial Private Sub OnGUIDChanged()
+    End Sub
+    Partial Private Sub OnPolicyNoChanging(value As String)
+    End Sub
+    Partial Private Sub OnPolicyNoChanged()
+    End Sub
+    Partial Private Sub OnPaymentDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnPaymentDateChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GUID", DbType:="VarChar(255)")>  _
+	Public Property GUID() As String
+		Get
+			Return Me._GUID
+		End Get
+		Set
+			If (String.Equals(Me._GUID, value) = false) Then
+				Me.OnGUIDChanging(value)
+				Me.SendPropertyChanging
+				Me._GUID = value
+				Me.SendPropertyChanged("GUID")
+				Me.OnGUIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PolicyNo", DbType:="NVarChar(50)")>  _
+	Public Property PolicyNo() As String
+		Get
+			Return Me._PolicyNo
+		End Get
+		Set
+			If (String.Equals(Me._PolicyNo, value) = false) Then
+				Me.OnPolicyNoChanging(value)
+				Me.SendPropertyChanging
+				Me._PolicyNo = value
+				Me.SendPropertyChanged("PolicyNo")
+				Me.OnPolicyNoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PaymentDate", DbType:="Date")>  _
+	Public Property PaymentDate() As System.Nullable(Of Date)
+		Get
+			Return Me._PaymentDate
+		End Get
+		Set
+			If (Me._PaymentDate.Equals(value) = false) Then
+				Me.OnPaymentDateChanging(value)
+				Me.SendPropertyChanging
+				Me._PaymentDate = value
+				Me.SendPropertyChanged("PaymentDate")
+				Me.OnPaymentDateChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.v_ImportPayment")>  _
+Partial Public Class v_ImportPayment
+	
+	Private _ID As Integer
+	
+	Private _GUID As String
+	
+	Private _PolicyNo As String
+	
+	Private _PaymentDate As System.Nullable(Of Date)
+	
+	Private _IsValid As Integer
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", DbType:="Int NOT NULL")>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me._ID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GUID", DbType:="VarChar(255)")>  _
+	Public Property GUID() As String
+		Get
+			Return Me._GUID
+		End Get
+		Set
+			If (String.Equals(Me._GUID, value) = false) Then
+				Me._GUID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PolicyNo", DbType:="NVarChar(50)")>  _
+	Public Property PolicyNo() As String
+		Get
+			Return Me._PolicyNo
+		End Get
+		Set
+			If (String.Equals(Me._PolicyNo, value) = false) Then
+				Me._PolicyNo = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PaymentDate", DbType:="Date")>  _
+	Public Property PaymentDate() As System.Nullable(Of Date)
+		Get
+			Return Me._PaymentDate
+		End Get
+		Set
+			If (Me._PaymentDate.Equals(value) = false) Then
+				Me._PaymentDate = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsValid", DbType:="Int NOT NULL")>  _
+	Public Property IsValid() As Integer
+		Get
+			Return Me._IsValid
+		End Get
+		Set
+			If ((Me._IsValid = value)  _
+						= false) Then
+				Me._IsValid = value
+			End If
+		End Set
+	End Property
 End Class

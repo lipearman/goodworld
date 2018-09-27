@@ -71,7 +71,7 @@ Partial Class Test
                 fs.Close()
             End Using
 
-            documentViewer.Document = String.Format("~/UploadFiles/{0}.pdf", _GUID)
+            'documentViewer.Document = String.Format("~/UploadFiles/{0}.pdf", _GUID)
         End Using
 
     End Sub

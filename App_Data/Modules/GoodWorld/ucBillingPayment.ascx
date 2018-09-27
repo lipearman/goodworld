@@ -27,106 +27,7 @@
 <fieldset>
     <legend class="text-primary"><%=PageName %></legend>
 </fieldset>
-<table>
-    <tr>
-        <td>
-
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"></asp:SqlDataSource>
-
-            <dx:ASPxComboBox ID="PolicyNoFilter" ClientInstanceName="PolicyNoFilter"
-                runat="server" Caption="ค้นหาเลขกรมธรรม์"
-                EnableCallbackMode="true"
-                CallbackPageSize="10"
-                ValueType="System.String"
-                ValueField="ID"
-                TextFormatString="{0}"
-                Width="250px"
-                DropDownStyle="DropDown">
-
-                <Columns>
-                    <dx:ListBoxColumn FieldName="PolicyNo" Caption="เลขกรมธรรม์" Width="200" />
-                    <dx:ListBoxColumn FieldName="ClientName" Caption="ชื่อผู้เอาประกันภัย" Width="250" />
-                    <dx:ListBoxColumn FieldName="CarLicensePlate" Caption="ทะเบียนรถ" Width="100" />
-
-                    <dx:ListBoxColumn FieldName="EffectiveDate" Caption="วันเริ่มคุ้มครอง" Width="100">
-                        <CellTemplate>
-                            <%# Eval("EffectiveDate", "{0:dd/MM/yyyy}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="Premium" Caption="เบี้ยสุทธิ" Width="100">
-                        <CellTemplate>
-                            <%# Eval("Suminsured", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="Stamp" Caption="อากร" Width="100">
-                        <CellTemplate>
-                            <%# Eval("Suminsured", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="Vat" Caption="ภาษี" Width="100">
-                        <CellTemplate>
-                            <%# Eval("Suminsured", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="GrossPremium" Caption="เบี้ยรวม" Width="100">
-                        <CellTemplate>
-                            <%# Eval("GrossPremium", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="Brokerage" Caption="%" Width="100">
-                        <CellTemplate>
-                            <%# Eval("Brokerage", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-                    <dx:ListBoxColumn FieldName="BrokerageAmt" Caption="ค่าคอม" Width="100">
-                        <CellTemplate>
-                            <%# Eval("BrokerageAmt", "{0:N2}") %>
-                        </CellTemplate>
-                    </dx:ListBoxColumn>
-
-                </Columns>
-
-            </dx:ASPxComboBox>
-        </td>
-        <td>&nbsp;
-        </td>
-        <td>
-
-
-            <dx:BootstrapDateEdit runat="server" ID="PaymentDate" Caption="วันที่จ่าย" ClientInstanceName="PaymentDate"></dx:BootstrapDateEdit>
-
-
-        </td>
-        <td>&nbsp;
-        </td>
-        <td>
-
-            <dx:ASPxButton ID="AddPolicyNo" AutoPostBack="false"
-                runat="server" Border-BorderWidth="0" CausesValidation="false"
-                Image-IconID="actions_download_16x16office2013"
-                Text="Add">
-                <ClientSideEvents Click="function(s,e){
-                                                    var code = PolicyNoFilter.GetValue();
-                                                    var pdate = PaymentDate.GetValue();
-                                                    if(code==null || pdate==null)
-                                                    {
-                                                        alert('กรุณาเลือก เลขกรมธรรม์ และวันที่จ่าย');
-                                                        e.processOnServer = false;
-                                                    }
-                                                    else
-                                                    {
-                                                        e.processOnServer = true;
-                                                    }
-                                                
-                                                }" />
-
-            </dx:ASPxButton>
-
-        </td>
-    </tr>
-</table>
-<br />
-
+ 
 
 <dx:BootstrapGridView ID="TaskGrid" runat="server"
     ClientInstanceName="taskGrid"
@@ -178,7 +79,6 @@
             <Items>
 
                 <dx:BootstrapGridViewToolbarItem Command="Refresh" BeginGroup="true" />
-                <dx:BootstrapGridViewToolbarItem Command="Delete" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="ClearSorting" BeginGroup="true" />
                 <dx:BootstrapGridViewToolbarItem Command="ShowSearchPanel" BeginGroup="true" />
 
@@ -216,8 +116,11 @@
    
 
         
-        <dx:BootstrapGridViewDateColumn FieldName="PaymentDate" Caption="วันที่่จ่ายประกัน" 
-            PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" >
+        <dx:BootstrapGridViewDateColumn FieldName="ReceiveDate" Caption="วันที่่รับเงิน" 
+             PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy"
+            PropertiesDateEdit-EditFormatString="dd/MM/yyyy" 
+            PropertiesDateEdit-DisplayFormatInEditMode="true"
+            PropertiesDateEdit-ValidationSettings-RequiredField-IsRequired="true" >
     
         </dx:BootstrapGridViewDateColumn>
 
@@ -243,25 +146,22 @@
 </dx:BootstrapGridView>
 
 <asp:SqlDataSource ID="SqlDataSource_BillingDetails" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
-    SelectCommand="select * from v_BillingPayment Order By CreateDate desc"
-     UpdateCommand="update tblBillingPayment
-    set PaymentDate=@PaymentDate
+    SelectCommand="select * from v_Report1 Order By CreateDate desc"
+     UpdateCommand="update tblPolicyRegister
+    set ReceiveDate=@ReceiveDate
     ,ModifyDate=getdate()
     ,ModifyBy=@UserName
     where ID=@ID
-    "
-    DeleteCommand="delete from tblBillingPayment where ID=@ID"
+    " 
     >
 
     <UpdateParameters> 
-        <asp:Parameter Name="PaymentDate" />
+        <asp:Parameter Name="ReceiveDate" />
         
          <asp:Parameter Name="UserName" />
          <asp:Parameter Name="ID" />
     </UpdateParameters>
-    <DeleteParameters>
-         <asp:Parameter Name="ID" />
-    </DeleteParameters>
+     
 </asp:SqlDataSource>
 
 

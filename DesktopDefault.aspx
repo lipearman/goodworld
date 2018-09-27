@@ -4,7 +4,8 @@
 <html id="Html1" xmlns="http://www.w3.org/1999/xhtml" runat="server">
 <head id="Head1" runat="server">
     <title><%=SiteName %></title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="viewport"  content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+ 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/site.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />

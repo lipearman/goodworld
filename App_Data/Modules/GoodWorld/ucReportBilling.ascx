@@ -59,9 +59,14 @@
         
         <dx:BootstrapGridViewTextColumn FieldName="CarLicensePlate" Caption="ทะเบียนรถ"></dx:BootstrapGridViewTextColumn>
         
-        <dx:BootstrapGridViewTextColumn FieldName="EffectiveDate" Caption="วันที่เริ่มคุ้มครอง" PropertiesTextEdit-DisplayFormatString="{0:dd/MM/yyyy}" ></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="EffectiveDate" Caption="วันที่เริ่มคุ้มครอง" 
+            PropertiesTextEdit-DisplayFormatString="{0:dd/MM/yyyy}" 
+            Settings-AllowHeaderFilter="True" Settings-FilterMode="Value" 
+            SettingsHeaderFilter-Mode="DateRangePicker" 
+
+            ></dx:BootstrapGridViewTextColumn>
         
-        <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"></dx:BootstrapGridViewTextColumn>
+        <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย"  Settings-AllowHeaderFilter="True" Settings-FilterMode="Value" ></dx:BootstrapGridViewTextColumn>
 
         <dx:BootstrapGridViewSpinEditColumn FieldName="Premium" Caption="เบี้ยสุทธิ" PropertiesSpinEdit-NumberType="Float" PropertiesSpinEdit-DisplayFormatString="{0:N2}">
         </dx:BootstrapGridViewSpinEditColumn>

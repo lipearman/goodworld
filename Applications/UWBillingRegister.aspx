@@ -181,8 +181,7 @@
                                     </table>
                                     <br />
                                     <div style="width: 900px; overflow: scroll">
-
-
+                                       
                                         <dx:BootstrapGridView ID="taskGrid2" runat="server"
                                             ClientInstanceName="taskGrid2"
                                             AutoGenerateColumns="False" CssClasses-HeaderRow="removeWrapping" CssClasses-Row="removeWrapping"
@@ -397,7 +396,7 @@
             SelectCommand="select ROW_NUMBER() OVER(ORDER BY CreateDate desc) AS RowNo,* from v_UWBillingPolicy where UWBillingID=@UWBillingID "
             DeleteCommand="delete from tblUWBillingPolicy where ID=@ID">
             <SelectParameters >
-                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID" />
+                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID2" />
             </SelectParameters>
             <DeleteParameters>
                 <asp:Parameter Name="ID" />
@@ -411,10 +410,10 @@
             DeleteCommand="delete from tblUWBillingPremium where ID=@ID"
             UpdateCommand="update tblUWBillingPremium set UWBillingTitle=@UWBillingTitle,UWBillingPremium=@UWBillingPremium where ID=@ID">
             <SelectParameters>
-                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID" />
+                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID2" />
             </SelectParameters>
             <InsertParameters>
-                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID" />
+                <asp:SessionParameter Name="UWBillingID" SessionField="UWBillingID2" />
                 <asp:Parameter Name="UWBillingTitle" />
                 <asp:Parameter Name="UWBillingPremium" />
             </InsertParameters>
@@ -536,24 +535,28 @@
                             <dx:BootstrapLayoutItem Caption="อากร" FieldName="Stamp" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
-
+                                         <dx:BootstrapSpinEdit ID="BootstrapSpinEdit1" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                            SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                        </dx:BootstrapSpinEdit>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
                             <dx:BootstrapLayoutItem Caption="ภาษี" FieldName="Vat" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
-                                    </dx:ContentControl>
+                                      <dx:BootstrapSpinEdit ID="BootstrapSpinEdit2" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                            SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                        </dx:BootstrapSpinEdit></dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
 
 
                             <dx:BootstrapLayoutItem Caption="เบี้ยรวม" FieldName="GrossPremium" ColSpanMd="4">
                                 <ContentCollection>
-                                    <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ID="newGrossPremium" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
+                                    <dx:ContentControl> 
+                                         <dx:BootstrapSpinEdit ID="newGrossPremium" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
+                                            SpinButtons-Enabled="false" SpinButtons-ClientVisible="false">
+                                        </dx:BootstrapSpinEdit>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
@@ -699,7 +702,25 @@
                                             <ClientSideEvents Click="function(s,e){
                                           TaskNewPopup2.Hide();
                                         }" />
+
+
                                         </dx:BootstrapButton>
+
+
+                                              <dx:BootstrapButton ID="BootstrapButton3" runat="server" ValidationGroup="newPolicyForm" AutoPostBack="false" Text="Calculate" Width="100px">
+                                            <ClientSideEvents Click="function(s,e){
+
+                                             if(ASPxClientEdit.ValidateEditorsInContainer(TaskNewPopup2.GetMainElement()))
+                                             {
+                                              TaskNewPopup2.PerformCallback('calpremium');
+                                             }
+
+
+                                        }" />
+                                            <SettingsBootstrap RenderOption="Primary" />
+                                        </dx:BootstrapButton>
+
+
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
@@ -828,7 +849,7 @@
                             <dx:BootstrapLayoutItem Caption="อากร" FieldName="Stamp" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
+                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" DisplayFormatString="N2"></dx:BootstrapTextBox>
 
                                     </dx:ContentControl>
                                 </ContentCollection>
@@ -836,7 +857,7 @@
                             <dx:BootstrapLayoutItem Caption="ภาษี" FieldName="Vat" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
+                                        <dx:BootstrapTextBox runat="server" ReadOnly="true" DisplayFormatString="N2"></dx:BootstrapTextBox>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
@@ -845,11 +866,11 @@
                             <dx:BootstrapLayoutItem Caption="เบี้ยรวม" FieldName="GrossPremium" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
-                                        <dx:BootstrapTextBox runat="server" ID="editGrossPremium" ReadOnly="true" MaskSettings-Mask="<0..99999g>.<00..99>"></dx:BootstrapTextBox>
+                                        <dx:BootstrapTextBox runat="server" ID="editGrossPremium" ReadOnly="true" DisplayFormatString="N2"></dx:BootstrapTextBox>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
-                            <dx:BootstrapLayoutItem Caption="%" FieldName="Brokerage" ColSpanMd="4">
+                            <dx:BootstrapLayoutItem Caption="%" FieldName="BRCommP" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
                                         <dx:BootstrapSpinEdit ID="editBrokerage" runat="server" DisplayFormatString="N2" ValidationSettings-ValidationGroup="editPolicyForm" AllowMouseWheel="false" NullText="0.00"
@@ -862,7 +883,7 @@
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:BootstrapLayoutItem>
-                            <dx:BootstrapLayoutItem Caption="ค่าคอม" FieldName="BrokerageAmt" ColSpanMd="4">
+                            <dx:BootstrapLayoutItem Caption="ค่าคอม" FieldName="BRCommAmt" ColSpanMd="4">
                                 <ContentCollection>
                                     <dx:ContentControl>
                                         <dx:BootstrapSpinEdit ID="editBrokerageAmt" ClientEnabled="false" runat="server" DisplayFormatString="N2" AllowMouseWheel="false" NullText="0.00"
@@ -992,6 +1013,20 @@
                                           TaskEditPopup2.Hide();
                                               
                                         }" />
+                                        </dx:BootstrapButton>
+
+
+                                          <dx:BootstrapButton ID="BootstrapButton4" runat="server" ValidationGroup="editPolicyForm" AutoPostBack="false" Text="Calculate" Width="100px">
+                                            <ClientSideEvents Click="function(s,e){
+
+                                             if(ASPxClientEdit.ValidateEditorsInContainer(TaskEditPopup2.GetMainElement()))
+                                             {
+                                              TaskEditPopup2.PerformCallback('calpremium');
+                                             }
+
+
+                                        }" />
+                                            <SettingsBootstrap RenderOption="Primary" />
                                         </dx:BootstrapButton>
                                     </dx:ContentControl>
                                 </ContentCollection>

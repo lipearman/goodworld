@@ -25,7 +25,7 @@ Partial Class Applications_UWBillingRegister
         If IsPostBack = False Then
             Dim _ID = Request.Params("ID")
             hdID.Set("ID", _ID)
-            Session("UWBillingID") = _ID
+            Session("UWBillingID2") = _ID
             edit(_ID)
         End If
 
@@ -152,6 +152,7 @@ Partial Class Applications_UWBillingRegister
 
             'Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
             Dim _TotalPremium = _GrossPremium - _BrokerageAmt - _VAT7Amt + _TAX3Amt - _ServiceFreeAmt - _ServiceFreeVAT7Amt + _ServiceFreeTAX3Amt
+            'Dim _TotalPremium = (_GrossPremium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _VAT7Amt + _ServiceFreeAmt + _ServiceFreeVAT7Amt)
 
             newBrokerageAmt.Value = _BrokerageAmt
             newVAT7Amt.Value = _VAT7Amt
@@ -181,7 +182,20 @@ Partial Class Applications_UWBillingRegister
             Dim _ServiceFreeTAX3Amt = _ServiceFreeAmt * 3 / 100
 
             'Dim _TotalPremium = (_Premium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _ServiceFreeAmt + _VAT7Amt + _ServiceFreeVAT7Amt)
+            'Dim _TotalPremium = (_GrossPremium + _TAX3Amt + _ServiceFreeTAX3Amt) - (_BrokerageAmt + _VAT7Amt + _ServiceFreeAmt + _ServiceFreeVAT7Amt)
             Dim _TotalPremium = _GrossPremium - _BrokerageAmt - _VAT7Amt + _TAX3Amt - _ServiceFreeAmt - _ServiceFreeVAT7Amt + _ServiceFreeTAX3Amt
+
+            'Dim sb As New StringBuilder()
+            'sb.AppendFormat("_GrossPremium:{0}/n", _GrossPremium)
+            'sb.AppendFormat("_BrokerageAmt:{0}/n", _BrokerageAmt)
+            'sb.AppendFormat("_VAT7Amt:{0}/n", _VAT7Amt)
+            'sb.AppendFormat("_TAX3Amt:{0}/n", _TAX3Amt)
+            'sb.AppendFormat("_ServiceFreeAmt:{0}/n", _ServiceFreeAmt)
+            'sb.AppendFormat("_ServiceFreeVAT7Amt:{0}/n", _ServiceFreeVAT7Amt)
+            'sb.AppendFormat("_ServiceFreeTAX3Amt:{0}/n", _ServiceFreeTAX3Amt)
+
+            'Throw New Exception(sb.ToString())
+
 
             editBrokerageAmt.Value = _BrokerageAmt
             editVAT7Amt.Value = _VAT7Amt
@@ -300,7 +314,7 @@ Partial Class Applications_UWBillingRegister
             Return
         End If
         Dim _ID = 0
-        If Session("UWBillingID") IsNot Nothing Then _ID = CInt(Session("UWBillingID"))
+        If Session("UWBillingID2") IsNot Nothing Then _ID = CInt(Session("UWBillingID2"))
         Dim _UWCODE = ""
         Using dc As New DataClasses_GoodWorldExt()
             Dim data = (From c In dc.v_UWBillingRegisters Where c.ID.Equals(_ID)).FirstOrDefault()
@@ -319,7 +333,7 @@ Partial Class Applications_UWBillingRegister
         Dim comboBox As ASPxComboBox = CType(source, ASPxComboBox)
 
         Dim _ID = 0
-        If Session("UWBillingID") IsNot Nothing Then _ID = CInt(Session("UWBillingID"))
+        If Session("UWBillingID2") IsNot Nothing Then _ID = CInt(Session("UWBillingID2"))
         Dim _UWCODE = ""
         Using dc As New DataClasses_GoodWorldExt()
             Dim data = (From c In dc.v_UWBillingRegisters Where c.ID.Equals(_ID)).FirstOrDefault()

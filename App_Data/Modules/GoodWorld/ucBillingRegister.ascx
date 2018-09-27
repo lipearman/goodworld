@@ -569,8 +569,11 @@
                     </dx:BootstrapButton>--%>
 
 
-            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server" AllowedPermissions="All" Height="100%">
-            </GleamTech:DocumentViewerControl>
+          <%--  <GleamTech:DocumentViewerControl ID="documentViewer" runat="server" AllowedPermissions="All" Height="100%">
+            </GleamTech:DocumentViewerControl>--%>
+           
+            <asp:Literal runat="server" ID="documentViewer" ></asp:Literal>
+            
 
             <%--        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" ProcessingMode="Local" Visible="false">
                 <LocalReport ReportPath="~/App_Data/reports/" >

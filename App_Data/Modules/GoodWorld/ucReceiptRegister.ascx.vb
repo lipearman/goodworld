@@ -308,7 +308,8 @@ Partial Class Modules_ucReceiptRegister
             Dim _GUID = System.Guid.NewGuid().ToString()
             Session("GUID") = _GUID
 
-            Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID))
+            'Dim FileName = Server.MapPath(String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID))
+            Dim FileName = Server.MapPath(String.Format("~/UploadFiles/{0}.pdf", _GUID))
 
             Using fs As FileStream = New FileStream(FileName, FileMode.Create)
                 fs.Write(bytes, 0, bytes.Length)
@@ -321,7 +322,10 @@ Partial Class Modules_ucReceiptRegister
 
 
 
-            documentViewer.Document = String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID)
+            'documentViewer.Document = String.Format("~/App_Data/UploadTemp/{0}.pdf", _GUID)
+
+            documentViewer.Text = String.Format("<embed src=""UploadFiles/{0}.pdf"" type=""application/pdf"" width=""100%"" height=""100%"">", _GUID)
+
         End Using
     End Sub
 

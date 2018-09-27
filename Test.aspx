@@ -15,8 +15,8 @@
         <div>
 
 
-            <GleamTech:DocumentViewerControl ID="documentViewer" EnableViewState="false" runat="server" Height="800">
-            </GleamTech:DocumentViewerControl>
+<%--            <GleamTech:DocumentViewerControl ID="documentViewer" EnableViewState="false" runat="server" Height="800">
+            </GleamTech:DocumentViewerControl>--%>
 
 
         </div>

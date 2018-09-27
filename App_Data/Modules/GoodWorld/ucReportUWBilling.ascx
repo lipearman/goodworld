@@ -261,7 +261,7 @@
 
 <asp:SqlDataSource ID="SqlDataSource_Details" runat="server" ConnectionString="<%$ ConnectionStrings:PortalConnectionString %>"
     SelectCommand="select ROW_NUMBER() OVER(ORDER BY ClientName) AS RowNo,* 
-    from v_UWBillingDetails where PaymentDate is not null 
+    from v_Report1 where PaymentDate is not null 
     and year([PaymentDate])=@PaymentYear
     and InsurerCode=@InsurerCode
     ">

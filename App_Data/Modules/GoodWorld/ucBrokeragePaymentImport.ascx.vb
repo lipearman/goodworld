@@ -101,8 +101,10 @@ Partial Class Modules_ucBrokeragePaymentImport
                 'End If
 
 
+                If range_Summary(r, 3).Value.TextValue IsNot Nothing Then
 
-                BrokeragePaymentRegisters.Add(New tblBrokeragePaymentRegister With {.Branchid = range_Summary(r, 0).Value.NumericValue _
+
+                    BrokeragePaymentRegisters.Add(New tblBrokeragePaymentRegister With {.Branchid = range_Summary(r, 0).Value.NumericValue _
                                                                 , .Accountcode = range_Summary(r, 1).Value.TextValue _
                                                                 , .AgentName = range_Summary(r, 2).Value.TextValue _
                                                                 , .AGENT = range_Summary(r, 3).Value.TextValue _
@@ -127,6 +129,8 @@ Partial Class Modules_ucBrokeragePaymentImport
                                                                 , .CreateBy = HttpContext.Current.User.Identity.Name _
                                                                 , .CreateDate = Now
                                     })
+
+                End If
             Next
 
             Dim sb As New StringBuilder()

@@ -254,5 +254,17 @@
         <elementListCompartment Id="26132a64-915e-4550-bc54-c3ff9e9afbcd" absoluteBounds="3.765, 4.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="a984d45c-4b7c-4023-9fd3-3ec1757c8855" absoluteBounds="3.625, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/tmpPaymentDate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1532d0bf-6914-45d1-824c-6c167051618e" absoluteBounds="3.64, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1fb86e1-cdf0-4809-af38-d55bdf1c6b55" absoluteBounds="6.125, 1.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DataClasses_GoodWorldDataContext/v_ImportPayment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1acbd6e8-111d-4d65-93f8-25d28720bded" absoluteBounds="6.14, 2.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -164,7 +164,11 @@
         </dx:BootstrapGridViewDataColumn>
 
         <dx:BootstrapGridViewTextColumn FieldName="ReceiptNo" Width="150" Caption="เลขที่ใบเสร็จ" PropertiesTextEdit-ValidationSettings-RequiredField-IsRequired="true" Settings-AllowFilterBySearchPanel="True"></dx:BootstrapGridViewTextColumn>
-        <dx:BootstrapGridViewDateColumn FieldName="ReceiveDate" Caption="วันที่รับเงิน" Width="100" PropertiesDateEdit-ValidationSettings-RequiredField-IsRequired="true" PropertiesDateEdit-DisplayFormatString="dd/MM/yyyy" />
+        <dx:BootstrapGridViewDateColumn FieldName="ReceiveDate" 
+            PropertiesDateEdit-DisplayFormatString="{0:dd/MM/yyyy}"
+            PropertiesDateEdit-EditFormatString="{0:dd/MM/yyyy}" 
+            PropertiesDateEdit-DisplayFormatInEditMode="true"
+            Caption="วันที่รับเงิน" Width="100" PropertiesDateEdit-ValidationSettings-RequiredField-IsRequired="true"  />
 
         <dx:BootstrapGridViewTextColumn FieldName="InsurerName" Caption="บริษัทประกันภัย" Width="100" ReadOnly="true" />
         <dx:BootstrapGridViewTextColumn FieldName="Address1" Caption="ที่อยู่ 1" Width="100" />
@@ -806,9 +810,10 @@
                     </dx:BootstrapButton>--%>
 
 
-            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server" AllowedPermissions="All" Height="100%">
-            </GleamTech:DocumentViewerControl>
-
+<%--            <GleamTech:DocumentViewerControl ID="documentViewer" runat="server" AllowedPermissions="All" Height="100%">
+            </GleamTech:DocumentViewerControl>--%>
+             <asp:Literal runat="server" ID="documentViewer" ></asp:Literal>
+            
             <%--        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false" ProcessingMode="Local" Visible="false">
                 <LocalReport ReportPath="~/App_Data/reports/" >
                     
